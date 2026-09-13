@@ -24,11 +24,11 @@ The user needs to find the data they want. That data needs to be correctly infer
 
 ### Cost, coverage and throughput
 
-Infrastructure stays simple as long as the evaluation pipelines are "green". There is no human evaluation in my approach: I label the golden set myself and the evaluators are deterministic.
+Infrastructure stays simple as long as the evaluation pipelines are "green". There is no human evaluation in my approach: the golden set is the expected output for the reference report, written from the report's own registers before any model output, and the evaluators are deterministic. Reports the pipeline processes do not need one; only the few reference reports do.
 
 The target of my approach, in order: identification and provenance correctness on this report; then coverage of the four in-scope sections, which the brief requires. Cost and throughput are not targets at about ten pages per report. Coverage of the corpus (other reports and years) and throughput (reports per hour) are stretch goals; I start with the provided report and iterate from there.
 
-The determinism is at a high-level, meaning that it's only when strictly necessary that an LLM is used as a fallback in order to keep the costs down. That necessity comes from evaluating the different steps of the pipeline.
+The determinism is at a high-level, meaning that it's only when strictly necessary that an LLM is used as a fallback in order to keep the costs down. Each phase ends in a validation point whose outcomes are counted per run; those counts, not intuition, decide where the next hour or the next model call goes.
 
 ## What assumptions are you making?
 

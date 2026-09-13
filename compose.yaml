@@ -1,0 +1,28 @@
+# DESIGN.md > 3. Deployment. The model server (llama-swap on the host, port 9292) is reached through the host network,
+# because it listens on 127.0.0.1 only; run `docker compose run pipeline ...` for a batch, `docker compose up api` to serve.
+services:
+  pipeline:
+    build: {context: ., target: pipeline}
+    network_mode: host
+    user: "${UID:-1000}:${GID:-1000}"   # files under ./data stay owned by the host user
+    environment:
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://127.0.0.1:9292/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-oss}
+      PROMPT_VERSION: ${PROMPT_VERSION:-v1}
+    volumes:
+      - ./data:/data
+      - ./documentation/baseline:/reports:ro
+    profiles: ["batch"]
+
+  api:
+    build: {context: ., target: api}
+    network_mode: host   # serves on :8000 and reaches the model server for /ask
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://127.0.0.1:9292/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-oss}
+      DB_PATH: /data/risk.db
+      API_REPLAY_RUN: ${API_REPLAY_RUN:-}
+    volumes:
+      - ./data:/data
+    restart: unless-stopped

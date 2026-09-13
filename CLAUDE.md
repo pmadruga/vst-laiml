@@ -24,7 +24,7 @@ Grouped by the brief's four task steps. Stage numbers are stable; the reports us
 
 ### Brief step 2: Extract the principal risks
 2. **Identify and freeze the golden set**: `transform/identify.py` yields 3 + 7 candidates; Pedro confirms the count and writes `eval/golden.json` now, before any model output exists. Frozen from here.
-3. **Describe**: `transform/llm.py` with record/replay, `prompts/v1/` including the taxonomy rule, `transform/describe.py` one call per risk; a replay run reproduces `describe.json` byte-for-byte.
+3. **Describe**: `shared/llm.py` with record/replay, `shared/prompts/v1/` including the taxonomy rule, `transform/describe.py` one call per risk; a replay run reproduces `describe.json` byte-for-byte.
 4. **Merge, validate, repair**: `transform/merge.py`, `transform/validate.py` grounding against the risk's own verbatim span, one repair retry, `quality_flags`; `final.json` with 9 records.
 
 ### Brief step 3: Return a structured object

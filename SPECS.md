@@ -46,3 +46,35 @@
 | A3 | Parse question | One structured-output call, question → intent (categories, companies, years, register, status, leftover text); same taxonomy and mapping rule as T2; call recorded for replay | structured output constrained by the intent schema, temperature 0, versioned prompt | "which renewable-energy companies list cyber security as a principal risk" → categories [cyber], register any, sector renewable energy, leftover "" |
 | A4 | Run intent | Intent → the same SQL as A2; leftover text → FTS5 over title and description, BM25-ranked, intersected with the filters | SQL + FTS5 MATCH | leftover "tariffs" → matches "Geopolitics and regulatory framework" and "Carbon taxes and tariffs" |
 | A5 | Respond | Records with citations, quality flags, review state and lineage, plus the parsed intent; the question and intent logged to the run record | JSON; run record row per query | response carries `intent.categories = ["cyber"]` so the consumer sees how the question was read |
+
+## Validation points
+
+| Check | Phase | What it verifies | How | Severity | Run-record field | A failure points at |
+|---|---|---|---|---|---|---|
+| E3 match | EXTRACT | configured title matched exact, variant, similarity or not at all | normalised string equality, prefix test, longest-common-subsequence ratio with a 0.85 floor | similarity: warning; none: error if required, warning if optional | `section_match_grade` | the title vocabulary |
+| E3 landing | EXTRACT | title present on the landing page and footer equals the printed number | normalised substring search in the page text; right-most small number in the footer band | error if required, warning if optional | `landing_page_ok` | TOC links or page mapping |
+| E8 blocks | EXTRACT | every located section produced at least one block | count of blocks per section in the persisted output | error if required, warning if optional | `blocks_per_section` | the page parser for that layout |
+| E8 shape | EXTRACT | main-risks table is 3 × 3 with no empty cell | count column heads and row labels; every cell text non-empty | error | `main_risks_shape` | the p.51 parser |
+| E8 marker | EXTRACT | every ESRS financial row has a marker; icon and text agree | icon direction from the arrow path vs the row-text rule, compared per row | missing: warning; disagreements counted | `marker_missing`, `marker_disagreement` | icon reading or the text rule |
+| E8 fidelity | EXTRACT | every block's text is a substring of its page | whitespace-normalised substring test against the page's plain text | error | `text_not_on_page` | line grouping, cross-page bleed |
+| E8 coverage | EXTRACT | blocks cover at least 95% of a page's non-footer words | word multiset of the page's blocks divided by the page's word multiset | warning | `page_coverage` | a parser dropping content |
+| E8 drift | EXTRACT | counts equal the previous run of the same report | compare block counts per marker and page with the last run record for the report | warning | `count_drift` | a parser regression |
+| T1 agreement | TRANSFORM | register candidates vs model-proposed candidates | fuzzy title match between the two candidate sets; agreement = matched ÷ register count | below threshold: warning | `identify_agreement` | the register assumption |
+| T2 poor fit | TRANSFORM | risks flagged as fitting no category well | the poor-fit flag returned in the structured output, counted per run | counted | `category_poor_fit` | the taxonomy |
+| T4 schema | TRANSFORM | schema, page range, category enum, sentence count | Pydantic validation; page inside the section range; enum membership; sentence split and count | one retry, then flag | `record_schema_failures` | the prompt |
+| T4 grounding | TRANSFORM | span on page; sentences share content with the span; numbers and names in the span; mitigation matches or is null | substring test for the span; content-word overlap per sentence above a floor; regex for numbers, years and capitalised names checked against the span; fuzzy match of the mitigation to the "how we manage it" text | one retry, then flag; rate below threshold: warning | `grounding_failures` | the model or the prompt |
+| T6 set | TRANSFORM | record count, unique canonical ids, citations exist, categories in enum | count = candidates − merges; id uniqueness; every citation's span found on its page; enum membership | error | `transform_set_checks` | merge or identify |
+| T6 replay | TRANSFORM | replaying recorded calls reproduces the record set | rerun the phase with `--replay` and compare the serialised record set byte for byte | error | `replay_identical` | provider nondeterminism |
+| T6 evaluators | TRANSFORM | the five evaluators against the golden set | identification precision and recall, exact page and section, key-phrase grounding, category agreement, field presence, each against `golden.json` | failing evaluator: error, stops the load | `eval_scores` | parser (identification, grounding), model (category), prompt (field presence) |
+| A1 version | API | database schema version equals the service's | read the version row at start-up and compare with the service constant | refuse to start | `api_schema_version` | deployment |
+| A3 intent | API | question golden set: category and filter agreement | run the recorded intent calls against the question golden set; compare categories and filters field by field | below threshold: warning | `intent_agreement` | the intent prompt or the mapping rule |
+
+## Run record
+
+Two tables, written by every phase and by the API.
+
+`run`: `run_id`, `report_id`, `pdf`, `model`, `prompt_version`, `phases`, `started_at`, `finished_at`, `status` (ok, warnings, error, deferred).
+
+`run_record`: one row per (run, report, check): `run_id`, `report_id`, `phase`, `check_id` (from the table above), `outcome` (ok, warning, error), `count`, `strategy` (which parser or match grade produced the result), `detail` (JSON: the flagged items), `created_at`.
+
+Reading it: one query per check across reports gives the failure rate per step; the "points at" column turns that rate into the next task.

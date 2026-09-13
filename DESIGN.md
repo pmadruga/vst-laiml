@@ -8,7 +8,11 @@ The pipeline parses the provided PDF and reads the risks the report itself lists
 
 This is an ETL pipeline. My approach starts small and simple on the provided report and measures what generalises: every step records the strategy it used and every validation point counts its failures, so a run on a second report shows where the pipeline held and where it did not.
 
-A hand-labelled golden set for this report checks that the records are true, and catches regressions when the model, the parser or the prompt changes.
+A golden set is the expected output for a reference report, the fixture the regression tests run against; the Vestas 2025 report is the first, and a second is added only when a report exposes a layout the parser has not seen. Running it after a change to the model, the parser or the prompt shows which evaluator moved.
+
+## How the pipeline measures itself
+
+Every phase ends at a validation point (E3, E8, T6, A1) and every record passes a grounding check (T4). Each check has a severity rule, error stops the report and warning counts, and names what it caught. Every outcome lands in one run record, per run, report and check. Read across runs and reports, the counts say which step to improve next and whether the fix is engineering, a prompt, or a model call; nothing is skipped silently.
 
 ## 1. Pipeline
 
@@ -16,7 +20,7 @@ Three phases of pure steps; each step reads the previous step's file and writes 
 
 ### EXTRACT: find the sections, read them into blocks with provenance (E1–E8)
 
-Deterministic, no model, one library (PyMuPDF). Sections are found through the TOC's link annotations, which resolve straight to page indices, and verified on the landing page. Two pages are rebuilt from word coordinates because plain text breaks them: the three-column main-risks table on p.51, and the ESRS tables on pp.71–74, where risk versus opportunity is read from an arrow icon in the drawings and cross-checked against the row text. The phase ends with checks that nothing was invented, moved or dropped; a required section that fails stops the run for that report. The phase exists to turn pages into blocks whose provenance is a fact, not a claim: every block names the section and page it came from, and every later step reads blocks, never the PDF.
+Deterministic, no model, one library (PyMuPDF). Sections are found through the TOC's link annotations, which resolve straight to page indices, and verified on the landing page. Two pages are rebuilt from word coordinates because plain text breaks them: the three-column main-risks table on p.51, and the ESRS tables on pp.71–74, where risk versus opportunity is read from an arrow icon in the drawings and cross-checked against the row text. The phase ends with checks that nothing was invented, moved or dropped; a required section that fails stops the run for that report. The phase exists to turn pages into blocks whose provenance is a fact, not a claim: every block names the section and page it came from, and every later step reads blocks, never the PDF. A model fed page by page could supply the page number just as well; the coordinate parser stays for what sits below the page: which cell a sentence belongs to, which icon marks a row, and a fixed count of register rows that identification can be checked against.
 
 ### TRANSFORM: turn blocks into comparable, validated records (T1–T6)
 
@@ -28,7 +32,7 @@ SQLite, one transaction per report: risk instances with citations, categories, c
 
 ## 2. API
 
-A read-only service over the SQLite file that LOAD writes, sharing only the schema with the pipeline and running as its own process. Structured endpoints take filters (company, year, category, register, status) and answer the three brief questions; a question endpoint first parses a natural-language question into those same filters with one recorded model call, using the taxonomy and mapping rule of T2, then runs our SQL with full-text search over any leftover words and returns the parsed intent alongside the records. Every record carries citations, quality flags, review state and lineage; authentication, per-client scoping, writes, alerting and semantic search are in STRETCH.md.
+A read-only service over the SQLite file that LOAD writes, sharing only the `src/shared/` contract with the pipeline (schema, configuration, run record, model client, the three brief queries) and running as its own process. Structured endpoints take filters (company, year, category, register, status) and answer the three brief questions; a question endpoint first parses a natural-language question into those same filters with one recorded model call, using the taxonomy and mapping rule of T2, then runs our SQL with full-text search over any leftover words and returns the parsed intent alongside the records. Every record carries citations, quality flags, review state and lineage; authentication, per-client scoping, writes, alerting and semantic search are in STRETCH.md.
 
 ## 3. Deployment
 
