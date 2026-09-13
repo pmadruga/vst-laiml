@@ -10,7 +10,7 @@ Deliverables are PLAN.md (½-page product plan, one section per question in the 
 - No time constraint per stage: correctness and completeness of the current stage over speed. PLAN.md › Optimising for still records the cut order because the brief grades cut reasoning.
 - Never edit `documentation/self/*` or `documentation/baseline/*`. Never edit PLAN.md, DESIGN.md or this file unless Pedro asks; propose changes in the stage report.
 - Keep every attempt: no force-pushes, no deleting failed experiments, the brief wants unsuccessful attempts kept for discussion.
-- Commits: the first commit (Pedro's notes and the baseline documents) is Pedro's own work and carries no co-author. Every commit made with Claude Code from then on ends with a co-author trailer naming the model, e.g. `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`. Commit only when Pedro asks.
+- Commits carry no co-author trailer. Commit and push only when Pedro asks.
 - Tooling: uv, Python 3.12, pytest. PDF library: PyMuPDF only (links, words with fonts, drawings); it opens the AES-256 file with its empty user password without extra packages. Docling is deferred (STRETCH.md).
 - LLM calls never run live inside tests. Tests and the eval use replay mode over `runs/<run_id>/llm/*.json`. No provider key is present on the dev machine; Pedro supplies one before Stage 3 and names the primary and weaker model.
 
