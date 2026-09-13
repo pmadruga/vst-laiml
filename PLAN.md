@@ -1,8 +1,8 @@
-# PLAN.md — Structured Risk Intelligence pipeline
+# PLAN.md - Structured Risk Intelligence pipeline
 
 *What this is:* It answers the five questions in the brief; it's about what is being built, for whom, what it is optimised for, and what is deferred. DESIGN.md says how it is built and cites the sections below.
 
-Quick recap, after my raw initial [notes](/documentation/self/notes.md) taken when reading the brief the first time. The product is a queryable risk database with search, filter and trend over time. This pipeline turns one report (Vestas Annual Report 2025) into structured risk records with provenance, and evaluates itself. DESIGN.md cites the sections below.
+Quick recap, after my raw initial [notes](/documentation/self/notes.md) taken when reading the brief the first time. The product is a queryable risk database with search, filter and trend over time. This pipeline turns one report (Vestas Annual Report 2025) into structured risk records with provenance, and evaluates itself.
 
 ## Who is the user, and how will they consume the output?
 
@@ -14,21 +14,30 @@ Two surfaces. A batch ingestion pipeline runs per report as reports arrive each 
 
 ## What are you optimizing for: correctness, coverage, cost, throughput?
 
-"Cost-conscious correctness" is what I'd call it here. I want to make sure that the pipeline provides value to the users from day one.  Coverage and throughput are stretch goals.
+I'm aware that the consumers of the pipeline/API have to analyse several documents per year. The approach is to start "small and simple" while evaluating what generalises and what doesn't.
 
-Correctness: the user need to find the data they want. That data needs to be correctly infered from what the user queries the serving API with, that means the risks need to be properly identified. The found data needs to have provenance. Everything from searching, filtering and trending needs to be delivered to the user. I'm prioritizing evaluation, but starting with a deterministic one.
+So, I'm going for a cost-conscious correctness, while determining what generalises and what doesn't.
 
-Cost: trying to keep infrastructure simple as long as the evaluation pipelines are "green". If the cost allows, there will be human evals to support correctness as much as possible.
+### Correctness
 
-I'll start with a low throughput (just the report provided) as well as low coverage ()
+The user needs to find the data they want. That data needs to be correctly inferred from what the user queries the serving API with, that means the risks need to be properly identified. The found data needs to have provenance. Everything from searching, filtering and trending needs to be delivered to the user. I'm prioritizing evaluation to ensure correctness, but starting with a deterministic one.
+
+### Cost, coverage and throughput
+
+Infrastructure stays simple as long as the evaluation pipelines are "green". There is no human evaluation in my approach: I label the golden set myself and the evaluators are deterministic.
+
+The target of my approach, in order: identification and provenance correctness on this report; then coverage of the four in-scope sections, which the brief requires. Cost and throughput are not targets at about ten pages per report. Coverage of the corpus (other reports and years) and throughput (reports per hour) are stretch goals; I start with the provided report and iterate from there.
+
+The determinism is at a high-level, meaning that it's only when strictly necessary that an LLM is used as a fallback in order to keep the costs down. That necessity comes from evaluating the different steps of the pipeline.
 
 ## What assumptions are you making?
 
 - The users are very interested in the factuality provided by the API. An API returning wrong results (or lack of provenance) would erode the users' trust in the system, thus removing the value-proposition of this system.
 - There's an ingestion pipeline and there's an API to serve the results (where the user can search, filter, and look at trends). I chose to keep them separate.
-- There's only one document being parsed and indexed for now, so it doesn't generalize to other documents (if there's time, it will be detailed in the [STRETCH.md](/STRETCH.md)).
-- The PDF is always well-structured as the one from the example.
-- The evaluation is the most important part of this. However, it assumes that there are no resources for doing human evaluation of the pipeline.
+- There's only one document being parsed and indexed for now, so it doesn't generalize to other documents just yet, but potentially to other years (if there's time, it will be detailed in the [STRETCH.md](/STRETCH.md)).
+- This approach assumes a born-digital PDF with a text layer and the sections at the brief's pages; other layouts are deferred.
+- Sections are located by their title in the table of contents; reports without a matching TOC entry are flagged and deferred.
+- The provided reports already include the risks as well as a starting fixed taxonomy.
 
 ## What are you explicitly not solving here but would tackle next?
 

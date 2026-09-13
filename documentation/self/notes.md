@@ -14,7 +14,7 @@ I need to build a pipeline for Structured Risk Intelligence. First, I'll do some
 
 A small team at a research firm. This firm sells structured risk intelligence to asset managers and compliance teams.
 
-## The problem
+## The case
 
 The analysts need to speed up the time to analyze corporate annual reports, per quarter, and determine several risks and their properties, such as:
 
@@ -25,6 +25,16 @@ The analysts need to speed up the time to analyze corporate annual reports, per 
 It's also important that different analysts typically report different risks. This means that not only is there a lack of consensus between humans on what constitutes a risk, but also that this pipeline needs to have a consensus mechanism (probably between different LLMs) for identifying risks.
 
 As a reminder, the stakeholders are compliance and asset managers.
+
+## The problem
+
+The true problem lies in picking a solution between cost, correctness, throughput and coverage.
+
+A low cost solution would be to just look at the provided document and parse the information in a deterministic way. But because this is within a context of a small research firm that sells structured risk intelligence, it should be somewhat general to different types of reports.
+
+A high-correctness one involves the creation of a potentially expensive database (ie, vector database), which would also slow down the speed of the pipeline as well. Having human-evals on that, would also increase the cost and time to run this same pipeline.
+
+So I'm considering a solution that tries to keep the cost down and the correctness up.
 
 ## Specification
 
@@ -80,3 +90,11 @@ In these notes, I have to have a good grasp of:
 - What are you optimizing for in this first slice: correctness, coverage, cost, throughput?
 - What assumptions are you making?
 - What are you explicitly not solving here but would tackle next?
+
+## Design.md
+
+This document should be detailed to the point where I know what every step of the pipeline is doing. It's the starting point of the code implementation.
+
+## Identity
+
+I want the pipeline to be testable and scalable. Specifically, I want the identity of the pipeline to be having a possibility of fallbacks (each more expensive) by evaluating each step in the best possible way.
