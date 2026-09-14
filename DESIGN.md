@@ -1,10 +1,12 @@
 # DESIGN.md - Structured Risk Intelligence pipeline
 
-ETL where T is a language model. Every step is a pure function whose output is written to disk per run, and every output records which strategy produced it and any flags raised. Phase summaries are below; the per-step specification is in [SPECS.md](SPECS.md).
+This contains the approach for the pipeline and for the API, divided in these two major sections.
+
+Phase summaries are below; the per-step specification is in [SPECS.md](SPECS.md).
 
 ## High-level approach
 
-The pipeline parses the provided PDF and reads the risks the report itself lists, with their page references (EXTRACT). An LLM then turns each risk into a comparable record: a standard description, a category from the fixed taxonomy in the brief, the stated mitigation. Each record is validated against the page text before it is loaded into the database (TRANSFORM). An API serves that database (after LOAD).
+The pipeline parses the provided PDF and reads the risks the report itself lists, with their page references (EXTRACT). The model never decides what is a risk; it only writes. For each risk the risk register lists, one call returns a standard description, one primary category from the brief's seven, and the mitigation as the report states it, taken from the risk register row or from the topical section that details the risk. Each record is validated against the page text before it is loaded into the database (TRANSFORM). An API serves that database (after LOAD).
 
 This is an ETL pipeline. My approach starts small and simple on the provided report and measures what generalises: every step records the strategy it used and every validation point counts its failures, so a run on a second report shows where the pipeline held and where it did not.
 
@@ -20,11 +22,11 @@ Three phases of pure steps; each step reads the previous step's file and writes 
 
 ### EXTRACT: find the sections, read them into blocks with provenance (E1–E8)
 
-Deterministic, no model, one library (PyMuPDF). Sections are found through the TOC's link annotations, which resolve straight to page indices, and verified on the landing page. Two pages are rebuilt from word coordinates because plain text breaks them: the three-column main-risks table on p.51, and the ESRS tables on pp.71–74, where risk versus opportunity is read from an arrow icon in the drawings and cross-checked against the row text. The phase ends with checks that nothing was invented, moved or dropped; a required section that fails stops the run for that report. The phase exists to turn pages into blocks whose provenance is a fact, not a claim: every block names the section and page it came from, and every later step reads blocks, never the PDF. A model fed page by page could supply the page number just as well; the coordinate parser stays for what sits below the page: which cell a sentence belongs to, which icon marks a row, and a fixed count of register rows that identification can be checked against.
+Deterministic, no model, one library (PyMuPDF). Sections are found through the TOC's link annotations, which resolve straight to page indices, and verified on the landing page. Two pages are rebuilt from word coordinates because plain text breaks them: the three-column main-risks table on p.51, and the ESRS tables on pp.71–74, where risk versus opportunity is read from an arrow icon in the drawings and cross-checked against the row text. The phase ends with checks that nothing was invented, moved or dropped; a required section that fails stops the run for that report. The phase exists to turn pages into blocks whose provenance is a fact, not a claim: every block names the section and page it came from, and every later step reads blocks, never the PDF. A model fed page by page could supply the page number just as well; the coordinate parser stays for what sits below the page: which cell a sentence belongs to, which icon marks a row, and a fixed count of risk register rows that identification can be checked against.
 
 ### TRANSFORM: turn blocks into comparable, validated records (T1–T6)
 
-The model's phase; every call is recorded for replay. Candidates come from the report's own registers, with a model-proposed set run alongside only to measure agreement. One structured call per risk writes the description, the categories from the brief's seven, and the mitigation as stated or null. Duplicates across registers merge into one record with all citations. Each record is grounded in its page text, with one retry, then flagged. The phase ends with set-level checks and, where a golden set exists, the evaluators; a failing evaluator stops the load. The phase turns a report's own words into records that can be compared across companies and years, and it refuses to load any record it cannot ground in the page.
+The model's phase; every call is recorded for replay. Candidates come from the report's own risk registers, with a model-proposed set run alongside only to measure agreement. One structured call per risk writes the description, the categories from the brief's seven, and the mitigation as stated or null. Duplicates across risk registers merge into one record with all citations. Each record is grounded in its page text, with one retry, then flagged. The phase ends with set-level checks and, where a golden set exists, the evaluators; a failing evaluator stops the load. The phase turns a report's own words into records that can be compared across companies and years, and it refuses to load any record it cannot ground in the page.
 
 ### LOAD: store the records, serve the questions (L1–L6)
 
@@ -32,7 +34,24 @@ SQLite, one transaction per report: risk instances with citations, categories, c
 
 ## 2. API
 
-A read-only service over the SQLite file that LOAD writes, sharing only the `src/shared/` contract with the pipeline (schema, configuration, run record, model client, the three brief queries) and running as its own process. Structured endpoints take filters (company, year, category, register, status) and answer the three brief questions; a question endpoint first parses a natural-language question into those same filters with one recorded model call, using the taxonomy and mapping rule of T2, then runs our SQL with full-text search over any leftover words and returns the parsed intent alongside the records. Every record carries citations, quality flags, review state and lineage; authentication, per-client scoping, writes, alerting and semantic search are in STRETCH.md.
+A read-only service over the SQLite file that LOAD writes, sharing only the `src/shared/` contract with the pipeline (schema, configuration, run record, model client, the three brief queries) and running as its own process. Structured endpoints take filters (company, year, category, risk register, status) and answer the three brief questions; a question endpoint first parses a natural-language question into those same filters with one recorded model call, using the taxonomy and mapping rule of T2, then runs our SQL with full-text search over any leftover words and returns the parsed intent alongside the records. Every record carries citations, quality flags, review state and lineage; authentication, per-client scoping, writes, alerting and semantic search are in STRETCH.md.
+
+## Trade-offs
+
+Each follows from what PLAN.md optimises for: correctness of identification and provenance first, measured; coverage of the in-scope sections second; cost as a constraint.
+
+| Choice | Alternative not taken | Why, in PLAN.md's terms | What it costs |
+| --- | --- | --- | --- |
+| The report's risk registers identify the risks; the model only writes the record | The model proposes the risks from the section text | Identification becomes a count to check, not a judgement to trust; the risk register is the company's own list (assumption 2) | A risk disclosed only in prose is missed; a report without a risk register needs the model path, which is built but only measured today |
+| Coordinate parser for the two known table layouts | Docling, or a model reading page text | Provenance below the page (cell, icon, fixed row count) is a fact the checks can verify (EXTRACT) | Every new layout costs engineering time; the run record says when |
+| Local 20B model through an OpenAI-compatible server | A hosted frontier model | Cost as a constraint, public inputs, and the same server for tests through record and replay | Weaker categorisation on hard cases; one request at a time |
+| One structured call per risk, temperature 0 | One call per page returning all risks | Each record is grounded and repaired on its own; a bad call spoils one record | About twenty calls per report instead of five |
+| SQLite in a file, read by the API | Postgres | One report, one analyst, no server to run; the schema is the same SQL | Single writer; the API must be restarted when the file is replaced |
+| Flagged records are served with a flag | Human review before load | Assumption 6: consumers accept flags; nothing stalls on a reviewer | Wrong records can reach a client, marked |
+
+## Scaling
+
+Measured on this report and extrapolated in [SCALABILITY.md](SCALABILITY.md). One report costs about twenty model calls, 14k tokens in and 4k out, and 51 seconds, of which 50 are the model; extract, load and the structured API endpoints are under a second combined. A quarter of 200 reports is under three hours sequentially on one local GPU, or under an hour with four model workers, and a few megabytes of database. What scales badly is not compute: every new layout costs parser work, and a flag rate of two in nine means about a hundred records a quarter for analysts to look at. Latency matters only on the question endpoint, about one second per model call; the structured endpoints answer in milliseconds from indexed SQLite at any volume the firm will reach.
 
 ## 3. Deployment
 
