@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p73-d4a0dee2",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "d4a0dee2c93b1de3cdc99ba47e026b2df2d23ad7ca186ee7d89a9d0a9458eefe",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 73:\n\nSub-topic\nImpacts on people and environment\nFinancial risks or opportunities\nName and description\nValue chain \nName and description\nValue chain \nDouble materiality\nWorking conditions of own \nworkforce\n\t Health and safety incidents of own workforce (actual) \n\t\n\u0007The negative impact related to health and safety incidents.\nOwn operations\n \t\u0007Cost implication of injuries in own workforce \n\t\n\u0007Potential injuries leading to delays, lost work hours and compensation costs pose  \na financial risk.\nOwn operations\n\t Secure employment (actual) \n\t\n\u0007The high share of permanent contracts and stable market position provides a secure \nand predictable work environment for employees.\nOwn operations\n\t\nSecure employment-related risks and opportunities scored as immaterial.\nN/A\nImpact materiality\nEqual treatment and \nopportunities for all\n\t Diversity (actual)\n\t\n\u0007A global workforce and inclusive culture enabling engagement, innovation,  \nand performance has a positive impact on employees.\nOwn operations\n\t\nDiversity-related risks and opportunities scored as immaterial.\nN/A\nSub-topic\nImpacts on people and environment\nFinancial risks or opportunities\nName and description\nValue chain \nName and description\nValue chain \nDouble materiality\nWorking conditions in the \nvalue chain\n\t Health and safety incidents of supply chain workers (actual) \n\t\n\u0007The negative impact related to health and safety incidents of workers in the upstream \nsupply chain. \nUpstream\n\t\n\u0007Health and safety related risks related to incidents of supply chain workers scored as \nimmaterial.\nN/A\n\t Health and safety incidents of contractors and sub-contractors (actual) \n\t\n\u0007The negative impact related to health and safety incidents of contractors,  \nsub-contractors, and temporary workers working on Vestas sites in manufacturing, \nconstruction, and service.\nOwn operations\n\t Cost implications of injuries to contractors and sub-contractors\n\t\n\u0007Potential injuries to value chain workers leading to delays, lost work hours and \ncompensation costs pose a risk.\nOwn operations\nOther work-related rights of \nworkers in the value chain\n\t Child and forced labour (potential) \n\t\nRisk of forced and child labour in our supply chain.\nUpstream\n\t Fines related to forced or child labour\n\t\n\u0007Vestas’ global network of suppliers combined with the risk of fines related to child and \nforced labour constitute a potential risk. \nUpstream\nS1 Own Workforce\nS2 Workers in the value chain\nImpact materiality\n Positive \n \u0007Negative\nFinancial materiality\n Opportunity  \n Risk\nVestas Annual Report 2025\n73\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nGeneral information – Material impacts, risks, and opportunities"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[{\"title\":\"Cost implications of injuries in own workforce\",\"span\":\"Potential injuries leading to delays, lost work hours and compensation costs pose a financial risk.\"},{\"title\":\"Cost implications of injuries to contractors and sub‑contractors\",\"span\":\"Potential injuries to value chain workers leading to delays, lost work hours and compensation costs pose a risk.\"},{\"title\":\"Risk of forced and child labour in the supply chain\",\"span\":\"Risk of forced and child labour in our supply chain.\"},{\"title\":\"Fines related to forced or child labour\",\"span\":\"Vestas’ global network of suppliers combined with the risk of fines related to child and forced labour constitute a potential risk.\"}]}",
+  "usage": {
+    "completion_tokens": 200,
+    "prompt_tokens": 752,
+    "total_tokens": 952,
+    "prompt_tokens_details": {
+      "cached_tokens": 202
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 2.17,
+  "created_at": "2026-09-13T19:51:15.536715+00:00"
+}

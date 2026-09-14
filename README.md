@@ -12,6 +12,8 @@ Turns one annual report (Vestas Annual Report 2025) into structured principal-ri
 | [STRETCH.md](STRETCH.md) | What comes next with another week, each item with the trigger that would make it worth building. |
 | [documentation/running.md](documentation/running.md) | Every command: pipeline phases, replay, evaluation, database, Docker, tests. |
 | [documentation/results.md](documentation/results.md) | The recorded baseline and the three regression runs, scored. |
+| [documentation/stages/grounding-comparison.md](documentation/stages/grounding-comparison.md) | The grounding checks in hand-rolled regex against spaCy, measured on the recorded runs and seeded cases, and why regex stays. |
+| [documentation/stages/entities-probe.md](documentation/stages/entities-probe.md) | What spaCy's named-entity recogniser finds in the risk text, and why an entities step waits for more reports. |
 | [SCALABILITY.md](SCALABILITY.md) | Measured time, tokens, hosted-equivalent token cost and sizes at each point of the pipeline and the API for one report, extrapolated to 10, 20, 50 and 200 reports. |
 | [documentation/self/notes.md](documentation/self/notes.md) | My raw first-read notes on the brief, written by hand before any planning: the problem, the stakeholders, the constraints as I understood them. |
 | [documentation/self/methodology.md](documentation/self/methodology.md) | The order I worked in, from reading the report to writing the plan, building and testing. |

@@ -1,0 +1,26 @@
+{
+  "run_id": "exp-grounding-spacy",
+  "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "replay": null,
+  "grounding": "spacy",
+  "phases": [
+    "extract",
+    "transform"
+  ],
+  "invocations": [
+    {
+      "phases": [
+        "extract",
+        "transform"
+      ],
+      "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "replay": null,
+      "grounding": "spacy",
+      "started_at": "2026-09-14T08:40:23.651589+00:00"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "run_id": "reg-broken-parser",
+  "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "replay": null,
+  "grounding": "regex",
+  "phases": [
+    "extract",
+    "transform"
+  ],
+  "invocations": [
+    {
+      "phases": [
+        "extract",
+        "transform"
+      ],
+      "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "replay": null,
+      "grounding": "regex",
+      "started_at": "2026-09-14T08:39:12.346622+00:00"
+    }
+  ]
+}

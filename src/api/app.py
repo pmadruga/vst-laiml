@@ -89,19 +89,24 @@ def query_records(conn: sqlite3.Connection, intent: QueryIntent, limit: int = 10
         where.append("(" + " OR ".join("(c.id = ? OR lower(c.name) LIKE ?)" for _ in intent.companies) + ")")
         for name in intent.companies:
             params += [name.lower(), f"%{name.lower()}%"]
-    if intent.years:
-        where.append(f"r.fiscal_year IN ({','.join('?' * len(intent.years))})")
-        params += intent.years
     if intent.source_register:
         where.append("ri.source_register = ?")
         params.append(intent.source_register.value)
     if intent.sector:
         where.append("lower(c.sector) LIKE ?")
         params.append(f"%{intent.sector.lower()}%")
-    if intent.status:
+    if intent.status == "removed":
+        # a removed risk has no instance in the year it is removed: return its last instance, the year before
+        sql.append("JOIN risk_status s ON s.canonical_risk_id = ri.canonical_risk_id AND s.fiscal_year = r.fiscal_year + 1")
+    elif intent.status:
         sql.append("JOIN risk_status s ON s.canonical_risk_id = ri.canonical_risk_id AND s.fiscal_year = r.fiscal_year")
+    if intent.status:
         where.append("s.status = ?")
         params.append(intent.status)
+    if intent.years:  # the year asked about: for removed, the year the risk is gone
+        year_col = "s.fiscal_year" if intent.status == "removed" else "r.fiscal_year"
+        where.append(f"{year_col} IN ({','.join('?' * len(intent.years))})")
+        params += intent.years
     if intent.free_text.strip():
         sql.append("JOIN risk_fts f ON f.id = ri.id")
         where.append("risk_fts MATCH ?")

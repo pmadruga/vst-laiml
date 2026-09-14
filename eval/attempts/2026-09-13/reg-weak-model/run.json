@@ -1,0 +1,12 @@
+{
+  "run_id": "reg-weak-model",
+  "pdf": "/home/pedro/dev/vst-laiml/documentation/baseline/VestasAnnualReport2025.pdf",
+  "phases": [
+    "extract",
+    "transform"
+  ],
+  "model": "ministral-3:14b",
+  "prompt_version": "v1",
+  "replay": "reg-weak-model",
+  "started_at": "2026-09-13T19:56:18.808580+00:00"
+}

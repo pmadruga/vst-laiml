@@ -47,7 +47,8 @@ CREATE INDEX IF NOT EXISTS idx_risk_register ON risk_instance(source_register);
 CREATE VIRTUAL TABLE IF NOT EXISTS risk_fts USING fts5(id UNINDEXED, title, description);
 -- L3: status per canonical risk and year. new = no instance the year before; removed = none this year;
 -- elevated = prominence rose (ESRS register -> ERM main risks); continuing otherwise. Empty with one report.
-CREATE VIEW IF NOT EXISTS risk_status AS
+DROP VIEW IF EXISTS risk_status;
+CREATE VIEW risk_status AS
 WITH years AS (
   SELECT cr.id AS canonical_risk_id, r.fiscal_year, MIN(ri.prominence) AS prominence
   FROM risk_instance ri JOIN report r ON r.id = ri.report_id JOIN canonical_risk cr ON cr.id = ri.canonical_risk_id
@@ -65,7 +66,8 @@ UNION ALL
 SELECT y.canonical_risk_id, y.fiscal_year + 1, 'removed'
 FROM years y
 WHERE NOT EXISTS (SELECT 1 FROM years n WHERE n.canonical_risk_id = y.canonical_risk_id AND n.fiscal_year = y.fiscal_year + 1)
-  AND y.fiscal_year + 1 <= (SELECT MAX(fiscal_year) FROM report);
+  AND y.fiscal_year + 1 <= (SELECT MAX(r3.fiscal_year) FROM report r3 JOIN canonical_risk cr3 ON cr3.company_id = r3.company_id
+                           WHERE cr3.id = y.canonical_risk_id);  -- the company's own latest report, not any company's
 """
 
 

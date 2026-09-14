@@ -9,7 +9,8 @@
     python etl.py --list
 
 Options: --pdf, --model, --prompt-version, --no-llm-identify (skip the second identify strategy),
---break-parser (regression: naive text order on p.51), --db.
+--break-parser (regression: naive text order on p.51), --grounding (T4 checks: regex or spacy), --db.
+run.json keeps every invocation of a run id, so a run's provenance survives later phases and re-scoring.
 """
 
 from __future__ import annotations
@@ -21,7 +22,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from shared.config import (COMPANY, DB_PATH, DEFAULT_PDF, EVAL_DIR, LLM_MODEL, PHASES, PROMPT_VERSION, REPORT, REVIEW_BODIES, RUNS_DIR)
+from shared.config import (COMPANY, DB_PATH, DEFAULT_PDF, EVAL_DIR, GROUNDING_NLP, LLM_MODEL, PHASES, PROMPT_VERSION, REPORT, REVIEW_BODIES, RUNS_DIR)
 from pipeline.extract.locate import locate
 from pipeline.extract.parse import parse
 from pipeline.extract.validate import validate_extraction
@@ -45,6 +46,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--model", default=LLM_MODEL); p.add_argument("--prompt-version", default=PROMPT_VERSION)
     p.add_argument("--no-llm-identify", action="store_true", help="skip the model-proposed identify strategy (T1)")
     p.add_argument("--break-parser", action="store_true", help="regression: replace the p.51 table parser with naive text order")
+    p.add_argument("--grounding", choices=("regex", "spacy"), default=GROUNDING_NLP, help="T4 grounding checks: hand-rolled regex or spaCy")
     p.add_argument("--db", type=Path, default=DB_PATH)
     p.add_argument("--list", action="store_true")
     return p
@@ -127,7 +129,7 @@ def phase_transform(args, d: Path, rec: RunRecord) -> int:
     records = enrich_mitigations(records, parsed, rec)
     print(f"[transform] T5 enrich: {sum(any(f.startswith('mitigation_from_topical') for f in r.quality_flags) for r in records)} mitigations from the topical sections")
 
-    records = validate_and_repair(records, parsed, rec, client)
+    records = validate_and_repair(records, parsed, rec, client, args.grounding)
     flagged = [r.id for r in records if r.quality_flags]
     print(f"[transform] T4 validate and repair: {len(flagged)} flagged {flagged}")
 
@@ -150,7 +152,7 @@ def phase_transform(args, d: Path, rec: RunRecord) -> int:
             desc2 = describe(ident2, rrec, rc)
             rec2, _ = merge(ident2.candidates, desc2, rrec, rec.run_id, args.model, args.prompt_version)
             rec2 = enrich_mitigations(rec2, parsed, rrec)
-            replay_records = validate_and_repair(rec2, parsed, rrec, rc)
+            replay_records = validate_and_repair(rec2, parsed, rrec, rc, args.grounding)
         except Exception as e:  # a replay miss is itself the finding
             rec.add("transform", "pipeline_reproducibility", "error", count=1, error=str(e)[:200])
     status = validate_transform(records, len(identified.candidates), merges, parsed, rec, replay_records)
@@ -167,11 +169,28 @@ def phase_load(args, d: Path, rec: RunRecord) -> int:
     if rec.rows and any(r.check_id == "eval_scores" and r.outcome == "error" for r in rec.rows):
         print("[load] refused: a golden-set evaluator failed (T6). See runs/<id>/eval/report.json")
         return 3
-    meta = {"pdf": str(args.pdf), "phases": ["extract", "transform", "load"], "finished_at": datetime.now(timezone.utc).isoformat()}
+    phases = json.loads((d / "run.json").read_text()).get("phases", ["load"]) if (d / "run.json").exists() else ["load"]
+    meta = {"pdf": str(args.pdf), "phases": phases, "finished_at": datetime.now(timezone.utc).isoformat()}
     status = load(extraction, rec, args.db, parsed.page_text.get(50, ""), meta)
     print(f"[load] {status}; database {args.db}")
     print(rec.summary("load"))
     return 0 if status != "error" else 3
+
+
+def write_run_json(d: Path, run_id: str, invocation: dict) -> dict:
+    """Append this invocation to run.json. Top-level model, prompt and replay come from the latest invocation that ran the
+    transform (the one whose calls are recorded); phases is every phase any invocation ran."""
+    path = d / "run.json"
+    meta = json.loads(path.read_text()) if path.exists() else {}
+    invocations = meta.get("invocations") or ([{k: meta[k] for k in ("phases", "pdf", "model", "prompt_version", "replay", "started_at") if k in meta}] if meta else [])
+    invocations.append(invocation)
+    source = next((i for i in reversed(invocations) if "transform" in i.get("phases", [])), invocation)
+    meta = {"run_id": run_id, "pdf": source.get("pdf"), "model": source.get("model"), "prompt_version": source.get("prompt_version"),
+            "replay": source.get("replay"), "grounding": source.get("grounding"),
+            "phases": [ph for ph in ("extract", "transform", "load") if any(ph in i.get("phases", []) for i in invocations)],
+            "invocations": invocations}
+    path.write_text(json.dumps(meta, indent=2) + "\n")
+    return meta
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -185,9 +204,8 @@ def main(argv: list[str] | None = None) -> int:
     d = RUNS_DIR / run_id
     d.mkdir(parents=True, exist_ok=True)
     rec = RunRecord(run_id, REPORT["id"], d)
-    (d / "run.json").write_text(json.dumps({"run_id": run_id, "pdf": str(args.pdf), "phases": wanted, "model": args.model,
-                                            "prompt_version": args.prompt_version, "replay": args.replay,
-                                            "started_at": datetime.now(timezone.utc).isoformat()}, indent=2) + "\n")
+    write_run_json(d, run_id, {"phases": wanted, "pdf": str(args.pdf), "model": args.model, "prompt_version": args.prompt_version,
+                               "replay": args.replay, "grounding": args.grounding, "started_at": datetime.now(timezone.utc).isoformat()})
     print(f"run {run_id} -> {d}")
     for ph in wanted:
         rc = {"extract": phase_extract, "transform": phase_transform, "load": phase_load}[ph](args, d, rec)

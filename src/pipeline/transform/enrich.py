@@ -14,7 +14,9 @@ import re
 from shared.runrecord import RunRecord
 from shared.schema import Citation, ParseResult, Register, RiskRecord
 
-ACTIONS = re.compile(r"Actions and resources\s*(?P<body>.+?)(?=(?:\n[A-Z][^\n]{0,60}\n(?:Type of impact|MDR-|[EGS]\d-\d))|\Z)", re.S)
+# The MDR-A "Actions and resources" heading stands on its own line; the same words inside a sentence are a cross-reference.
+ACTIONS_HEADING = re.compile(r"^[ \t]*Actions and resources[ \t]*$", re.M)
+SUBHEADING_MAX = 45  # a line this short, unpunctuated, after a finished sentence starts the next sub-section
 MAX_CHARS = 700
 
 
@@ -23,15 +25,25 @@ def _norm(s: str) -> str:
 
 
 def _actions_paragraph(text: str) -> str | None:
-    m = ACTIONS.search(text)
+    m = ACTIONS_HEADING.search(text)
     if not m:
         return None
-    body = " ".join(m.group("body").split())
-    body = re.sub(r"\s*-\s(?=[a-z])", "", body)  # re-join words hyphenated at line ends
+    kept: list[str] = []
+    for line in text[m.end():].split("\n"):
+        s = line.strip()
+        if not s:
+            continue
+        if kept and kept[-1].endswith(".") and len(s) < SUBHEADING_MAX and not s.endswith((".", ":", ";", ",")):
+            break
+        kept.append(s)
+        if sum(map(len, kept)) > MAX_CHARS:
+            break
+    body = re.sub(r"(?<=[a-z])-\n(?=[a-z])", "", "\n".join(kept))  # re-join words hyphenated at line ends only
+    body = " ".join(body.split())
     if len(body) > MAX_CHARS:
         cut = body[:MAX_CHARS]
         body = cut[: cut.rfind(". ") + 1] or cut
-    return body.strip() or None
+    return body or None
 
 
 def enrich_mitigations(records: list[RiskRecord], parsed: ParseResult, record: RunRecord) -> list[RiskRecord]:

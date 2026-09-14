@@ -5,5 +5,5 @@ __pycache__/
 *.egg-info/
 data/*.db
 data/runs/
-runs/
+/runs/
 documentation/baseline/Case_GenAIandNLPEngineer.pdf

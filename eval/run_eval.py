@@ -29,7 +29,9 @@ def score_run(run_id: str, golden_path: Path = EVAL_DIR / "golden.json", intents
         raise SystemExit(f"{run_id}: no final.json, the run stopped before the transform phase; errors on the run record: {errors}")
     final = json.loads((run_dir / "final.json").read_text())
     golden = load_golden(golden_path)
-    results = evaluate(golden, final["risks"])
+    parse_path = run_dir / "parse.json"
+    page_text = {int(k): v for k, v in json.loads(parse_path.read_text())["page_text"].items()} if parse_path.exists() else None
+    results = evaluate(golden, final["risks"], page_text)
     record = RunRecord(run_id, final["report"]["id"], run_dir)
     scores = {r.name: r.score for r in results}
     failed = [r.name for r in results if not r.passed]

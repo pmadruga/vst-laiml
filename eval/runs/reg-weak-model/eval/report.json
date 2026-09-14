@@ -1,0 +1,114 @@
+{
+  "run_id": "reg-weak-model",
+  "scores": {
+    "identification": 1.0,
+    "provenance": 1.0,
+    "grounding": 0.111,
+    "category": 0.889,
+    "fields": 1.0
+  },
+  "failed": [
+    "grounding"
+  ],
+  "results": [
+    {
+      "name": "identification",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "expected": 9,
+        "records": 9
+      }
+    },
+    {
+      "name": "provenance",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {}
+    },
+    {
+      "name": "grounding",
+      "score": 0.111,
+      "passed": false,
+      "failures": [
+        [
+          "geopolitics",
+          [
+            "phrase_missing:regulatory"
+          ]
+        ],
+        [
+          "project_execution",
+          [
+            "phrase_missing:onshore and offshore projects"
+          ]
+        ],
+        [
+          "cyber",
+          [
+            "phrase_missing:cyber attack",
+            "phrase_missing:critical infrastructure"
+          ]
+        ],
+        [
+          "injuries_own_workforce",
+          [
+            "phrase_missing:compensation costs"
+          ]
+        ],
+        [
+          "injuries_contractors",
+          [
+            "phrase_missing:value chain workers"
+          ]
+        ],
+        [
+          "forced_child_labour",
+          [
+            "phrase_missing:forced labour",
+            "phrase_missing:suppliers"
+          ]
+        ],
+        [
+          "market_conditions",
+          [
+            "phrase_missing:auction design",
+            "phrase_missing:permit delays"
+          ]
+        ],
+        [
+          "corruption",
+          [
+            "phrase_missing:global presence"
+          ]
+        ]
+      ],
+      "detail": {}
+    },
+    {
+      "name": "category",
+      "score": 0.889,
+      "passed": true,
+      "failures": [
+        [
+          "geopolitics",
+          [
+            "category:supply_chain!=regulatory"
+          ]
+        ]
+      ],
+      "detail": {}
+    },
+    {
+      "name": "fields",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {}
+    }
+  ]
+}

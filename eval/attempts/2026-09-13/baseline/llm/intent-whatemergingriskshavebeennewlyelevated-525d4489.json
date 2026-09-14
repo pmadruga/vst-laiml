@@ -1,0 +1,138 @@
+{
+  "call_id": "intent-whatemergingriskshavebeennewlyelevated-525d4489",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "525d44891d57d91f7cb59439c586232c6d2782cb2220194a80a22d3b7da4af02",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You turn a question about corporate risk disclosures into a structured query intent. The database holds principal risks per company and fiscal year, each with one primary category from a fixed taxonomy: financial, operational, regulatory, market, climate, cyber, supply_chain.\n\nMap the question's subject to categories by cause:\n- attacks on IT, data, digital assets -> cyber\n- suppliers, components, logistics, raw materials, sourcing -> supply_chain\n- laws, permits, sanctions, tariffs, taxes, compliance, corruption, labour law -> regulatory\n- demand, prices, competition, auctions, grid, customers -> market\n- climate transition, physical climate, carbon -> climate\n- execution, quality, safety, delivery, capacity -> operational\n- liquidity, currency, credit, funding -> financial\nLeave categories empty when the question asks about risks in general without naming a subject; never list every category.\n\nOther fields, each only when the question itself says so:\n- companies: company names the question mentions.\n- years: fiscal years the question mentions.\n- source_register: erm_main_risk only when the question asks for a company's top, main, principal or enterprise-level risks as a set; otherwise null.\n- status: how a risk changed over time, when the question asks about change: something that rose in importance -> elevated; something that appeared -> new; something that disappeared -> removed; otherwise null.\n- sector: an industry the question uses as a filter over companies; never inferred from a company name.\n- free_text: only words that name a specific thing to search for that no field above captures; otherwise empty.\n"
+    },
+    {
+      "role": "user",
+      "content": "Question: What emerging risks have been newly elevated?"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "Category": {
+        "description": "Closed taxonomy from the brief (PLAN.md > Assumptions).",
+        "enum": [
+          "financial",
+          "operational",
+          "regulatory",
+          "market",
+          "climate",
+          "cyber",
+          "supply_chain"
+        ],
+        "title": "Category",
+        "type": "string"
+      },
+      "Register": {
+        "enum": [
+          "erm_main_risk",
+          "esrs_financial_risk"
+        ],
+        "title": "Register",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "description": "What the question endpoint parses a natural-language question into. Sent to the model as a JSON schema.",
+    "properties": {
+      "categories": {
+        "items": {
+          "$ref": "#/$defs/Category"
+        },
+        "title": "Categories",
+        "type": "array"
+      },
+      "companies": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Companies",
+        "type": "array"
+      },
+      "years": {
+        "items": {
+          "type": "integer"
+        },
+        "title": "Years",
+        "type": "array"
+      },
+      "source_register": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Register"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "status": {
+        "anyOf": [
+          {
+            "enum": [
+              "new",
+              "continuing",
+              "removed",
+              "elevated"
+            ],
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Status"
+      },
+      "sector": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Sector"
+      },
+      "free_text": {
+        "default": "",
+        "title": "Free Text",
+        "type": "string"
+      }
+    },
+    "title": "QueryIntent",
+    "type": "object",
+    "required": [
+      "categories",
+      "companies",
+      "years",
+      "source_register",
+      "status",
+      "sector",
+      "free_text"
+    ]
+  },
+  "response_content": "{\n  \"categories\": [],\n  \"companies\": [],\n  \"years\": [],\n  \"source_register\": null,\n  \"status\": \"elevated\",\n  \"sector\": \"\",\n  \"free_text\": \"\"\n}",
+  "usage": {
+    "completion_tokens": 122,
+    "prompt_tokens": 408,
+    "total_tokens": 530,
+    "prompt_tokens_details": {
+      "cached_tokens": 398
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 1.2,
+  "created_at": "2026-09-13T19:51:44.783024+00:00"
+}

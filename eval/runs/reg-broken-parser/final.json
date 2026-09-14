@@ -1,0 +1,361 @@
+{
+  "company": {
+    "id": "vestas",
+    "name": "Vestas Wind Systems A/S",
+    "sector": "renewable energy",
+    "country": "DK"
+  },
+  "report": {
+    "id": "vestas-2025",
+    "company_id": "vestas",
+    "fiscal_year": 2025,
+    "file": "VestasAnnualReport2025.pdf",
+    "review_bodies": [
+      "Executive Management Team",
+      "Board of Directors",
+      "Audit Committee"
+    ],
+    "review_frequency": "every six months",
+    "page_offset": 0
+  },
+  "run": {
+    "run_id": "reg-broken-parser",
+    "model": "gpt-oss",
+    "prompt_version": "v1",
+    "started_at": "2026-09-14T08:39:45.409404Z"
+  },
+  "risks": [
+    {
+      "id": "vestas-2025-r01",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-erm-geopolitics-and-regulatory-framework",
+      "title": "Geopolitical and Regulatory Disruption",
+      "description": "The company faces significant challenges from shifting geopolitical tensions, conflicts, and trade disputes that create tariffs, sanctions, export controls, and targeted restrictions on critical materials. These actions alter the regulatory landscape, disrupt global supply chains, and complicate project execution, potentially leading to delays, cost increases, and reduced market competitiveness.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "source_register": "erm_main_risk",
+      "source_taxonomy": null,
+      "section": "risk_management",
+      "page": 51,
+      "citations": [
+        {
+          "section": "risk_management",
+          "page": 51,
+          "source_register": "erm_main_risk",
+          "span": "Description In 2025, Vestas continued to navigate significant challenges arising from shifting geopolitical tensions across the world. Conflicts in Ukraine and the Middle East continued to disrupt regional stability, affecting global supply chains and business operations. Trade tensions between major economies have intensified, leading to tariffs, sanctions, export controls, and targeted restrictions on e.g. critical materials which complicate global operations. Governments in the EU, China, and the USA introduced assertive industrial policies aimed"
+        }
+      ],
+      "potential_impact": "at securing domestic manufacturing and energy independence. These shifts are reshaping the regulatory landscape, altering market incentives, and intensifying competition in the clean-tech sector. For Vestas, this situation means navigating an increasingly fragmented and unpredictable global environment, while continuously adapting to external forces beyond our control. Project execution at Vestas involves delivering complex onshore and offshore projects within specified parameters relating to quality, cost, and timeline. As the scale and complexity of offshore",
+      "mitigation": "The company enhances internal coordination to manage execution risks, implements precise project controls, addresses production capacity ramp‑up delays, enforces quality control during scaling, and monitors supply‑chain disruptions while seeking supportive regulatory frameworks and sustainable, scalable supply chains.",
+      "prominence": 1,
+      "verbatim_span": "Description In 2025, Vestas continued to navigate significant challenges arising from shifting geopolitical tensions across the world. Conflicts in Ukraine and the Middle East continued to disrupt regional stability, affecting global supply chains and business operations. Trade tensions between major economies have intensified, leading to tariffs, sanctions, export controls, and targeted restrictions on e.g. critical materials which complicate global operations. Governments in the EU, China, and the USA introduced assertive industrial policies aimed",
+      "verbatim_title": "Geopolitics and regulatory framework",
+      "stated_mitigation": "projects grow, so does the need for precise internal coordination. Execution is affected by delays in production capacity ramp-up, quality control issues during scaling, and supply chain disruptions. The lack of industry-wide standardisation and insufficient logistical infrastructure further complicate timely delivery. Success also depends on external factors, such as supportive regulatory frameworks, the cross-border mobility of skilled workers, and the availability of a sustainable and scalable supply chain, all of which remain vulnerable to",
+      "confidence": 0.9,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r02",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-erm-project-execution",
+      "title": "Cyber Threat to Project Execution",
+      "description": "Vestas’ digital and other critical assets are exposed to cyber attacks, which could disrupt or destabilise energy generation. Such attacks threaten the reliability and security of the company’s energy solutions, which are critical infrastructure for electricity producers worldwide.",
+      "category": "cyber",
+      "secondary_categories": [],
+      "source_register": "erm_main_risk",
+      "source_taxonomy": null,
+      "section": "risk_management",
+      "page": 51,
+      "citations": [
+        {
+          "section": "risk_management",
+          "page": 51,
+          "source_register": "erm_main_risk",
+          "span": "geopolitical and market shifts. Vestas’ digital and other critical assets are exposed to cyber attacks. A cyber attack may have dual implications for both Vestas as a company and for the societies that our energy solutions serve. Electricity producers rely on Vestas’ energy solutions for reliable and secure sustainable energy production, making these solutions critical infrastructure for societies around the world. Cyber-threat actors constantly evolve their methods and techniques to attack Vestas’ energy"
+        }
+      ],
+      "potential_impact": "solutions, for the purpose of extorsion or to destabilise energy generation. Vestas’ technology, data, and operations are a potential target for geopolitical actors and the cyber-criminal industry. Potential impact Geopolitical tensions and regulatory shifts create uncertainty across global markets, which can disrupt and delay supply chains, and increase costs through tariffs and trade barriers. These dynamics may weaken project economics, reduce market volumes, and challenge Vestas’ ability to maintain cost efficiency and competitiveness.",
+      "mitigation": null,
+      "prominence": 1,
+      "verbatim_span": "geopolitical and market shifts. Vestas’ digital and other critical assets are exposed to cyber attacks. A cyber attack may have dual implications for both Vestas as a company and for the societies that our energy solutions serve. Electricity producers rely on Vestas’ energy solutions for reliable and secure sustainable energy production, making these solutions critical infrastructure for societies around the world. Cyber-threat actors constantly evolve their methods and techniques to attack Vestas’ energy",
+      "verbatim_title": "Project execution",
+      "stated_mitigation": "Challenges in project execution can lead to delays in delivery, cost overruns, and margin erosion, particularly as offshore projects grow in scale and complexity. Quality issues may result in formal disputes and reputational damage. These factors can undermine Vestas’ ability to secure new business, reduce investor confidence, and weaken long-term competitiveness in the global wind market. Politically motivated cyber actors may seek to disrupt energy production. A cyber attack on Vestas may be designed",
+      "confidence": 0.9,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r03",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-g1-cyber-security-risks",
+      "title": "Cyber attacks on operations",
+      "description": "The company faces the risk that a cyber attack could disrupt customers’ operations, cause electricity outages, and damage physical assets. A successful attack on Vestas’ energy solutions and infrastructure could lead to significant economic loss and reputational damage.",
+      "category": "cyber",
+      "secondary_categories": [],
+      "source_register": "erm_main_risk",
+      "source_taxonomy": null,
+      "section": "risk_management",
+      "page": 51,
+      "citations": [
+        {
+          "section": "risk_management",
+          "page": 51,
+          "source_register": "erm_main_risk",
+          "span": "to impact our customers’ operations, causing electricity outage and physical damage to assets. A successful cyber attack on Vestas’ energy solutions and our infrastructures might result in significant economic loss and reputational damage. How we manage it We manage geopolitical risks by continuously monitoring global developments and implementing appropriate mitigations. By maintaining a global and regionalised manufacturing footprint, Vestas can effectively respond to geopolitical shifts and regulatory changes. Proactive advocacy ensures alignment and"
+        },
+        {
+          "section": "material_iros",
+          "page": 74,
+          "source_register": "esrs_financial_risk",
+          "span": "Cyber attacks might disrupt business operations, expose intellectual property, or cause legal liability."
+        }
+      ],
+      "potential_impact": "compliance with evolving policies and the regulatory climate. Additionally, we exercise commercial discipline and utilise indexation and financial hedging strategies to minimise exposure. We mitigate execution risks through project governance, enhanced planning functions, and continuous alignment between commercial and delivery teams. We invest in scalable manufacturing capacity and maintain close coordination with suppliers to secure timely component availability. As a global manufacturer and key contributor to critical infrastructure, Vestas is required to continuously",
+      "mitigation": "The company monitors global developments, implements appropriate mitigations, and develops cyber‑security services to help customers navigate cyber risks. In 2025, its cyber‑security efforts were effective and no critical incidents occurred.",
+      "prominence": 1,
+      "verbatim_span": "to impact our customers’ operations, causing electricity outage and physical damage to assets. A successful cyber attack on Vestas’ energy solutions and our infrastructures might result in significant economic loss and reputational damage. How we manage it We manage geopolitical risks by continuously monitoring global developments and implementing appropriate mitigations. By maintaining a global and regionalised manufacturing footprint, Vestas can effectively respond to geopolitical shifts and regulatory changes. Proactive advocacy ensures alignment and",
+      "verbatim_title": "Cyber attacks",
+      "stated_mitigation": "address evolving cyber risks, both to our company and to the customers we serve. We are developing cyber security services aimed at helping our customers navigate cyber risks effectively, fulfil industry requirements and standards, and uphold their responsibilities. During 2025, our cyber security efforts were effective and no critical cyber security incidents took place. 51 Vestas Annual Report 2025 Our business Sustainability statement Financial statements Auditor and management statements Corporate governance – Risk management",
+      "confidence": 0.95,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r04",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-e1-carbon-taxes-and-tariffs",
+      "title": "Carbon taxes and tariffs",
+      "description": "High carbon taxes and tariffs raise the price of greenhouse‑gas‑intensive materials such as steel. This increase in material costs raises the overall cost of producing wind turbines.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "climate"
+      ],
+      "source_register": "esrs_financial_risk",
+      "source_taxonomy": "E1",
+      "section": "material_iros",
+      "page": 71,
+      "citations": [
+        {
+          "section": "material_iros",
+          "page": 71,
+          "source_register": "esrs_financial_risk",
+          "span": "High carbon taxes and tariffs increase the price of GHG intense materials such as steel, increasing the overall cost to produce wind turbines."
+        },
+        {
+          "section": "climate_change",
+          "page": 86,
+          "source_register": "esrs_financial_risk",
+          "span": "Our transition plan is structured around the two overarching decarbonisation levers, for which we have established key actions and allocated resources to meet our emission reduction targets. We track"
+        }
+      ],
+      "potential_impact": null,
+      "mitigation": "Our transition plan is structured around the two overarching decarbonisation levers, for which we have established key actions and allocated resources to meet our emission reduction targets. We track progress on the key actions across all geographies where we operate, and we work on implementation with stakeholders across our manufacturing, construction, and service operations, as well as with our suppliers.",
+      "prominence": 2,
+      "verbatim_span": "High carbon taxes and tariffs increase the price of GHG intense materials such as steel, increasing the overall cost to produce wind turbines.",
+      "verbatim_title": "Carbon taxes and tariffs",
+      "stated_mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "quality_flags": [
+        "mitigation_from_topical_section:p86"
+      ],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r05",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-s1-cost-implication-of-injuries-in-own-workforce",
+      "title": "Injury Cost Risk",
+      "description": "Potential injuries to the company’s own workforce can cause delays, lost work hours, and compensation costs. These outcomes represent a financial risk to the organization.",
+      "category": "operational",
+      "secondary_categories": [],
+      "source_register": "esrs_financial_risk",
+      "source_taxonomy": "S1",
+      "section": "material_iros",
+      "page": 73,
+      "citations": [
+        {
+          "section": "material_iros",
+          "page": 73,
+          "source_register": "esrs_financial_risk",
+          "span": "Potential injuries leading to delays, lost work hours and compensation costs pose a financial risk."
+        }
+      ],
+      "potential_impact": null,
+      "mitigation": null,
+      "prominence": 2,
+      "verbatim_span": "Potential injuries leading to delays, lost work hours and compensation costs pose a financial risk.",
+      "verbatim_title": "Cost implication of injuries in own workforce",
+      "stated_mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r06",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-s2-cost-implications-of-injuries-to-contractors-and-sub-contractors",
+      "title": "Injuries to Value‑Chain Workers",
+      "description": "Potential injuries to contractors and sub‑contractors in the company’s value chain pose a risk. Such injuries could lead to delays, lost work hours and compensation costs.",
+      "category": "operational",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "source_register": "esrs_financial_risk",
+      "source_taxonomy": "S2",
+      "section": "material_iros",
+      "page": 73,
+      "citations": [
+        {
+          "section": "material_iros",
+          "page": 73,
+          "source_register": "esrs_financial_risk",
+          "span": "Potential injuries to value chain workers leading to delays, lost work hours and compensation costs pose a risk."
+        }
+      ],
+      "potential_impact": null,
+      "mitigation": null,
+      "prominence": 2,
+      "verbatim_span": "Potential injuries to value chain workers leading to delays, lost work hours and compensation costs pose a risk.",
+      "verbatim_title": "Cost implications of injuries to contractors and sub-contractors",
+      "stated_mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r07",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-s2-fines-related-to-forced-or-child-labour",
+      "title": "Fines related to forced or child labour",
+      "description": "The company faces the risk of fines related to child and forced labour. This risk arises from its global network of suppliers, which may be involved in such practices.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "source_register": "esrs_financial_risk",
+      "source_taxonomy": "S2",
+      "section": "material_iros",
+      "page": 73,
+      "citations": [
+        {
+          "section": "material_iros",
+          "page": 73,
+          "source_register": "esrs_financial_risk",
+          "span": "Vestas’ global network of suppliers combined with the risk of fines related to child and forced labour constitute a potential risk."
+        }
+      ],
+      "potential_impact": null,
+      "mitigation": null,
+      "prominence": 2,
+      "verbatim_span": "Vestas’ global network of suppliers combined with the risk of fines related to child and forced labour constitute a potential risk.",
+      "verbatim_title": "Fines related to forced or child labour",
+      "stated_mitigation": null,
+      "confidence": 0.9,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r08",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-g1-insufficient-market-conditions",
+      "title": "Insufficient market conditions",
+      "description": "The risk arises from inadequate grid expansion, ineffective auction design, and permit delays. These conditions could increase costs, hinder investments, and reduce the viability of wind deployment.",
+      "category": "market",
+      "secondary_categories": [
+        "regulatory"
+      ],
+      "source_register": "esrs_financial_risk",
+      "source_taxonomy": "G1",
+      "section": "material_iros",
+      "page": 74,
+      "citations": [
+        {
+          "section": "material_iros",
+          "page": 74,
+          "source_register": "esrs_financial_risk",
+          "span": "Inadequate grid expansion, ineffective auction design and permit delays could increase costs, hinder investments, and reduce the viability of wind deployment."
+        }
+      ],
+      "potential_impact": null,
+      "mitigation": null,
+      "prominence": 2,
+      "verbatim_span": "Inadequate grid expansion, ineffective auction design and permit delays could increase costs, hinder investments, and reduce the viability of wind deployment.",
+      "verbatim_title": "Insufficient market conditions",
+      "stated_mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "quality_flags": [],
+      "review_state": "auto_accepted",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    },
+    {
+      "id": "vestas-2025-r09",
+      "report_id": "vestas-2025",
+      "canonical_risk_id": "vestas-g1-risk-of-corruption-and-bribery",
+      "title": "Risk of corruption and bribery",
+      "description": "Vestas’ global presence presents an increased risk of exposure to corruption and bribery. This risk arises from operating in multiple jurisdictions where differing anti‑corruption laws and enforcement practices may apply, potentially leading to legal and reputational consequences.",
+      "category": "regulatory",
+      "secondary_categories": [],
+      "source_register": "esrs_financial_risk",
+      "source_taxonomy": "G1",
+      "section": "material_iros",
+      "page": 74,
+      "citations": [
+        {
+          "section": "material_iros",
+          "page": 74,
+          "source_register": "esrs_financial_risk",
+          "span": "Vestas’ global presence presents an increased risk of exposure to corruption and bribery."
+        }
+      ],
+      "potential_impact": null,
+      "mitigation": null,
+      "prominence": 2,
+      "verbatim_span": "Vestas’ global presence presents an increased risk of exposure to corruption and bribery.",
+      "verbatim_title": "Risk of corruption and bribery",
+      "stated_mitigation": null,
+      "confidence": 0.9,
+      "poor_fit": false,
+      "quality_flags": [
+        "grounding:sentence_2_ungrounded"
+      ],
+      "review_state": "pending_review",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "run_id": "reg-broken-parser"
+    }
+  ]
+}

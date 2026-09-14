@@ -1,0 +1,60 @@
+{
+  "run_id": "reg-weak-model",
+  "scores": {
+    "identification": 1.0,
+    "provenance": 1.0,
+    "grounding": 1.0,
+    "category": 0.889,
+    "fields": 1.0
+  },
+  "failed": [],
+  "results": [
+    {
+      "name": "identification",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "expected": 9,
+        "records": 9
+      }
+    },
+    {
+      "name": "provenance",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {}
+    },
+    {
+      "name": "grounding",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {}
+    },
+    {
+      "name": "category",
+      "score": 0.889,
+      "passed": true,
+      "failures": [
+        [
+          "geopolitics",
+          [
+            "category:supply_chain!=regulatory"
+          ]
+        ]
+      ],
+      "detail": {}
+    },
+    {
+      "name": "fields",
+      "score": 1.0,
+      "passed": true,
+      "failures": [],
+      "detail": {}
+    }
+  ]
+}

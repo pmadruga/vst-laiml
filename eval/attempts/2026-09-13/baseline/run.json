@@ -1,0 +1,11 @@
+{
+  "run_id": "baseline",
+  "pdf": "/home/pedro/dev/vst-laiml/documentation/baseline/VestasAnnualReport2025.pdf",
+  "phases": [
+    "load"
+  ],
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "replay": null,
+  "started_at": "2026-09-13T19:56:20.150242+00:00"
+}

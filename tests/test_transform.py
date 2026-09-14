@@ -13,7 +13,7 @@ from pipeline.transform.enrich import enrich_mitigations
 from pipeline.transform.identify import identify, register_candidates
 from shared.llm import LLMClient, ReplayMiss
 from pipeline.transform.merge import canonical_id, merge
-from pipeline.transform.validate import grounding_problems, validate_and_repair, validate_transform
+from pipeline.transform.validate import get_nlp, grounding_problems, validate_and_repair, validate_transform
 
 
 def test_register_candidates_are_the_ten_register_rows(parsed):
@@ -51,14 +51,18 @@ def test_replay_miss_is_loud(baseline_run):
         client.complete("never-recorded", "system", "a prompt that was never sent", DescribeOutput)
 
 
-def test_grounding_catches_invented_facts(baseline_run):
+@pytest.mark.parametrize("backend", ["regex", "spacy"])
+def test_grounding_catches_invented_facts(baseline_run, backend):
+    if backend == "spacy":
+        pytest.importorskip("spacy")
+    nlp = get_nlp(backend)
     final = RiskExtraction.model_validate_json((baseline_run / "final.json").read_text())
     parsed = ParseResult.model_validate_json((baseline_run / "parse.json").read_text())
     rec = next(r for r in final.risks if r.category == "cyber")
     page = parsed.page_text[rec.page]
-    assert grounding_problems(rec, page) == [] or all(not p.startswith("span") for p in grounding_problems(rec, page))
+    assert all(not p.startswith("span") for p in grounding_problems(rec, page, nlp=nlp))
     bad = rec.model_copy(update={"description": "A SCADA breach in 2019 cost EUR 40m. Attackers from Ruritania targeted turbines."})
-    problems = grounding_problems(bad, page)
+    problems = grounding_problems(bad, page, nlp=nlp)
     assert any(p.startswith("number_not_in_text") for p in problems)
     assert any(p.startswith("name_not_in_text") for p in problems)
 
@@ -86,4 +90,5 @@ def test_final_object_has_register_fields_and_enriched_mitigation(baseline_run):
     assert by["Cyber attacks"].stated_mitigation and by["Cyber attacks"].canonical_risk_id == "vestas-g1-cyber-security-risks"  # merged: ESRS id kept
     carbon = by["Carbon taxes and tariffs"]
     assert carbon.mitigation and any(f.startswith("mitigation_from_topical_section") for f in carbon.quality_flags)
+    assert carbon.mitigation.startswith("Our transition plan")  # the MDR-A actions paragraph, not the quoted cross-reference
     assert any(c.page in (85, 86, 87) for c in carbon.citations)

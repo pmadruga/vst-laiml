@@ -16,6 +16,25 @@ A golden set is the expected output for a reference report, the fixture the regr
 
 Every phase ends at a validation point (E3, E8, T6, A1) and every record passes a grounding check (T4). Each check has a severity rule, error stops the report and warning counts, and names what it caught. Every outcome lands in one run record, per run, report and check. Read across runs and reports, the counts say which step to improve next and whether the fix is engineering, a prompt, or a model call; nothing is skipped silently.
 
+## Where the model is used, and where it is not
+
+The rule: whatever must be checkable (where a risk is, which risks exist, how many, whether a sentence is on the page) is code; the model writes text and reads meaning, and each of its outputs is checked by code afterwards. The code side is classical NLP and layout analysis, hand-rolled today.
+
+| Step | Technique | Model | Why |
+| --- | --- | --- | --- |
+| Locate sections (E1–E3) | TOC link annotations, title synonyms, landing-page check | no | A page index is a fact the check can confirm exactly |
+| Parse the tables (E4–E8) | Word coordinates and font sizes for cells; the drawing layer for the risk or opportunity arrow; row-count checks | no | Which cell a sentence belongs to must be verifiable; read by a model it would be a claim |
+| Identify (T1) | The report's risk register rows; a model proposes candidates from the section text, kept only when its quoted span is on the page | checker only | The company's own list gives a count to check against; the model's proposals measure agreement, they do not decide |
+| Describe and categorise (T2) | One structured call per risk with the taxonomy's cause test in the prompt and the ESRS topic as a prior | yes | Several register rows are one sentence and the brief asks for two to three, so quoting cannot meet it; nine labelled records cannot train a classifier |
+| Mitigation (T2, T5) | p.51: the "How we manage it" cell, condensed by the model; ESRS rows: the topical "Actions and resources" paragraph found by regex, quoted | partly | The report states it; the model only shortens a stated cell |
+| Merge (T3) | Title similarity and keyword hints across the two registers | no | Deterministic and recorded |
+| Validate (T4) | Regex sentence split, stop-word content overlap with the span, regex for numbers, capitalised names; one model retry with the problems attached | check no, repair yes | A check that uses the model cannot catch the model |
+| Evaluate | Golden set and five deterministic evaluators | no | Same reason; scores are reproducible in replay |
+| Load | SQL, FTS5 full-text search, regex for the review frequency on p.50 | no | Nothing to interpret |
+| Question endpoint | One structured call parses the question into filters; our SQL and FTS5 run them | yes | Mapping a paraphrase to the taxonomy ("supplier concentration" to supply_chain) is where keyword rules break; the model never writes SQL |
+
+spaCy was measured as the T4 backend (`--grounding spacy`; [comparison](documentation/stages/grounding-comparison.md)): the same verdict as the regex checks on all 45 recorded records and on every seeded failure, fifty times slower per record and about 190 MB of dependencies, so the regex checks stay. Its real use would be named entities as a product feature, not these checks. Not built: rules for the question fields they can fill (companies and sectors matched against the database, years, status words), leaving the model only the category.
+
 ## 1. Pipeline
 
 Three phases of pure steps; each step reads the previous step's file and writes its own under `runs/<run_id>/`. Per-step detail is in [SPECS.md](SPECS.md).
@@ -45,13 +64,13 @@ Each follows from what PLAN.md optimises for: correctness of identification and 
 | The report's risk registers identify the risks; the model only writes the record | The model proposes the risks from the section text | Identification becomes a count to check, not a judgement to trust; the risk register is the company's own list (assumption 2) | A risk disclosed only in prose is missed; a report without a risk register needs the model path, which is built but only measured today |
 | Coordinate parser for the two known table layouts | Docling, or a model reading page text | Provenance below the page (cell, icon, fixed row count) is a fact the checks can verify (EXTRACT) | Every new layout costs engineering time; the run record says when |
 | Local 20B model through an OpenAI-compatible server | A hosted frontier model | Cost as a constraint, public inputs, and the same server for tests through record and replay | Weaker categorisation on hard cases; one request at a time |
-| One structured call per risk, temperature 0 | One call per page returning all risks | Each record is grounded and repaired on its own; a bad call spoils one record | Sixteen calls per report instead of four |
+| One structured call per risk, temperature 0 | One call per page returning all risks | Each record is grounded and repaired on its own; a bad call spoils one record | 16 to 17 calls per report instead of four |
 | SQLite in a file, read by the API | Postgres | One report, one analyst, no server to run; the schema is the same SQL | Single writer; the API must be restarted when the file is replaced |
 | Flagged records are served with a flag | Human review before load | Assumption 6: consumers accept flags; nothing stalls on a reviewer | Wrong records can reach a client, marked; one of nine records is flagged for review on the baseline, the share that triggers analyst review (STRETCH.md) |
 
 ## Scaling
 
-One report costs 16 model calls and 36 seconds on one local GPU, almost all of it the model, so a quarter of 200 reports runs in about two hours; the measurements, token costs and extrapolation are in [SCALABILITY.md](SCALABILITY.md).
+One report costs 16 to 17 model calls (the number of repairs varies between runs) and 36 seconds on one local GPU, almost all of it the model, so a quarter of 200 reports runs in about two hours; the measurements, token costs and extrapolation are in [SCALABILITY.md](SCALABILITY.md).
 
 ## 3. Deployment
 

@@ -1,0 +1,451 @@
+{
+  "spacy_load_s": 0.61,
+  "runs": {
+    "eval/runs/baseline": {
+      "records": 9,
+      "flagged": {
+        "regex": 3,
+        "spacy": 3
+      },
+      "same_verdict": 9,
+      "same_problems": 9,
+      "rows": [
+        {
+          "id": "vestas-2025-r01",
+          "title": "Geopolitical and Regulatory Risks",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r02",
+          "title": "Project Execution",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r03",
+          "title": "Cyber attacks on digital assets",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r04",
+          "title": "Carbon taxes and tariffs",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r05",
+          "title": "Injury\u2011Related Workforce Delays",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r06",
+          "title": "Injuries to Contractors and Sub\u2011Contractors",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r07",
+          "title": "Fines for Child or Forced Labour",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r08",
+          "title": "Insufficient market conditions",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r09",
+          "title": "Risk of corruption and bribery",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        }
+      ]
+    },
+    "eval/runs/reg-weak-model": {
+      "records": 9,
+      "flagged": {
+        "regex": 5,
+        "spacy": 5
+      },
+      "same_verdict": 9,
+      "same_problems": 8,
+      "rows": [
+        {
+          "id": "vestas-2025-r01",
+          "title": "Geopolitical tensions disrupting supply chains",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r02",
+          "title": "Offshore project execution delays and quality risks",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r03",
+          "title": "Cyber attacks on digital assets",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r04",
+          "title": "Carbon taxes on GHG-intensive materials",
+          "regex": [
+            "name_not_in_text:GHG-intensive",
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r05",
+          "title": "Injuries in own workforce",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r06",
+          "title": "Injuries to contractors and subcontractors",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r07",
+          "title": "Fines for forced or child labour",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r08",
+          "title": "Grid expansion and auction delays",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r09",
+          "title": "Corruption and bribery exposure",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        }
+      ]
+    },
+    "eval/runs/reg-broken-parser": {
+      "records": 9,
+      "flagged": {
+        "regex": 2,
+        "spacy": 2
+      },
+      "same_verdict": 9,
+      "same_problems": 9,
+      "rows": [
+        {
+          "id": "vestas-2025-r01",
+          "title": "Geopolitical and Regulatory Disruption",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r02",
+          "title": "Cyber Threat to Project Execution",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r03",
+          "title": "Cyber attacks on operations",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r04",
+          "title": "Carbon taxes and tariffs",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r05",
+          "title": "Injury Cost Risk",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r06",
+          "title": "Injuries to Value\u2011Chain Workers",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r07",
+          "title": "Fines for child or forced labour",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r08",
+          "title": "Insufficient market conditions",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r09",
+          "title": "Risk of corruption and bribery",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        }
+      ]
+    },
+    "eval/runs/reg-prompt-no-mitigation": {
+      "records": 9,
+      "flagged": {
+        "regex": 3,
+        "spacy": 3
+      },
+      "same_verdict": 9,
+      "same_problems": 9,
+      "rows": [
+        {
+          "id": "vestas-2025-r01",
+          "title": "Geopolitical and Regulatory Risks",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r02",
+          "title": "Project Execution Risk",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r03",
+          "title": "Cyber Attacks on Digital Assets",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r04",
+          "title": "Carbon taxes and tariffs",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r05",
+          "title": "Injury\u2011Related Workforce Risk",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r06",
+          "title": "Injuries to Value\u2011Chain Workers",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r07",
+          "title": "Fines for child or forced labour",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r08",
+          "title": "Insufficient market conditions",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r09",
+          "title": "Risk of corruption and bribery",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        }
+      ]
+    },
+    "eval/runs/exp-grounding-spacy": {
+      "records": 9,
+      "flagged": {
+        "regex": 2,
+        "spacy": 2
+      },
+      "same_verdict": 9,
+      "same_problems": 9,
+      "rows": [
+        {
+          "id": "vestas-2025-r01",
+          "title": "Geopolitical and Regulatory Risks",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r02",
+          "title": "Project Execution",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r03",
+          "title": "Cyber Attacks on Digital Assets",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r04",
+          "title": "Carbon taxes and tariffs",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r05",
+          "title": "Injury\u2011Related Workforce Risk",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r06",
+          "title": "Injuries to contractors and sub\u2011contractors",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r07",
+          "title": "Fines for child or forced labour",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        },
+        {
+          "id": "vestas-2025-r08",
+          "title": "Insufficient market conditions",
+          "regex": [],
+          "spacy": []
+        },
+        {
+          "id": "vestas-2025-r09",
+          "title": "Risk of corruption and bribery",
+          "regex": [
+            "sentence_2_ungrounded"
+          ],
+          "spacy": [
+            "sentence_2_ungrounded"
+          ]
+        }
+      ]
+    }
+  },
+  "seeded": {
+    "records": 9,
+    "singular_cases": 9,
+    "counts": {
+      "invented_number": {
+        "regex": 9,
+        "spacy": 9
+      },
+      "invented_name": {
+        "regex": 9,
+        "spacy": 9
+      },
+      "off_topic_sentence": {
+        "regex": 6,
+        "spacy": 6
+      },
+      "singular_forms_false_flag": {
+        "regex": 0,
+        "spacy": 0
+      }
+    }
+  },
+  "sentences": {
+    "regex": {
+      "correct": 6,
+      "cases": 8,
+      "wrong": [
+        [
+          "Tariffs imposed by the U.S. Government raise costs. Margins fall.",
+          2,
+          3
+        ],
+        [
+          "Vestas Wind Systems A/S operates in 80 countries. Its exposure to St. Louis is limited.",
+          2,
+          3
+        ]
+      ]
+    },
+    "spacy": {
+      "correct": 6,
+      "cases": 8,
+      "wrong": [
+        [
+          "Costs could reach EUR 40m. This affects margins in 2027.",
+          2,
+          1
+        ],
+        [
+          "Delays of approx. 6 months are possible. They raise costs.",
+          2,
+          3
+        ]
+      ]
+    }
+  },
+  "ms_per_record": {
+    "regex": 0.6,
+    "spacy": 29.1
+  }
+}

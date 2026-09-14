@@ -2,7 +2,8 @@
 
 identification  precision and recall of the record set against the golden risks (fuzzy title or alias match)
 provenance      exact section and page for every matched record
-grounding       every golden key phrase appears in the matched record's own text (description, span, mitigation)
+grounding       every golden key phrase appears in the model-written text (description, mitigation); no number in the
+                description is missing from the record's cited pages
 category        primary category equals the golden category (or an acceptable alternative)
 fields          2-3 sentence description; mitigation present iff the golden set says it is stated
 
@@ -20,6 +21,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z])")
+NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
 THRESHOLDS = {"identification": 0.9, "provenance": 0.9, "grounding": 0.8, "category": 0.8, "fields": 0.8}
 
 
@@ -66,7 +68,8 @@ def match_records(golden: dict, records: list[dict]) -> dict[str, dict | None]:
     return out
 
 
-def evaluate(golden: dict, records: list[dict]) -> list[EvalResult]:
+def evaluate(golden: dict, records: list[dict], page_text: dict[int, str] | None = None) -> list[EvalResult]:
+    """page_text (printed page -> text, from parse.json) enables the invented-number check in grounding."""
     matches = match_records(golden, records)
     n_gold = len(golden["risks"])
     matched = {k: v for k, v in matches.items() if v is not None}
@@ -105,9 +108,15 @@ def evaluate(golden: dict, records: list[dict]) -> list[EvalResult]:
         return problems
 
     def grounding(g, r):
-        own = _norm(" ".join([r.get("description", ""), r.get("verbatim_span", ""), r.get("mitigation") or "",
-                              " ".join(c.get("span", "") for c in r.get("citations", []))]))
-        return [f"phrase_missing:{k}" for k in g["key_phrases"] if _norm(k) not in own]
+        # only what the model wrote: the span and citation spans are page text, so searching them cannot catch invention
+        own = _norm(" ".join([r.get("description", ""), r.get("mitigation") or ""]))
+        problems = [f"phrase_missing:{k}" for k in g["key_phrases"] if _norm(k) not in own]
+        if page_text is not None:
+            cited = _norm(" ".join(page_text.get(p, "") for p in {c["page"] for c in r.get("citations", [])} | {r["page"]}))
+            for num in NUMBER.findall(r.get("description", "")):
+                if not re.search(rf"(?<![0-9]){re.escape(_norm(num))}(?![0-9])", cited):
+                    problems.append(f"invented_number:{num}")
+        return problems
 
     def category(g, r):
         return [] if r.get("category") in g.get("acceptable_categories", [g["category"]]) else [f"category:{r.get('category')}!={g['category']}"]
@@ -134,7 +143,7 @@ def evaluate(golden: dict, records: list[dict]) -> list[EvalResult]:
 
 
 def evaluate_intents(golden: dict, parsed: list[dict]) -> EvalResult:
-    """A3 intent: category and filter agreement, field by field, over the question golden set."""
+    """A3 intent: every field of the parsed intent against the question golden set (sector and free text compared normalised)."""
     fails, ok = [], 0
     for q, got in zip(golden["questions"], parsed):
         exp = q["intent"]
@@ -144,8 +153,12 @@ def evaluate_intents(golden: dict, parsed: list[dict]) -> EvalResult:
         for k in ("source_register", "status"):
             if (got.get(k) or None) != (exp.get(k) or None):
                 problems.append(f"{k}:{got.get(k)}!={exp.get(k)}")
-        if bool(exp.get("sector")) != bool(got.get("sector")):
+        if _norm(got.get("sector") or "") != _norm(exp.get("sector") or ""):
             problems.append(f"sector:{got.get('sector')}!={exp.get('sector')}")
+        if sorted(got.get("years") or []) != sorted(exp.get("years") or []):
+            problems.append(f"years:{got.get('years')}!={exp.get('years')}")
+        if set(_norm(got.get("free_text") or "").split()) != set(_norm(exp.get("free_text") or "").split()):
+            problems.append(f"free_text:{got.get('free_text')!r}!={exp.get('free_text')!r}")
         if {c.lower() for c in got.get("companies", [])} != {c.lower() for c in exp["companies"]}:
             problems.append(f"companies:{got.get('companies')}!={exp['companies']}")
         if problems:

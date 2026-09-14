@@ -1,0 +1,12 @@
+{
+  "run_id": "reg-prompt-no-mitigation",
+  "pdf": "/home/pedro/dev/vst-laiml/documentation/baseline/VestasAnnualReport2025.pdf",
+  "phases": [
+    "extract",
+    "transform"
+  ],
+  "model": "gpt-oss",
+  "prompt_version": "v1-no-mitigation",
+  "replay": "reg-prompt-no-mitigation",
+  "started_at": "2026-09-13T19:56:17.702618+00:00"
+}

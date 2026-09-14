@@ -1,0 +1,204 @@
+[
+  {
+    "candidate_id": "p51-erm-1",
+    "output": {
+      "title": "Geopolitical and Regulatory Risks",
+      "description": "Vestas faces significant risks from shifting geopolitical tensions and regulatory changes, including conflicts in Ukraine and the Middle East, trade tensions, tariffs, sanctions, export controls, and industrial policies aimed at securing domestic manufacturing and energy independence. These developments can disrupt and delay supply chains, increase costs, weaken project economics, reduce market volumes, and challenge cost efficiency and competitiveness.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p51-erm-1-9d386bbd"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  },
+  {
+    "candidate_id": "p51-erm-2",
+    "output": {
+      "title": "Project Execution Risk",
+      "description": "Project execution at Vestas involves delivering complex onshore and offshore projects within specified parameters relating to quality, cost, and timeline. Execution is affected by delays in production capacity ramp\u2011up, quality control issues during scaling, and supply chain disruptions, which can lead to delays, cost overruns, and margin erosion. The lack of industry\u2011wide standardisation and insufficient logistical infrastructure further complicate timely delivery, while external factors such as regulatory frameworks, skilled worker mobility, and supply\u2011chain sustainability remain vulnerable to geopolitical and market shifts.",
+      "category": "operational",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p51-erm-2-6433379a"
+    ],
+    "votes": {
+      "operational": 1
+    }
+  },
+  {
+    "candidate_id": "p51-erm-3",
+    "output": {
+      "title": "Cyber attacks on critical assets",
+      "description": "Vestas\u2019 digital and other critical assets are exposed to cyber attacks. A cyber attack may have dual implications for both Vestas as a company and for the societies that our energy solutions serve, potentially causing electricity outages, physical damage to assets, and significant economic loss and reputational damage.",
+      "category": "cyber",
+      "secondary_categories": [],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p51-erm-3-0645ccbf"
+    ],
+    "votes": {
+      "cyber": 1
+    }
+  },
+  {
+    "candidate_id": "p71-E1-financial-4",
+    "output": {
+      "title": "Carbon taxes and tariffs",
+      "description": "High carbon taxes and tariffs increase the price of GHG\u2011intense materials such as steel. This raises the overall cost to produce wind turbines, potentially affecting the company\u2019s cost structure and competitiveness.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "climate"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p71-E1-financial-4-e14a8229"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  },
+  {
+    "candidate_id": "p73-S1-financial-1",
+    "output": {
+      "title": "Injury\u2011Related Workforce Risk",
+      "description": "Potential injuries to the company\u2019s own workforce can cause delays, lost work hours, and compensation costs. These impacts pose a financial risk to the organization.",
+      "category": "operational",
+      "secondary_categories": [],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p73-S1-financial-1-9b670d40"
+    ],
+    "votes": {
+      "operational": 1
+    }
+  },
+  {
+    "candidate_id": "p73-S2-financial-2",
+    "output": {
+      "title": "Injuries to Value\u2011Chain Workers",
+      "description": "Potential injuries to value chain workers pose a risk. Such injuries could lead to delays, lost work hours and compensation costs.",
+      "category": "operational",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p73-S2-financial-2-bd12ac34"
+    ],
+    "votes": {
+      "operational": 1
+    }
+  },
+  {
+    "candidate_id": "p73-S2-financial-3",
+    "output": {
+      "title": "Fines for child or forced labour",
+      "description": "Vestas faces the risk of fines related to child and forced labour within its global supplier network. These fines could arise from violations of labour laws and regulations governing the value chain.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p73-S2-financial-3-104d0c8c"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  },
+  {
+    "candidate_id": "p74-G1-financial-1",
+    "output": {
+      "title": "Insufficient Market Conditions",
+      "description": "Inadequate grid expansion, ineffective auction design, and permit delays could increase costs, hinder investments, and reduce the viability of wind deployment. These conditions directly affect the market environment in which the company operates.",
+      "category": "market",
+      "secondary_categories": [
+        "regulatory"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p74-G1-financial-1-1330f1ff"
+    ],
+    "votes": {
+      "market": 1
+    }
+  },
+  {
+    "candidate_id": "p74-G1-financial-2",
+    "output": {
+      "title": "Cyber security risks",
+      "description": "Cyber attacks might disrupt business operations, expose intellectual property, or cause legal liability. These impacts could impair the company\u2019s ability to deliver products and services and expose it to regulatory or contractual penalties.",
+      "category": "cyber",
+      "secondary_categories": [],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p74-G1-financial-2-f8f2b6df"
+    ],
+    "votes": {
+      "cyber": 1
+    }
+  },
+  {
+    "candidate_id": "p74-G1-financial-3",
+    "output": {
+      "title": "Risk of corruption and bribery",
+      "description": "Vestas\u2019 global presence presents an increased risk of exposure to corruption and bribery. This risk arises from operating in multiple jurisdictions where differing anti\u2011corruption laws and enforcement practices may apply, potentially leading to legal and reputational consequences.",
+      "category": "regulatory",
+      "secondary_categories": [],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p74-G1-financial-3-16d8bd1d"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  }
+]

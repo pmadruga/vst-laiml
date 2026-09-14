@@ -41,7 +41,20 @@ docker compose run --rm --entrypoint python pipeline eval/run_eval.py --run-id b
 docker compose run --rm --entrypoint python pipeline eval/run_eval.py --run-id baseline --intents   # scores the questions too; uses recordings, goes live only for an unrecorded question
 ```
 
-The four recorded runs ship in `eval/runs/` and are baked into the image at `/app/eval/runs/`; replay from there with `--replay /app/eval/runs/<run_id>`. Scores are in [results.md](results.md).
+The four recorded runs ship in `eval/runs/` and are baked into the image at `/app/eval/runs/`; replay from there with `--replay /app/eval/runs/<run_id>`. Scores are in [results.md](results.md). Recordings replaced by a later re-record are kept, unchanged, under `eval/attempts/<date>/`.
+
+Every invocation of a run id is appended to its `run.json` (`invocations`), so a run's model, prompt and phases survive later scoring or loading.
+
+### Grounding backend experiment (host only)
+
+The T4 grounding checks run on hand-rolled regex by default. `--grounding spacy` runs the same checks on spaCy (sentence boundaries, lemmas, named entities). spaCy is in the `nlp` dependency group, which the dev group includes and the Docker image does not, so these run on the host:
+
+```sh
+uv run python etl.py --extract --transform --run-id exp-grounding-spacy --grounding spacy     # live model calls, spaCy checks
+uv run python eval/compare_grounding.py eval/runs/baseline eval/runs/reg-weak-model eval/runs/reg-broken-parser eval/runs/reg-prompt-no-mitigation
+```
+
+The comparison replays each run's recorded calls, checks the same first-pass records with both backends, and adds seeded cases with a known answer; no model server is needed. Results are in [stages/grounding-comparison.md](stages/grounding-comparison.md).
 
 ## API
 

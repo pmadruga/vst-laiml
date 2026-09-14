@@ -1,0 +1,118 @@
+{
+  "call_id": "describe-p51-erm-3-c7374f59",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "c7374f5948c52425e4449fdd598bcf2153b2bad300e67bc162aeddb30631ef2f",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You write one comparable risk record for a principal risk disclosed in a company's annual report. You only use the text you are given. You never add facts, numbers, names or causes that are not in it.\n\nTaxonomy (exactly one primary category; secondary categories optional, only when the text supports them). Classify by the cause the text names, not by the consequence: almost every risk ends in cost or lost revenue, so \"financial\" is only for risks whose cause is financial.\n- financial: liquidity, funding, currency, interest, credit, capital structure as the cause\n- operational: execution, quality, capacity, safety of people, delivery, internal processes\n- regulatory: laws, permits, sanctions, tariffs and duties, taxes, compliance and legal liability, fines, corruption, labour law\n- market: demand, prices, competition, auction and subsidy design, customer and grid conditions\n- climate: physical climate effects and the climate transition as the cause\n- cyber: attacks on IT or OT, data, digital assets and connected products\n- supply_chain: suppliers, components, logistics, raw materials, upstream labour practices\n\nRules of thumb for hard cases (apply the cause test; do not invent a category):\n- harm to people at work, whether employees or contractors -> operational (the cause is safety), never financial because it costs money\n- a fine, tax, duty or sanction -> regulatory, even when it is driven by climate policy; add climate or supply_chain as secondary when the text names them\n- a risk in the supply chain (labour practices, sourcing, components) -> supply_chain when the cause sits with suppliers, regulatory when the cause is a law about them; use the other as secondary\n- external conditions such as grid capacity, auctions, permits -> market primary, regulatory secondary when permits or policy are named\nIf the text still fits none of the seven well, pick the closest and set poor_fit to true with a short reason.\n\nRules for the fields:\n- title: at most 6 words, neutral, no company name.\n- description: exactly 2 to 3 sentences, even when the source text is a single sentence: the first says what the risk is, the second why it matters or what it leads to, in the report's own terms. Every claim must be traceable to the text.\n- mitigation: what the report states it does about the risk, condensed from the text; null when the text states no mitigation.\n- confidence: your confidence in the primary category, 0 to 1.\n"
+    },
+    {
+      "role": "user",
+      "content": "Register: erm_main_risk (prominence 1; 1 = enterprise main risk, 2 = ESRS financially material risk)\nSection: risk_management, printed page 51\nTitle as printed: Cyber attacks\n\nDescription as printed:\nto impact our customers’ operations, causing electricity outage and physical damage to assets. A successful cyber attack on Vestas’ energy solutions and our infrastructures might result in significant economic loss and reputational damage. How we manage it We manage geopolitical risks by continuously monitoring global developments and implementing appropriate mitigations. By maintaining a global and regionalised manufacturing footprint, Vestas can effectively respond to geopolitical shifts and regulatory changes. Proactive advocacy ensures alignment and\n\nPotential impact as printed:\ncompliance with evolving policies and the regulatory climate. Additionally, we exercise commercial discipline and utilise indexation and financial hedging strategies to minimise exposure. We mitigate execution risks through project governance, enhanced planning functions, and continuous alignment between commercial and delivery teams. We invest in scalable manufacturing capacity and maintain close coordination with suppliers to secure timely component availability. As a global manufacturer and key contributor to critical infrastructure, Vestas is required to continuously\n\nHow we manage it, as printed:\naddress evolving cyber risks, both to our company and to the customers we serve. We are developing cyber security services aimed at helping our customers navigate cyber risks effectively, fulfil industry requirements and standards, and uphold their responsibilities. During 2025, our cyber security efforts were effective and no critical cyber security incidents took place. 51 Vestas Annual Report 2025 Our business Sustainability statement Financial statements Auditor and management statements Corporate governance – Risk management"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "Category": {
+        "description": "Closed taxonomy from the brief (PLAN.md > Assumptions).",
+        "enum": [
+          "financial",
+          "operational",
+          "regulatory",
+          "market",
+          "climate",
+          "cyber",
+          "supply_chain"
+        ],
+        "title": "Category",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "description": "What the describe prompt returns (T2). This is the JSON schema sent to the model.",
+    "properties": {
+      "title": {
+        "maxLength": 80,
+        "title": "Title",
+        "type": "string"
+      },
+      "description": {
+        "title": "Description",
+        "type": "string"
+      },
+      "category": {
+        "$ref": "#/$defs/Category"
+      },
+      "secondary_categories": {
+        "items": {
+          "$ref": "#/$defs/Category"
+        },
+        "title": "Secondary Categories",
+        "type": "array"
+      },
+      "mitigation": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Mitigation"
+      },
+      "confidence": {
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "title": "Confidence",
+        "type": "number"
+      },
+      "poor_fit": {
+        "default": false,
+        "title": "Poor Fit",
+        "type": "boolean"
+      },
+      "poor_fit_reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Poor Fit Reason"
+      }
+    },
+    "required": [
+      "title",
+      "description",
+      "category",
+      "secondary_categories",
+      "mitigation",
+      "confidence",
+      "poor_fit",
+      "poor_fit_reason"
+    ],
+    "title": "DescribeOutput",
+    "type": "object"
+  },
+  "response_content": "{\n  \"title\": \"Cyber attacks on operations\",\n  \"description\": \"The company faces the risk that a cyber attack could disrupt customers’ operations, cause electricity outages, and damage physical assets. A successful attack on Vestas’ energy solutions and infrastructure could lead to significant economic loss and reputational damage.\",\n  \"category\": \"cyber\",\n  \"secondary_categories\": [],\n  \"mitigation\": \"The company monitors global developments, implements appropriate mitigations, and develops cyber‑security services to help customers navigate cyber risks. In 2025, its cyber‑security efforts were effective and no critical incidents occurred.\",\n  \"confidence\": 0.95,\n  \"poor_fit\": false,\n  \"poor_fit_reason\": \"\"\n}",
+  "usage": {
+    "completion_tokens": 186,
+    "prompt_tokens": 915,
+    "total_tokens": 1101,
+    "prompt_tokens_details": {
+      "cached_tokens": 631
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 1.88,
+  "created_at": "2026-09-14T08:39:30.189392+00:00"
+}

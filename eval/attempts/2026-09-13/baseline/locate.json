@@ -1,0 +1,69 @@
+{
+  "pdf": "/home/pedro/dev/vst-laiml/documentation/baseline/VestasAnnualReport2025.pdf",
+  "page_count": 195,
+  "toc_pages": [
+    1,
+    7,
+    8
+  ],
+  "page_offset": 0,
+  "sections": [
+    {
+      "section": "risk_management",
+      "required": true,
+      "toc_title": "Risk management",
+      "matched_title": "Risk management",
+      "match_grade": "exact",
+      "match_score": 1.0,
+      "first_page": 50,
+      "last_page": 51,
+      "pdf_index": 49,
+      "source": "toc_link",
+      "outcome": "ok",
+      "quality_flags": []
+    },
+    {
+      "section": "material_iros",
+      "required": true,
+      "toc_title": "Material impacts, risks, and opportunities",
+      "matched_title": "Material impacts, risks, and opportunities",
+      "match_grade": "exact",
+      "match_score": 1.0,
+      "first_page": 71,
+      "last_page": 74,
+      "pdf_index": 70,
+      "source": "toc_link",
+      "outcome": "ok",
+      "quality_flags": []
+    },
+    {
+      "section": "climate_change",
+      "required": false,
+      "toc_title": "Climate change",
+      "matched_title": "Climate change",
+      "match_grade": "exact",
+      "match_score": 1.0,
+      "first_page": 85,
+      "last_page": 92,
+      "pdf_index": 84,
+      "source": "toc_link",
+      "outcome": "ok",
+      "quality_flags": []
+    },
+    {
+      "section": "cyber_security",
+      "required": false,
+      "toc_title": "Cyber security",
+      "matched_title": "Cyber security (entity-specific)",
+      "match_grade": "exact",
+      "match_score": 1.0,
+      "first_page": 118,
+      "last_page": 118,
+      "pdf_index": 117,
+      "source": "toc_link",
+      "outcome": "ok",
+      "quality_flags": []
+    }
+  ],
+  "status": "ok"
+}

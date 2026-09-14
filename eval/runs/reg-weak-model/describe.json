@@ -1,0 +1,206 @@
+[
+  {
+    "candidate_id": "p51-erm-1",
+    "output": {
+      "title": "Geopolitical tensions disrupting supply chains",
+      "description": "Shifting geopolitical tensions, including conflicts in Ukraine and the Middle East, disrupt global supply chains and business operations. This leads to delays and increased costs through tariffs, sanctions, and trade barriers, impacting project economics and competitiveness.",
+      "category": "supply_chain",
+      "secondary_categories": [
+        "regulatory"
+      ],
+      "mitigation": "Continuous global monitoring, regionalised manufacturing footprint, proactive advocacy, commercial discipline, and financial hedging.",
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p51-erm-1-7deb728d"
+    ],
+    "votes": {
+      "supply_chain": 1
+    }
+  },
+  {
+    "candidate_id": "p51-erm-2",
+    "output": {
+      "title": "Offshore project execution delays and quality risks",
+      "description": "Delays in production capacity ramp-up, quality control issues during scaling, and supply chain disruptions threaten timely delivery of complex offshore projects. These risks lead to cost overruns, margin erosion, and potential formal disputes, undermining competitiveness and investor confidence.",
+      "category": "operational",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": "Project governance, enhanced planning, alignment between commercial and delivery teams, investment in scalable manufacturing capacity, and close supplier coordination.",
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p51-erm-2-d0b08da7"
+    ],
+    "votes": {
+      "operational": 1
+    }
+  },
+  {
+    "candidate_id": "p51-erm-3",
+    "output": {
+      "title": "Cyber attacks on digital assets",
+      "description": "Vestas\u2019 digital and operational assets face evolving cyber threats from actors seeking extortion or destabilization, targeting technology, data, and infrastructure. Successful attacks could disrupt energy production, cause physical damage, and lead to significant economic and reputational harm.",
+      "category": "cyber",
+      "secondary_categories": [],
+      "mitigation": "Continuous cyber risk management, development of cyber security services for customers, and adherence to industry standards; no critical incidents in 2025.",
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p51-erm-3-fb1275c7"
+    ],
+    "votes": {
+      "cyber": 1
+    }
+  },
+  {
+    "candidate_id": "p71-E1-financial-4",
+    "output": {
+      "title": "Carbon taxes on GHG-intensive materials",
+      "description": "Higher carbon taxes and tariffs raise the cost of GHG-intensive inputs like steel, directly increasing production costs for wind turbines. This elevates overall expenses and could reduce profitability or competitiveness in the market.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "climate"
+      ],
+      "mitigation": null,
+      "confidence": 0.95,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p71-E1-financial-4-9dbd00d1"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  },
+  {
+    "candidate_id": "p73-S1-financial-1",
+    "output": {
+      "title": "Injuries in own workforce",
+      "description": "Potential injuries among employees may result in delays, lost productivity, and compensation obligations. These disruptions directly impact operational efficiency and financial performance.",
+      "category": "operational",
+      "secondary_categories": [],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p73-S1-financial-1-c322219c"
+    ],
+    "votes": {
+      "operational": 1
+    }
+  },
+  {
+    "candidate_id": "p73-S2-financial-2",
+    "output": {
+      "title": "Injuries to contractors and subcontractors",
+      "description": "Potential injuries to contractors and subcontractors may result in delays, lost work hours, and compensation costs. These disruptions could impact operational efficiency and financial performance.",
+      "category": "operational",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p73-S2-financial-2-29fe28ae"
+    ],
+    "votes": {
+      "operational": 1
+    }
+  },
+  {
+    "candidate_id": "p73-S2-financial-3",
+    "output": {
+      "title": "Fines for forced or child labour",
+      "description": "The company faces potential fines due to risks of forced or child labour in its global supplier network. This could result in regulatory penalties and reputational harm.",
+      "category": "regulatory",
+      "secondary_categories": [
+        "supply_chain"
+      ],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p73-S2-financial-3-288ebe1f"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  },
+  {
+    "candidate_id": "p74-G1-financial-1",
+    "output": {
+      "title": "Grid expansion and auction delays",
+      "description": "Insufficient grid expansion and delays in permit issuance for wind projects could raise costs and discourage investment in wind energy deployment. This may reduce the economic viability of wind projects and hinder their implementation.",
+      "category": "market",
+      "secondary_categories": [
+        "regulatory"
+      ],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p74-G1-financial-1-71692356"
+    ],
+    "votes": {
+      "market": 1
+    }
+  },
+  {
+    "candidate_id": "p74-G1-financial-2",
+    "output": {
+      "title": "Cyber attacks on operations",
+      "description": "Cyber attacks could disrupt business operations and expose intellectual property, potentially leading to legal liability.",
+      "category": "cyber",
+      "secondary_categories": [
+        "regulatory"
+      ],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p74-G1-financial-2-7e7194e6"
+    ],
+    "votes": {
+      "cyber": 1
+    }
+  },
+  {
+    "candidate_id": "p74-G1-financial-3",
+    "output": {
+      "title": "Corruption and bribery exposure",
+      "description": "Vestas faces heightened risk of corruption and bribery due to its global operations. This could lead to legal liability, reputational damage, or operational disruptions in affected markets.",
+      "category": "regulatory",
+      "secondary_categories": [],
+      "mitigation": null,
+      "confidence": 1.0,
+      "poor_fit": false,
+      "poor_fit_reason": null
+    },
+    "call_ids": [
+      "describe-p74-G1-financial-3-e14701d3"
+    ],
+    "votes": {
+      "regulatory": 1
+    }
+  }
+]

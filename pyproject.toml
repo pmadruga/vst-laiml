@@ -12,7 +12,11 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", {include-group = "nlp"}]
+nlp = [
+    "en-core-web-sm",
+    "spacy>=3.8,<3.9",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -24,3 +28,6 @@ packages = ["src/shared", "src/pipeline", "src/api"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }

@@ -1,0 +1,530 @@
+[
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "pipeline_reproducibility",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "note": "the post-model code replayed over this run's own recordings gives the same records; provider variance is not measured here"
+    },
+    "created_at": "2026-09-13T19:53:03.710821Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "toc_pages",
+    "outcome": "ok",
+    "count": 78,
+    "strategy": null,
+    "detail": {
+      "pages": [
+        1,
+        7,
+        8
+      ],
+      "links": 64
+    },
+    "created_at": "2026-09-13T19:56:17.839568Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "section_match_grade",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": "exact",
+    "detail": {
+      "section": "risk_management",
+      "score": 1.0,
+      "matched": "Risk management"
+    },
+    "created_at": "2026-09-13T19:56:17.856055Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "landing_page_ok",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "section": "risk_management",
+      "page": 50,
+      "pdf_index": 49,
+      "title_ok": true,
+      "footer": 50
+    },
+    "created_at": "2026-09-13T19:56:17.870348Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "section_match_grade",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": "exact",
+    "detail": {
+      "section": "material_iros",
+      "score": 1.0,
+      "matched": "Material impacts, risks, and opportunities"
+    },
+    "created_at": "2026-09-13T19:56:17.871093Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "landing_page_ok",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "section": "material_iros",
+      "page": 71,
+      "pdf_index": 70,
+      "title_ok": true,
+      "footer": 71
+    },
+    "created_at": "2026-09-13T19:56:17.882056Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "section_match_grade",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": "exact",
+    "detail": {
+      "section": "climate_change",
+      "score": 1.0,
+      "matched": "Climate change"
+    },
+    "created_at": "2026-09-13T19:56:17.882996Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "landing_page_ok",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "section": "climate_change",
+      "page": 85,
+      "pdf_index": 84,
+      "title_ok": true,
+      "footer": 85
+    },
+    "created_at": "2026-09-13T19:56:17.901556Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "section_match_grade",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": "exact",
+    "detail": {
+      "section": "cyber_security",
+      "score": 1.0,
+      "matched": "Cyber security (entity-specific)"
+    },
+    "created_at": "2026-09-13T19:56:17.902488Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "landing_page_ok",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "section": "cyber_security",
+      "page": 118,
+      "pdf_index": 117,
+      "title_ok": true,
+      "footer": 118
+    },
+    "created_at": "2026-09-13T19:56:17.925262Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "blocks_per_section",
+    "outcome": "ok",
+    "count": 4,
+    "strategy": null,
+    "detail": {
+      "section": "risk_management"
+    },
+    "created_at": "2026-09-13T19:56:18.094240Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "blocks_per_section",
+    "outcome": "ok",
+    "count": 38,
+    "strategy": null,
+    "detail": {
+      "section": "material_iros"
+    },
+    "created_at": "2026-09-13T19:56:18.095203Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "blocks_per_section",
+    "outcome": "ok",
+    "count": 8,
+    "strategy": null,
+    "detail": {
+      "section": "climate_change"
+    },
+    "created_at": "2026-09-13T19:56:18.096252Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "blocks_per_section",
+    "outcome": "ok",
+    "count": 1,
+    "strategy": null,
+    "detail": {
+      "section": "cyber_security"
+    },
+    "created_at": "2026-09-13T19:56:18.096864Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "main_risks_shape",
+    "outcome": "ok",
+    "count": 3,
+    "strategy": null,
+    "detail": {
+      "rows": [
+        "description",
+        "how_we_manage_it",
+        "potential_impact"
+      ],
+      "empty": []
+    },
+    "created_at": "2026-09-13T19:56:18.097481Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "marker_missing",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "blocks": []
+    },
+    "created_at": "2026-09-13T19:56:18.098099Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "marker_disagreement",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "blocks": [],
+      "risks": 7,
+      "opportunities": 3
+    },
+    "created_at": "2026-09-13T19:56:18.098699Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "text_not_on_page",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "blocks": []
+    },
+    "created_at": "2026-09-13T19:56:18.316203Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "page_coverage",
+    "outcome": "warning",
+    "count": 4,
+    "strategy": null,
+    "detail": {
+      "pages": [
+        [
+          71,
+          0.518
+        ],
+        [
+          72,
+          0.654
+        ],
+        [
+          73,
+          0.748
+        ],
+        [
+          74,
+          0.742
+        ]
+      ],
+      "threshold": 0.95
+    },
+    "created_at": "2026-09-13T19:56:18.317136Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "block_ids_and_ranges",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "duplicates": [],
+      "outside": []
+    },
+    "created_at": "2026-09-13T19:56:18.320522Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "extract",
+    "check_id": "count_drift",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "changed": {},
+      "counts": {
+        "50:none": 1,
+        "51:risk": 3,
+        "71:immaterial": 2,
+        "71:impact": 4,
+        "71:opportunity": 2,
+        "71:risk": 1,
+        "72:immaterial": 3,
+        "72:impact": 4,
+        "72:opportunity": 1,
+        "73:immaterial": 3,
+        "73:impact": 6,
+        "73:risk": 3,
+        "74:immaterial": 2,
+        "74:impact": 4,
+        "74:risk": 3,
+        "85:none": 1,
+        "86:none": 1,
+        "87:none": 1,
+        "88:none": 1,
+        "89:none": 1,
+        "90:none": 1,
+        "91:none": 1,
+        "92:none": 1,
+        "118:none": 1
+      }
+    },
+    "created_at": "2026-09-13T19:56:18.322076Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "identify_register",
+    "outcome": "ok",
+    "count": 10,
+    "strategy": "register",
+    "detail": {
+      "erm": 3,
+      "esrs": 7
+    },
+    "created_at": "2026-09-13T19:56:18.325263Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "identify_agreement",
+    "outcome": "ok",
+    "count": 10,
+    "strategy": "llm",
+    "detail": {
+      "agreement": 1.0,
+      "proposed": 14,
+      "threshold": 0.7
+    },
+    "created_at": "2026-09-13T19:56:18.332322Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "category_poor_fit",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "candidates": [],
+      "self_consistency_runs": [],
+      "model": "gpt-oss",
+      "prompt_version": "v1-no-mitigation"
+    },
+    "created_at": "2026-09-13T19:56:18.344032Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "merge",
+    "outcome": "ok",
+    "count": 1,
+    "strategy": null,
+    "detail": {
+      "merged": [
+        [
+          "p51-erm-3",
+          "p74-G1-financial-2"
+        ]
+      ],
+      "records": 9,
+      "candidates": 10
+    },
+    "created_at": "2026-09-13T19:56:18.346307Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "mitigation_enriched",
+    "outcome": "ok",
+    "count": 1,
+    "strategy": "topical_actions_paragraph",
+    "detail": {
+      "records": [
+        [
+          "vestas-2025-r04",
+          86
+        ]
+      ]
+    },
+    "created_at": "2026-09-13T19:56:18.364098Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "grounding_failures",
+    "outcome": "ok",
+    "count": 1,
+    "strategy": null,
+    "detail": {
+      "failures": [
+        [
+          "vestas-2025-r09",
+          [
+            "sentence_2_ungrounded"
+          ]
+        ]
+      ],
+      "repaired": [
+        "vestas-2025-r07",
+        "vestas-2025-r08"
+      ],
+      "pass_rate": 0.889,
+      "threshold": 0.8
+    },
+    "created_at": "2026-09-13T19:56:18.372165Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "transform_set_checks",
+    "outcome": "ok",
+    "count": 0,
+    "strategy": null,
+    "detail": {
+      "problems": [],
+      "records": 9
+    },
+    "created_at": "2026-09-13T19:56:18.375123Z"
+  },
+  {
+    "run_id": "reg-prompt-no-mitigation",
+    "report_id": "vestas-2025",
+    "phase": "transform",
+    "check_id": "eval_scores",
+    "outcome": "error",
+    "count": 1,
+    "strategy": null,
+    "detail": {
+      "scores": {
+        "identification": 1.0,
+        "provenance": 1.0,
+        "grounding": 1.0,
+        "category": 1.0,
+        "fields": 0.667
+      },
+      "failed": [
+        "fields"
+      ],
+      "thresholds": {
+        "identification": 0.9,
+        "provenance": 0.9,
+        "grounding": 0.8,
+        "category": 0.8,
+        "fields": 0.8
+      },
+      "failures": {
+        "fields": [
+          [
+            "geopolitics",
+            [
+              "mitigation_present:False!=True"
+            ]
+          ],
+          [
+            "project_execution",
+            [
+              "mitigation_present:False!=True"
+            ]
+          ],
+          [
+            "cyber",
+            [
+              "mitigation_present:False!=True"
+            ]
+          ]
+        ]
+      }
+    },
+    "created_at": "2026-09-13T19:56:18.568960Z"
+  }
+]

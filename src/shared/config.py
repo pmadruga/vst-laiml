@@ -25,6 +25,10 @@ LLM_TIMEOUT_S = float(os.environ.get("LLM_TIMEOUT_S", "600"))
 LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "low")  # gpt-oss chat-template kwarg
 PROMPT_VERSION = os.environ.get("PROMPT_VERSION", "v1")
 
+# --- T4 grounding checks: "regex" (hand-rolled) or "spacy" (sentences, lemmas, entities; needs the nlp dependency group) ---
+GROUNDING_NLP = os.environ.get("GROUNDING_NLP", "regex")
+SPACY_MODEL = os.environ.get("SPACY_MODEL", "en_core_web_sm")
+
 # --- thresholds (SPECS.md > Validation points) -------------------------------------------
 PAGE_COVERAGE_MIN = 0.95
 IDENTIFY_AGREEMENT_MIN = 0.7

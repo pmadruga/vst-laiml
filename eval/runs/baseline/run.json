@@ -1,0 +1,38 @@
+{
+  "run_id": "baseline",
+  "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "replay": null,
+  "grounding": "regex",
+  "phases": [
+    "extract",
+    "transform",
+    "load"
+  ],
+  "invocations": [
+    {
+      "phases": [
+        "extract",
+        "transform"
+      ],
+      "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "replay": null,
+      "grounding": "regex",
+      "started_at": "2026-09-14T08:38:23.202283+00:00"
+    },
+    {
+      "phases": [
+        "load"
+      ],
+      "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+      "model": "gpt-oss",
+      "prompt_version": "v1",
+      "replay": null,
+      "grounding": "regex",
+      "started_at": "2026-09-14T08:39:11.308595+00:00"
+    }
+  ]
+}

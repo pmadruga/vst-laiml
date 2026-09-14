@@ -1,0 +1,26 @@
+{
+  "run_id": "reg-weak-model",
+  "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+  "model": "ministral-3:14b",
+  "prompt_version": "v1",
+  "replay": null,
+  "grounding": "regex",
+  "phases": [
+    "extract",
+    "transform"
+  ],
+  "invocations": [
+    {
+      "phases": [
+        "extract",
+        "transform"
+      ],
+      "pdf": "documentation/baseline/VestasAnnualReport2025.pdf",
+      "model": "ministral-3:14b",
+      "prompt_version": "v1",
+      "replay": null,
+      "grounding": "regex",
+      "started_at": "2026-09-14T08:41:08.290836+00:00"
+    }
+  ]
+}

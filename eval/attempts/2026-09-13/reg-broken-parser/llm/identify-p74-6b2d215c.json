@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p74-6b2d215c",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "6b2d215c66e851e1dffff531fa3fe51d6f823d6ee8b2a30d1bac34d7b9463a45",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 74:\n\nSub-topic\nImpacts on people and environment\nFinancial risks or opportunities\nName and description\nValue chain \nName and description\nValue chain \nImpact materiality\nCommunities’ economic, \nsocial and cultural rights\n\t Land-related impacts (potential) \n\t\n\u0007Land-use restrictions during wind farm construction leading to a temporary negative \nimpact in the form of physical and economic displacement (e.g income losses) of local \ncommunities.\nOwn operations\n\t\nAffected communities-related risks and opportunities scored as immaterial.\nN/A\nParticular rights of \nindigenous peoples\n\t Impacts on the right to free, prior, and informed consent (potential)\n\t\n\u0007Failure to respect indigenous peoples right to own, control and use their lands in \ndevelopment, construction and operation of wind farms is a negative impact.\nOwn operations\nS3 Affected communities\nSub-topic\nImpacts on people and environment\nFinancial risks or opportunities\nName and description\nValue chain \nName and description\nValue chain \nDouble materiality\nPolitical engagement\n\t Political engagement contributing to the green transition (actual) \n\t\n\u0007Positive impact on the energy transition through political advocacy and top line \nmessaging supporting policies and regulations aligned with the Paris Agreement.\nOwn operations\n\t Insufficient market conditions\n\t\n\u0007Inadequate grid expansion, ineffective auction design and permit delays could \nincrease costs, hinder investments, and reduce the viability of wind deployment.\nDownstream\nCyber security \n\t Cyber security incidents (entity-specific, potential)  \n\t\n\u0007Cyber attacks on wind farm infrastructure might cause power outages and increase in \nelectricity prices, negatively impacting society and people \nDownstream\n\t Cyber security risks \n\t\n\u0007Cyber attacks might disrupt business operations, expose intellectual property,  \nor cause legal liability.\nOwn operations\nFinancial materiality\nCorruption and bribery\n \n\t\n\u0007Corruption and bribery related impacts scored as immaterial. \nN/A\n\t \u0007Risk of corruption and bribery \n\t\n\u0007Vestas’ global presence presents an increased risk of exposure to corruption and \nbribery.\nOwn operations\nG1 Business Conduct\nImpact materiality\n Positive \n \u0007Negative\nFinancial materiality\n Opportunity  \n Risk\nVestas Annual Report 2025\n74\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nGeneral information – Material impacts, risks, and opportunities"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[{\"title\":\"Land‑use restrictions during wind‑farm construction\",\"span\":\"Land‑use restrictions during wind farm construction leading to a temporary negative impact in the form of physical and economic displacement (e.g income losses) of local communities.\"},{\"title\":\"Failure to respect indigenous peoples’ rights\",\"span\":\"Failure to respect indigenous peoples right to own, control and use their lands in development, construction and operation of wind farms is a negative impact.\"},{\"title\":\"Insufficient market conditions\",\"span\":\"Inadequate grid expansion, ineffective auction design and permit delays could increase costs, hinder investments, and reduce the viability of wind deployment.\"},{\"title\":\"Cyber security incidents\",\"span\":\"Cyber attacks on wind farm infrastructure might cause power outages and increase in electricity prices, negatively impacting society and people.\"},{\"title\":\"Cyber security risks\",\"span\":\"Cyber attacks might disrupt business operations, expose intellectual property, or cause legal liability.\"},{\"title\":\"Risk of corruption and bribery\",\"span\":\"Vestas’ global presence presents an increased risk of exposure to corruption and bribery.\"}]}",
+  "usage": {
+    "completion_tokens": 369,
+    "prompt_tokens": 689,
+    "total_tokens": 1058,
+    "prompt_tokens_details": {
+      "cached_tokens": 684
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 3.47,
+  "created_at": "2026-09-13T19:52:05.779106+00:00"
+}
