@@ -45,13 +45,13 @@ Each follows from what PLAN.md optimises for: correctness of identification and 
 | The report's risk registers identify the risks; the model only writes the record | The model proposes the risks from the section text | Identification becomes a count to check, not a judgement to trust; the risk register is the company's own list (assumption 2) | A risk disclosed only in prose is missed; a report without a risk register needs the model path, which is built but only measured today |
 | Coordinate parser for the two known table layouts | Docling, or a model reading page text | Provenance below the page (cell, icon, fixed row count) is a fact the checks can verify (EXTRACT) | Every new layout costs engineering time; the run record says when |
 | Local 20B model through an OpenAI-compatible server | A hosted frontier model | Cost as a constraint, public inputs, and the same server for tests through record and replay | Weaker categorisation on hard cases; one request at a time |
-| One structured call per risk, temperature 0 | One call per page returning all risks | Each record is grounded and repaired on its own; a bad call spoils one record | About twenty calls per report instead of five |
+| One structured call per risk, temperature 0 | One call per page returning all risks | Each record is grounded and repaired on its own; a bad call spoils one record | Sixteen calls per report instead of four |
 | SQLite in a file, read by the API | Postgres | One report, one analyst, no server to run; the schema is the same SQL | Single writer; the API must be restarted when the file is replaced |
-| Flagged records are served with a flag | Human review before load | Assumption 6: consumers accept flags; nothing stalls on a reviewer | Wrong records can reach a client, marked |
+| Flagged records are served with a flag | Human review before load | Assumption 6: consumers accept flags; nothing stalls on a reviewer | Wrong records can reach a client, marked; one of nine records is flagged for review on the baseline, the share that triggers analyst review (STRETCH.md) |
 
 ## Scaling
 
-Measured on this report and extrapolated in [SCALABILITY.md](SCALABILITY.md). One report costs about twenty model calls, 14k tokens in and 4k out, and 51 seconds, of which 50 are the model; extract, load and the structured API endpoints are under a second combined. A quarter of 200 reports is under three hours sequentially on one local GPU, or under an hour with four model workers, and a few megabytes of database. What scales badly is not compute: every new layout costs parser work, and a flag rate of two in nine means about a hundred records a quarter for analysts to look at. Latency matters only on the question endpoint, about one second per model call; the structured endpoints answer in milliseconds from indexed SQLite at any volume the firm will reach.
+One report costs 16 model calls and 36 seconds on one local GPU, almost all of it the model, so a quarter of 200 reports runs in about two hours; the measurements, token costs and extrapolation are in [SCALABILITY.md](SCALABILITY.md).
 
 ## 3. Deployment
 

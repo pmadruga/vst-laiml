@@ -42,7 +42,7 @@ Two things are settled without the model: which risks exist and where they came 
 In order of what I would build next, each detailed with its trigger in [STRETCH.md](/STRETCH.md):
 
 1. A second report and year, so that year-over-year status and the second example question have data. Trigger: the 2024 report, which the extract phase already reads up to the section titles.
-2. Analyst review of flagged records, with corrections feeding the golden set. Trigger: the share of records flagged for review, two of nine today.
+2. Analyst review of flagged records, with corrections feeding the golden set.
 3. Layouts the coordinate parser does not know, first through more title synonyms and table anchors, then Docling. Trigger: E3 and E8 failures on the run record.
 4. Alerting on new or elevated risks, then authentication and per-client scoping. Trigger: the second year, then the first external client.
 5. Semantic search and the citations API, which need a vector index and a per-token model provider respectively.

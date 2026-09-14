@@ -12,11 +12,13 @@ Turns one annual report (Vestas Annual Report 2025) into structured principal-ri
 | [STRETCH.md](STRETCH.md) | What comes next with another week, each item with the trigger that would make it worth building. |
 | [documentation/running.md](documentation/running.md) | Every command: pipeline phases, replay, evaluation, database, Docker, tests. |
 | [documentation/results.md](documentation/results.md) | The recorded baseline and the three regression runs, scored. |
-| [SCALABILITY.md](SCALABILITY.md) | Measured time, tokens and sizes at each point of the pipeline and the API for one report, extrapolated to 10, 20, 50 and 200 reports. |
+| [SCALABILITY.md](SCALABILITY.md) | Measured time, tokens, hosted-equivalent token cost and sizes at each point of the pipeline and the API for one report, extrapolated to 10, 20, 50 and 200 reports. |
 | [documentation/self/notes.md](documentation/self/notes.md) | My raw first-read notes on the brief, written by hand before any planning: the problem, the stakeholders, the constraints as I understood them. |
 | [documentation/self/methodology.md](documentation/self/methodology.md) | The order I worked in, from reading the report to writing the plan, building and testing. |
 
 ## Setup
+
+The report PDF is not in the repository: place the Vestas Annual Report 2025 at `documentation/baseline/VestasAnnualReport2025.pdf` first (the folder is gitignored and mounted read-only into the containers).
 
 Builds the two images and the database from the recorded baseline run. No model server needed.
 

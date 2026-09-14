@@ -6,7 +6,7 @@
 
 Ranked by what each returns for the effort; each has the trigger that makes it worth building.
 
-- **Review of flagged records.** Trigger: the share of `pending_review` records on a run, two of nine on the baseline. An analyst confirms or corrects the record; the correction lands in the `correction` table and flips `review_state`. Until then flagged records are served with their flag.
+- **Review of flagged records.** Trigger: the share of `pending_review` records on a run, one of nine on the baseline. An analyst confirms or corrects the record; the correction lands in the `correction` table and flips `review_state`. Until then flagged records are served with their flag.
 - **Corrections feeding the golden set.** Trigger: the first ten corrections. A corrected record on a reference report becomes the expected output for that risk, so the golden set grows from real disagreement rather than from labelling sessions.
 - **Second labeller.** Trigger: a category dispute an analyst cannot settle from the prompt's cause test. Two people label the reference report blind; the agreement number becomes the floor for the category evaluator.
 
