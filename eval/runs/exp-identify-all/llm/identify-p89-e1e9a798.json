@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p89-e1e9a798",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "e1e9a798bdf3eb084135e301cf57261f089b3edd772f2ebeb573727b8677f3f5",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 89:\n\nE1-6\nRegional split on Scope 1 and 2 GHG emissions – 2024\n1,000 t CO2e\nAmericas\nAsia Pacific\nEMEA\nTotal\nScope 1\n29\n6\n69\n104\nScope 2\n0\n0\n1\n1\nTotal Scope 1 and 2\n29\n6\n70\n105\nE1-6\nRegional split on Scope 1 and 2 GHG emissions – 2025\n1,000 t CO2e\nAmericas\nAsia Pacific\nEMEA\nTotal\nScope 1\n28\n11\n69\n108\nScope 2\n0\n0\n1\n1\nTotal Scope 1 and 2\n28\n11\n70\n109\nProgress on our original targets\nWe achieved an eight percent reduction in GHG emissions for \ncombined Scope 1 and market-based Scope 2 emissions from \n2019 to 2024 (our original baseline and last reporting year \non this target). For Scope 3, we achieved a 17 percent reduc-\ntion in emissions intensity (kg CO2e/MWh) in the same period \nand following our previous accounting method.\n \nSince 2020, we have seen significant growth in the wind \npower industry, as well as undergone a major structural \nchange when we acquired MHI Vestas Offshore Wind in 2020. \nHad we kept our original target scope, we would have achieved \na GHG reduction of approximately 44 percent at the end of \n2024 compared to 2019 for Scope 1 and 2 emissions.\nIn 2025, we began the next stage of our GHG emission reduc-\ntion journey, with new targets that have been validated by \nSBTi. The following sections and tables describe our Scope 1, \n2, and 3 GHG emissions performance in 2025, compared to \nthe restated 2024 performance that follows our updated  \naccounting policies.\nProgress in 2025 \nTotal GHG emissions\nIn 2025, Vestas’ total GHG emissions were 9.45 Mt CO2e  \nusing the market-based method, and 9.50 Mt CO2e using the \nlocation-based method. \nScope 1 and 2 GHG emissions\nIn 2025, our combined Scope 1 and market-based Scope 2 \nGHG emissions amounted to 109 kt CO2e. The Scope 1 GHG \nemissions were 108 kt CO2e, while the Scope 2 market-based \nemissions were 1kt CO2e. \nThis demonstrates a 4 percent increase from 2024, primarily \ndriven by a 13 percent increase in emissions from offshore \nconstruction and service activities, which are more GHG-inten-\nsive than our other business areas. Emissions from onshore \nconstruction and service activities deceased by 3 percent.  \nAlthough our Scope 1 and 2 emissions increased, we continued \nto decouple emissions from growth, delivering significantly \nmore GW to the market (see page 8) and servicing more tur-\nbines in 2025 compared with 2024.\nOur combined Scope 1 and market-based Scope 2 emissions \nhave increased by 9 percent since 2022. The increase is \ndriven by growth in our Offshore construction and service  \nactivities and manufacturing ramp-up. \nWe track our performance on market-based, rather than loca-\ntion based, Scope 2 emissions, because we purchase renewa-\nble electricity credits to cover our energy consumption in the \nmarkets where we operate.\nThe share of contractual instruments for Scope 2 is 84 percent, \nof which 96.3 percent is bundled, and 3.7 percent is unbundled. \nThese contractual instruments include purchased electricity \nfrom renewable energy suppliers, green energy certificates, \nguarantees of origin, and renewable energy certificates.  \nCurrently, none of our Scope 1 emissions are regulated under \nemission trading schemes.\nThe biogenic emissions from the combustion or biodegrada-\ntion of biomass not included in Scope 1 and 2 GHG emissions \nwas 4.9 kt CO2e (2024: 6.9 kt CO2e) and 12.7 kt CO2e (2024: \n11.2 kt CO2e).\nScope 3 GHG emissions\nIn 2025, our Scope 3 absolute GHG emissions were 9.34  \nmillion tonnes, reflecting a 15 percent increase compared with \n2024. Our Scope 3 emissions intensity was 6.39 kg CO2e/\nMWh generated in 2025, reflecting a 16 percent increase \ncompared with 2024. The increase is primarily driven by  \nnormalised blade-production levels in 2025, following lower \nactivity in 2024. Despite the year-on-year increase, we remain \non track with our Scope 3 emissions reduction trajectory, \nachieving a 10 percent reduction in emissions intensity (kg \nCO2e/MWh) since our 2022 baseline.\nThe significant Scope 3 categories for Vestas are: purchased \ngoods and services, capital goods, fuel and energy related ac-\ntivities, upstream transport and distribution, waste generated \nin operations, business travel, employee commuting, and end-\nof-life of sold products.\nExcluded categories, and their reason for exclusion: process-\ning of sold products (products need no further processing), \nuse of sold products (turbines do not generate emissions  \nduring use1), downstream leased assets (we do not lease any \nowned facilities or equipment to a third party), franchises (we \ndo not have any franchises), downstream transport and distri-\nbution (we report all transport that we pay for as upstream \ntransport), and investments.\nBiogenic emissions from the combustion or biodegradation  \nof biomass reported separately from Scope 3 totalled 64 kt \nCO2e in 2025 (2024: 60 kt CO2e).\n1    \u0007Service components and vehicle operations are included in Scope 3.1 \nand Scope 1, respectively.\n→\nView from a Vestas V162-6.2 \nMW turbine at the Pahkakoski \nwind farm in Finland.\n89\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nE1 Climate change"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{ \"candidates\": [] }",
+  "usage": {
+    "completion_tokens": 48,
+    "prompt_tokens": 1541,
+    "total_tokens": 1589,
+    "prompt_tokens_details": {
+      "cached_tokens": 195
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 0.99,
+  "created_at": "2026-09-14T09:19:38.861308+00:00"
+}

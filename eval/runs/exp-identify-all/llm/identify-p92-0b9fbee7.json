@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p92-0b9fbee7",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "0b9fbee7bbe4527f8b7cc5ca3447ed363f739dfc190a9987066b7577d94338e1",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 92:\n\nWherever possible, actual activity data (e.g., tangible product \nweight or supplier-reported freight emissions, for example) \nare used to determine Scope 3 GHG emissions. Where that  \nis not possible, spend-based emission factors (e.g., CO2e per \nEuro spent) are applied.\nTo avoid potential double-counting of Scope 3 GHG emissions, \nmaterial-based and non-material-based spend transactions \nare reconciled to remove potential duplicated transactions. \nFor example, Vestas global freight providers report detailed \nScope 3 GHG emissions for Category 4 and the financial \ntransactions related to global freight for these providers are \nremoved as part of the accounting method. \nCapital goods and waste: Other purchased goods and services \n(category 1) and capital goods (category 2) are estimated \nbased on spend data using DEFRA (2011) factors for indirect \nemissions from the supply chain. Fuel- and energy-related \nactivities are calculated using DEFRA (2025) factors for \nemissions related to the production of fuel, NREL factors \n(2019) for renewable electricity and IEA factors (2025) for \ngrid electricity.\nTransportation: Emissions from upstream transportation \n(category 4) are based on supplier information and estimated \nbased on the LCA reports for weight and distance of \ncomponents transported and DEFRA (2025) carbon \nemissions factors. Business travel (category 6) emissions  \nfor air flights, hotels, and rental cars are activity-based data \nprovided by the travel agency used for all bookings. Employee \ncommuting (category 7) is reported on daily commute by car, \nwhich is estimated based on the average number of FTEs and \na selected sample of commuting distance. It applies standard \nfactors published by the DEFRA (2025).\nEnd-of-life treatment: Emissions from end-of-life treatment of \nsold products (category 12) are estimated based on material \ncomposition of all produced and shipped wind turbines in  \nthe reporting year, including estimated end-of-life transport \nemissions. For materials that are not recyclable, an average \n(2025) emission factor for inert landfill is applied. \n‘Biogenic GHG emissions’\nEmissions of biogenic CO2 GHG are accounted for separately \nfrom the gross Scope 1, 2, and 3 GHG baseline. Direct Scope  \n1 and 2 biogenic GHG emissions CO2 gases are determined \nbased on amounts of biogenic fuel for own transport and the \ndirect consumption of biogenic-based fuels, with the usage  \nof standard factors (DEFRA 2025 and IEA 2025). Scope 3 \nbiogenic GHG emissions are determined according to other \naccounting principles described, and applying, where relevant, \nbiogenic CO2 factors derived from ecoinvent (2025). \n‘Scope 3 GHG emissions intensity (target value) (kg CO2e per \nMWh generated)’\nVestas’ SBTi-validated Scope 3 target is measured as kg CO2e \nper MWh generated. The amount of MWh generated is based \non the number and type of wind turbines produced and \nshipped in the financial year along with values for wind turbine \ncapacity factor and site-specific lifetime. Vestas applies an \nexpected lifetime based on site-specific agreed lifetimes \nwhere this differs from the standard design lifetime. In relation \nto the target to reduce GHG emissions in the value chain, \nindirect GHG emissions from the value chain per MWh \ngenerated include around 70 percent of the Scope 3 \nemissions. Each year, we disclose our absolute Scope 3 \nemissions and progress towards our Scope 3 intensity target. \nHowever, we will not disclose our absolute emissions in our \ntarget year (2030) for our Scope 3 intensity target, as this will \nallow a very precise calculation of forecasted growth and \nfuture sales. This commercial forecast is highly confidential \nand commercially sensitive. Disclosing our sales forecasts \nwould potentially impact market share and competition by \ninfluencing market perceptions, affecting strategic planning \nand undermining negotiations or partnerships in a harmful \nway.\n'Service vehicles'\nVehicles weighing less than 4.8 tonnes that are used in our \nservice operations. Renewably fuelled service vehicles are \nfuelled by electricity, HVO100, Bio-(M)Ethanol, green-hydrogen, \nor green-ammonia. A plug-in hybrid vehicle counts as 0.4 \nrenewably fuelled vehicle. A hybrid vehicle counts as 0.2 \nrenewably fuelled vehicle. Data is provided periodically and \nreported at the end of the reporting period. Estimations for \nthe last two months of the year have been used. \n'Benefit cars'\nCars given to employees at certain corporate levels as part of \ntheir overall compensation package. Benefit cars are reported \nas share of Plug-in, Hybrid, Electric-vehicles ((PH)EVs). Data is \nprovided periodically and reported at the end of the reporting \nperiod. Estimations for the last two months of the year have \nbeen used. \n'Heating systems in Vestas' factories'\nAny heating system in factories under Vestas’ operational \ncontrol. Renewable heating systems are running on or \nsupported by renewable electricity, renewable fuel, renewable \nenergy, renewable district heating (with a share of 80 percent \nrenewable energy or above for the reporting period), \nrenewable gas, or biomass. Data is collected and reported  \nat the end of the reporting period. \n'Steel and iron CO2e contribution to Scope 3'\nThe percentage GHG contribution of steel and iron to Vestas’ \noverall Scope 3 emissions. Data is collected and reported at \nthe end of the reporting period as part of overall Scope 3 \ncalculation.\n'Share of emissions from own operations related to service' \nThe percentage of greenhouse gas (GHG) emissions from \nVestas’ own operations that are attributable to service-related \nactivities. The data is collected and reported at the end of the \nreporting period as part of the overall emissions from own \noperations. See page 91 for accounting policies for Scope 1.\n↑\nVestas V163-4.5 MW wind turbine blades being transported \nfrom the Daimiel factory in Spain..\n92\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nE1 Climate change"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[] }",
+  "usage": {
+    "completion_tokens": 19,
+    "prompt_tokens": 1546,
+    "total_tokens": 1565,
+    "prompt_tokens_details": {
+      "cached_tokens": 195
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 0.77,
+  "created_at": "2026-09-14T09:19:41.488746+00:00"
+}

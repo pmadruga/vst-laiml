@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p85-89931d02",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "89931d02f36364aa416a3fa8a9330df08aa3b794658d84771c47c75cae59205f",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 85:\n\nE1\nClimate Change\nSBM-3 \nImpacts, risks,  \nand opportunities\n\t \u0007Scope 1, 2, & 3 GHG emissions\nType of impact: Actual, negative impact\nLocation in the value chain: Entire value chain\nTime horizon: \u0007Short-, medium- and long-term\nNature of activity: Direct impact of emissions from our own \noperations. Indirect impact of emissions from our supply chain \nthrough business relationships with suppliers. \nDescription: The Greenhouse Gas (GHG) emissions from our \nown operations and supply chain have a material negative  \nimpact on the climate. In 2025, 109 kt of combined Scope 1 \nand 2 emissions were emitted. Scope 1 emissions are primarily \ndriven by fossil fuels. Scope 2 emissions are driven by electric-\nity and district heating.  \nIn 2025, our absolute Scope 3 emissions were 9.34 Mt CO2e \n(2024: 8.14 Mt CO2e), and our Scope 3 emission intensity \nwas 6.39 kg CO2e/MWh (2024: 5.53 kg CO2e/MWh). Scope 3 \nemissions comprise more than 99 percent of our total green-\nhouse gas emissions (2024: 98.8 percent) and are primarily \ndriven by purchased goods and transport. \nTo mitigate the impact of Scope 1, 2, and 3 GHG emissions,  \nwe have set GHG emission reduction targets and established \na transition plan for climate change mitigation, with actions \nimplemented across the organisation. See pages 86-87 for \nmore information about our decarbonisation levers and miti-\ngation actions. \n\t \u0007Catalysing sustainable development\nType of impact: Actual, positive impact\nLocation in the value chain: Entire value chain\nTime horizon: \u0007Short-, medium-, and long-term\nNature of activity: Direct impact through industry-leading  \ninitiatives. Indirect impact though business relationships that \nenable these initiatives.\nDescription: Vestas is a global leader in sustainable energy \nsolutions. Through engagement in industry associations  \nand coalitions and spearheading decarbonisation initiatives,  \nsuch as engaging with steel suppliers to stimulate demand  \nfor low-emission steel and piloting renewably fuelled service  \nvessels, we are driving the transition to a sustainable future. \n\t \u0007Enabling the green transition \nType of impact: Actual, positive impact\nLocation in the value chain: Downstream\nTime horizon: \u0007Short-, medium-, and long-term\nNature of activity: Directly enabling companies and society  \nto reduce GHG emissions through our solutions.\nDescription: As a global partner on sustainable energy solutions, \nVestas plays a pivotal role in expanding access to renewable \nenergy worldwide and contributes to mitigating climate \nchange by enabling businesses and society to reduce their \ngreenhouse gas emissions. \nVestas’ wind turbines produced and shipped in 2025 are  \nexpected to avoid 463 million tonnes of GHG emissions over \ntheir lifetime, equivalent to about 88 million US homes’ elec-\ntricity consumption for one year.1 The expected annual GHG \nemissions avoided by Vestas’ total aggregated installed fleet \nis 245 million tonnes at the end of 2025.\n\t \u0007Energy consumption\nType of impact: Actual, negative impact\nLocation in the value chain: Own operations\nTime horizon: \u0007Short-, medium-, and long-term\nNature of activity: Direct impact from energy consumed  \nduring manufacturing, construction, and service.\nDescription: Energy is consumed during the manufacture of \nwind turbine components and the construction and servicing \nof wind parks. Energy consumption in our own operations relies \non fossil fuels, leading to resource depletion and emissions \nthat negatively impact the climate. Reducing reliance on fossil \nfuels is part of our strategy to cut the emissions from our own \noperations in half by 2030.\n\t \u0007Low-emission materials \nType of impact: Financial opportunity\nLocation in the value chain: Downstream\nTime horizon: Medium- and long-term \n \nDescription: Decarbonising high-emission materials used  \nin our wind turbines is critical to meet our Scope 3 emission  \nreduction target. Steel and iron have the greatest impact,  \naccounting for about 41 percent of our Scope 3 emissions \n(2024: 50 percent). By building a value chain for low-emission \nmaterials in collaboration with suppliers and customers, we \nenhance the sustainability of our value proposition and enable \nVestas to win tenders with non-price criteria, presenting a sig-\nnificant financial opportunity.\n\t \u0007Growth rate of the wind industry\nType of impact: Financial opportunity\nLocation in the value chain: Downstream\nTime horizon: Medium- and long-term \nDescription: Governments worldwide have set progressive \ntargets for the expansion of wind energy to meet the tempera-\nture threshold of the Paris Agreement. More than 980 GW of \nnew onshore and offshore capacity is expected to be added \nfrom 2025 to 2030, reflecting a compound annual growth \nrate of 8.8 percent for that period.2 As a global wind turbine \nsolutions provider, we are well positioned to capitalise on this \nsignificant financial opportunity (see page 16 for more infor-\nmation on our market outlook). \n\t \u0007Carbon taxes and tariffs\nType of impact: Financial transition risk\nLocation in the value chain: Own operations\nTime horizon: Medium- and long-term\nDescription: Our business outlook is influenced by political \nand legal developments. Political and market transition risks, \nsuch as carbon taxes, can financially impact Vestas. High carbon \ntaxes and tariffs will increase the cost of GHG-intensive mate-\nrials like steel, raising the overall cost of wind turbines. If we \ncannot distribute these costs along our value chain or transi-\ntion to low-carbon alternatives fast enough, our cost base may \nbe impacted. \n1\t \u0007Source: US Environmental Protection Agency: Greenhouse Gas \nEquivalencies Calculator.\n2\t \u0007Source: Global Wind Energy Council: Global Wind Report, April, 2025.\n85\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[{\"title\":\"Carbon taxes and tariffs\",\"span\":\"High carbon taxes and tariffs will increase the cost of GHG‑intensive materials like steel, raising the overall cost of wind turbines.\"}]}",
+  "usage": {
+    "completion_tokens": 158,
+    "prompt_tokens": 1519,
+    "total_tokens": 1677,
+    "prompt_tokens_details": {
+      "cached_tokens": 202
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 1.98,
+  "created_at": "2026-09-14T09:19:29.986494+00:00"
+}

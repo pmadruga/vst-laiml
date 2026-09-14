@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p50-c68ad31e",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "c68ad31efbc58cb4617976d9075d50f10b69555b5657dcb46450b8cd47250f80",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 50:\n\nQ4\nFocus on persistent risks \nand mitigations. \nAudit Committee and Board \nreview Q3 + Q4 topics\nQ1\nReview of emerging risks.\nQ2\nFocus on persistent risks  \nand mitigations, incl. material \nsustainability topics. \nAudit Committee and Board \nreview Q1 + Q2 topics\nQ3\nOverall ERM review \nand outlook.\nRisk  \nmanagement\nEnterprise Risk Management\nOperating across diverse markets and a rapidly evolving industry \nlandscape, Vestas is exposed to a wide array of risks that reflect the \ncomplexity and global nature of our business. These risks include \noperational, commercial, macroeconomic, and regulatory challenges.\nOur Enterprise Risk Management (ERM) framework ensures a \nstructured approach to identifying, assessing, mitigating, and \nmonitoring the risks we face. It promotes transparency and a  \nshared understanding of risk, helping to safeguard our strategic  \nand financial ambitions. Our ERM also aims to create and protect \nshareholder value, ensuring risk awareness and balancing risk \nagainst reward.\nVestas’ most significant risks, including material sustainability \ntopics such as climate change mitigation and responsible business \nconduct, are reviewed every six months by the Executive \nManagement Team, the Board of Directors, and the Audit Committee. \nThese reviews are informed by insights from management teams \nacross the organisation and include all types of risk that could \nmaterially affect the achievement of our strategic objectives.\nA condensed overview of our key enterprise risks, is provided on the \nnext page.\nAt Vestas, risk management is an integral part of \nbusiness operations and strategy. We are com-\nmitted to proactively identifying and mitigating \nrisks that may affect our short- to medium-term \nobjectives, while addressing long-term risks that \ncould hinder the realisation of our strategic goals. \nThese efforts help us protect Vestas’ future and \nensure long-term resilience.\nEnterprise Risk Management annual wheel\n Risk Committee  \n Executive management team  \n Board of Directors/Audit committee\nOur risk management governance\nEVP area and Regional leadership teams \n/ Risk Committee/ Corporate ERM\nResponsible for designing and supervising risk management \nsystems, and for monitoring risks to ensure they are managed \nwithin acceptable limits. \nBoard of Directors/Audit Committee \n/ Executive Management Team\nResponsible for providing assurance on the design and \neffectiveness of Vestas’ risk management.\nRisk Owners, Risk Officers and Action Owners \nThe individuals responsible for managing risks on a \nday-to-day basis to achieve Vestas’ business objectives.\nOperational (1st line)\nAssurance (2nd line)\nAudit (3rd line)\n50\nCorporate governance\nVestas Annual Report 2025\nOur business\nSustainability statement\nFinancial statements\nAuditor and management statements"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[{\"title\":\"Operational, commercial, macroeconomic and regulatory challenges\",\"span\":\"operational, commercial, macroeconomic, and regulatory challenges.\"},{\"title\":\"Climate change mitigation and responsible business conduct\",\"span\":\"material sustainability topics such as climate change mitigation and responsible business conduct\"}]}",
+  "usage": {
+    "completion_tokens": 173,
+    "prompt_tokens": 773,
+    "total_tokens": 946,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 8.54,
+  "created_at": "2026-09-14T09:19:26.646219+00:00"
+}

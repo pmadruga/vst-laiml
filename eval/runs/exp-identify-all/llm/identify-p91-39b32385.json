@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p91-39b32385",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "39b323859d0f6cf8cbc8dfdae8eb84e3729fa2c327f7fe6a0fa9a8dca3380018",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 91:\n\n\u0007Accounting policies for E1 – Climate Change \n‘Expected GHG avoided over the lifetime of the capacity \nproduced and shipped during the period (million tonnes CO2e)’ \nBased on total turbines (MW) produced and shipped during \nthe reporting period. A weighted average capacity factor was \napplied in 2025, based on actual hourly performance data \nfrom the turbine types produced and shipped in the reporting \nyear. Vestas applies an expected lifetime based on site-specific \nagreed lifetimes where this differs from the standard design \nlifetime. The expected GHG avoided over the lifetime of the \nturbines is calculated using the latest updated standard factor \nof global average carbon emissions for electricity from the \nInternational Energy Agency (2025). \n‘Expected annual GHG avoided by the total aggregated \ninstalled fleet at the end of the period (million tonnes CO2e)’\nCalculated based on the total installed capacity and the global \naverage GHG emissions. Vestas applied the fleet average \ncapacity factor from 2025. The expected GHG avoided is \nbased on the latest updated standard factor of global average \ncarbon emissions for electricity from the International Energy \nAgency (2025). \nFinancial resources allocated to action plan  \n(CAPEX and OPEX) \nThe CAPEX and OPEX allocated to climate-related action \nplans is focused on reducing GHG emissions across Scope 1, \n2, and 3. The key actions are accounted for and monitored by \nthe respective owners of each sustainability action. The Group \nSustainability department maintains the budget overview and \nreceives data from relevant regional and functional heads for: \ni) investments incurred in the current year, and ii) future \ninvestments. The reported data is supported by documentation \nsuch as invoices for investments incurred in the reporting \nperiod and approved budget for future investments. \nE1-5\nEnergy \nTotal energy consumption related to own operations includes \nrenewable sources, crude oil and petroleum products, natural \ngas, other fossil sources as well as consumption of purchased \nor acquired electricity, heat, steam, and cooling (from \nrenewable sources or fossil sources) and district heating \nconsumed at Vestas-owned or operationally controlled assets. \nConsumption data is derived from direct measurements such \nas meter readings or purchase bills, fuel cards, and vouchers. \nWherever data is unavailable from our operations, we have \nmade estimations based on the type of operations and \nemployee headcount. More than 99 percent of the data is \nbased on direct measurement, with less than one percent \nestimated. Consumption of electricity comprises electricity \npurchased externally. Oil for heating is based on external \npurchases and meter readings at the end of reporting period. \nAll energy from non-renewable sources is considered fossil \nsource. Electricity and heating from renewable energy sources \nis calculated based on renewable energy certificates (RECs) \nand supplier statements. Renewable share of fuel for \ntransport is based on local renewable energy mix in line with \nfuel specific legal requirements and where legal requirements \nare exceeded, the added renewable energy is based on \nsupplier statements. Renewable electricity is calculated based \non supplier statements and Renewable Energy Certificates or \nequivalent. Only 100 percent renewable electricity is counted \nas renewable electricity. Percentage of renewable energy is \nbased on total consumption of energy. Total energy \nconsumption from activities in high climate impact sectors \nequals to Vestas’ energy consumption.\n \n‘Energy intensity per net revenue’\nVestas measures its Energy intensity by providing information \non its total energy consumption in high climate impact sectors, \nexpressed in Gigawatt hour (GWh) per million EUR net revenue. \nFor revenue, see the Financial Statements, pages 141-143.\nReported energy consumption is primarily based on direct \nmeasurements from utility meters or supplier invoices. Where \nsuch data is unavailable, estimates are made using historical \nconsumption data. Additionally, estimations are included for \ncountries where employees are stationed at client sites for \ntechnical support and where Vestas does not have significant \noperational presence. \nE1-4, E1-6\nGHG emissions \nCarbon emissions are measured using the carbon dioxide \nequivalent (CO2e) to include all relevant greenhouse gasses \n(seven Greenhouse gases (GHG), carbon dioxide (CO2), \nmethane (CH4), nitrous oxide (N2O), hydrofluorocarbons \n(HFCs), per-fluorocarbons (PFCs), sulfur hexafluoride (SF6) \nand nitrogen trifluoride (NF3)s ) according to the ESRS and  \nthe Greenhouse Gas Protocol (GHG Protocol). A distinction is \nmade between Scope 1, 2, and 3 emissions. Following the \nESRS’ consolidation approach, Vestas has applied the \noperational control method and considered financial control  \nto define the emissions' reporting scope. Vestas follows the \nESRS and GHG Protocol, for disclosures pertaining to E1-6 \n(Gross Scopes 1, 2, 3 and total GHG emissions), and SBM-3  \nin E4 (Biodiversity and Ecosystems Emission factors are \nselected for the most recent year available, where possible, \nfrom published or licensed databases). In some cases, \nemission factors may not be updated on an annual basis or \nnot be available for a material or location, in this case a \nsuitable proxy will be used that is appropriate for material \ntype/process, which may lead to uncertainty. We strive to \nutilise representative emission factors to provide transparent \ndisclosure according to GHG Protocol. \nVestas further discloses total Scope 1 and Scope 2 GHG \nemissions, disaggregated by Offshore and Onshore \noperations, using an internal site mapping of Service, \nConstruction, and Manufacturing locations.\nEmissions disclosures for entities within the operational \nboundary\nVestas has assessed that, in 2025, the company did not \nexercise operational control over any investees, including \nassociates, unconsolidated subsidiaries or joint ventures. \nHence, separate disclosures of GHG emissions from \noperationally controlled investees are not applicable.  \nVestas continues to review its contractual arrangements \nannually to ensure alignment with CSRD requirements.\nUncertainties and estimates\nIn reporting emissions from short-term vessel lease \narrangements, Vestas applies accounting judgment to \ndetermine whether these emissions fall under Scope 1 (direct) \nor Scope 3 (value chain). For the year 2025, accounting \njudgment has been made that short-term lease agreements \non vessels do not constitute financial nor operational control \nand are reported as part of Scope 3 which is considered \ncommon industry practice.\n‘Scope 1 GHG emissions (1,000 t CO2e)’\nThese emissions are calculated based on reported \nconsumption of non-renewable fuels used for company-\nowned transport, including emissions from assets under  \nlong-term lease arrangements accounted for in accordance \nwith IFRS 16, as well as for process, heating purposes (e.g., oil, \ngas, gasoline, propane, diesel, refrigerants), N2O and CH4 \nemissions from bioenergy usage. Standard emission factors \npublished by the UK Department for Environment; Food & \nRural Affairs (DEFRA) are applied in the calculation. \n‘Scope 2 GHG emissions (1,000 t CO2e)'\nThese emissions result from the consumption of non-\nrenewable electricity, district heating provided by external \nsuppliers, N2O and CH4 emissions from bioenergy usage. \nCalculations are based on reported usage and utilise standard \nemission factors from the International Energy Agency (IEA) \nand UK DEFRA.\n‘Scope 3 GHG emissions (million t CO2e)’\nIndirect GHG emissions from the value chain are reported \nbased on the ESRS requirements and the GHG Protocol. \nEmissions from short-term lease arrangements are classified \nunder scope 3. Vestas reports on Scope 3 categories 1-7 and \n12. Scope 3 categories 8, 10, 11, 13, and 15 are immaterial \nfor Vestas and categories 9 and 14 are not applicable. The \npercentage of Scope 3 GHG emissions calculated using \nprimary data (9 percent) is aligned with the definition from the \nGHG Protocol.\nIn 2025, we implemented a significant change in our GHG \naccounting methodology, where we recalibrated our baseline \nfrom 2019 to 2022, as part of the revalidation of our targets \nby the Science Based Targets initiative (SBTi) and transitioned \nto a spend-based boundary, which reflects a more precise and \naccurate representation of Vestas activities and full alignment \nwith GHG Protocol guidance. Additionally, Vestas has \nimplemented a digital-twin platform that converts all financial \ntransactions into material inflows and Scope 3 GHG \nemissions, further automating our global accounting method. \nVestas conducts third-party expert reviewed Life Cycle \nAssessments to evaluate the environmental performance of \nspecific wind turbine models that support Vestas’ global \nScope 3 accounting calculations.\nThe new accounting method accounts for components \nrelating to the wind turbine and service-related components, \nas well as activities for construction, capital goods, and waste, \netc. Essentially, all Vestas global spend transactions are \nextracted and grouped into two categories: 1) Material-based \nSpend and 2) Non-Material-based Spend.\nMaterial-based spend transactions are financial transactions \nthat contain a Vestas material number and unit quantity per \npurchase order. As such, a physical weight and material \ncomposition can be assigned to these transactions. CO2e \nemission factors are assigned on material composition and \nproduction process attributes per Vestas material number.  \nFor indication purposes, we accounted for over 500,000 \nfinancial transaction lines. Non-Material-based Spend are \nfinancial transactions that do not contain a Vestas material \nnumber. These transactions may represent physical products \n(e.g., wind turbine foundations or electrical balance of plant) or \nservices, such as transportation of goods or operational waste \ntreatment, etc., which are relevant for Scope 3 GHG emissions.\n91\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nE1 Climate change"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{ \"candidates\": [] }",
+  "usage": {
+    "completion_tokens": 40,
+    "prompt_tokens": 2367,
+    "total_tokens": 2407,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 1.2,
+  "created_at": "2026-09-14T09:19:40.716414+00:00"
+}

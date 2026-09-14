@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p90-8b211d3a",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "8b211d3a775b9fe0e9214158eb33cc7878f2ba5d02ec3154739b2804a313a7ed",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 90:\n\nRetrospective\nMilestones and target years\nE1-6\nGHG emissions*\nBase year**\n2024**\n2025\n% N / N-1\n2025\n2030\n2050\nAnnual % \ntarget / \nBase year\nScope 1 GHG emissions\nGross scope 1 GHG emissions (1,000 t CO2e)\n98\n104\n108\n+4\nNA\nNA\nNA\nNA\nPercentage of scope 1 GHG emissions from regulated \nemission trading schemes (%)\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nScope 2 GHG emissions\nGross location-based Scope 2 GHG emissions (1,000 t CO2e)\nNA\n48\n54\n+13\nNA\nNA\nNA\nNA\nGross market-based Scope 2 GHG emissions (1,000 t CO2e)\n2\n1\n1\n0\nNA\nNA\nNA\nNA\nSignificant Scope 3 GHG emissions\nTotal Gross indirect (Scope 3) GHG emissions (million t CO2e)\n8.67\n8.14\n9.34\n+15\nNA\nNA\nNA\nNA\n1.\nPurchased goods and services\n7.52\n7.15\n7.98\n+12\nNA\nNA\nNA\nNA\n2.\nCapital goods\n0.11\n0.11\n0.23\n+109\nNA\nNA\nNA\nNA\n3.\nFuel and energy-related activities  \n(not included in scope 1 or 2)\n0.03\n0.03\n0.03\n0\nNA\nNA\nNA\nNA\n4.\nUpstream transportation and distribution\n0.74\n0.60\n0.75\n+25\nNA\nNA\nNA\nNA\n5.\nWaste generated in operations\n0\n0.01\n0.01\n0\nNA\nNA\nNA\nNA\n6.\nBusiness travelling\n0.02\n0.04\n0.02\n-50\nNA\nNA\nNA\nNA\n7.\nEmployee commuting\n0.07\n0.05\n0.16\n+220\nNA\nNA\nNA\nNA\n8.\nUpstream leased assets\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n9.\nDownstream transportation\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n10.\nProcessing of sold products\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n11.\nUse of sold products\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n12.\nEnd-of-life treatment of sold products\n0.18\n0.15\n0.16\n+7\nNA\nNA\nNA\nNA\n13.\nDownstream leased assets\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n14.\nFranchises\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n15.\nInvestments\n0\n0\nNA\nNA\nNA\nNA\nNA\nNA\nTotal GHG emissions\nTotal GHG emissions (location-based) (million t CO2e)\nNA\n8.29\n9.50\n+15\nNA\nNA\nNA\nNA\nTotal GHG emissions (market-based) (million t CO2e)\n8.77\n8.25\n9.45\n+15\nNA\nNA\nNA\nNA\nGHG intensity per net revenue\nMillion t CO2e /mEUR\n% N / N-1\n2025\n2024\nTotal GHG emissions (location-based) per net revenue***\n0\n0\n0\nTotal GHG emissions (market-based) per net revenue***\n0\n0\n0\n*\t\n\u0007NA refers to GHG emission targets and values not applicable to Vestas. \nVestas’ Scope 3 targets are not absolute GHG-­based, but intensity \nbased (i.e. CO2e per MWh). Refer to page 87-88 for specific details on \nVestas’ targets. \n**\t \u0007The base year for all GHG targets has been updated to 2022, \nfollowing revalidation of our targets in 2025 by the Science Based \nTargets initiative. Scope 3 GHG emissions for 2024 has been \nrestated according to the spend-based boundary.\n*** \t\u0007Refer to note 1.2 for the net revenue, pages 141-143 in the Financial \nstatements.\n→\nVestas V126-3.45 MW wind turbines \nat the Lehtirova wind farm in Sweden.\n90\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nE1 Climate change"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[] }",
+  "usage": {
+    "completion_tokens": 19,
+    "prompt_tokens": 1218,
+    "total_tokens": 1237,
+    "prompt_tokens_details": {
+      "cached_tokens": 195
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 0.65,
+  "created_at": "2026-09-14T09:19:39.510468+00:00"
+}

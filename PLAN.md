@@ -30,19 +30,19 @@ Two things are settled without the model: which risks exist and where they came 
 
 ## What assumptions are you making?
 
-- A wrong record with a page citation costs more trust than a missing record. If that is false, recall should outweigh grounding and the validation step should warn instead of flagging records for review.
-- The report's own risk registers list its principal risks: the main-risks table and the ESRS rows marked as financial risks. The pipeline finds what the company chose to list, not risks the company omitted; the model-proposed candidates only measure agreement with the risk register. This is also why I dropped the multi-model consensus my first notes proposed: a fixed risk register gives a count to check against, which is cheaper and more auditable than agreement between models.
+- The risks come from tables, which is a limitation in itself.
 - The brief's seven categories are the client's taxonomy and each risk has one primary cause. Injuries, labour fines and bribery fit it only through a written cause test; if the client wants finer categories, the enum and the golden set change together.
 - The reports are born-digital PDFs with a text layer and a table of contents. Other layouts are detected, flagged and deferred, not parsed silently.
 - One reference report labelled from its risk registers is enough to catch regressions in the parser, the prompt and the model. My notes assumed domain experts would curate the golden set; here it is written from the report's risk registers, which settle identification, so what an expert would still contest is category, and that enters later through reviewed corrections.
-- Analysts and clients accept records that carry a quality flag. Nothing is held back for a human before it is served.
+- Analysts and clients accept records that carry a quality flag.
 
 ## What are you explicitly not solving here but would tackle next?
 
 In order of what I would build next, each detailed with its trigger in [STRETCH.md](/STRETCH.md):
 
-1. A second report and year, so that year-over-year status and the second example question have data. Trigger: the 2024 report, which the extract phase already reads up to the section titles.
-2. Analyst review of flagged records, with corrections feeding the golden set.
-3. Layouts the coordinate parser does not know, first through more title synonyms and table anchors, then Docling. Trigger: E3 and E8 failures on the run record.
-4. Alerting on new or elevated risks, then authentication and per-client scoping. Trigger: the second year, then the first external client.
-5. Semantic search and the citations API, which need a vector index and a per-token model provider respectively.
+1. Having identification of risks beyond the tables of the report, for generalization.
+2. A second report and year, so that year-over-year status and the second example question have data. Trigger: the 2024 report, which the extract phase already reads up to the section titles.
+3. Analyst review of flagged records, with corrections feeding the golden set.
+4. Layouts the coordinate parser does not know, first through more title synonyms and table anchors, then Docling. Trigger: E3 and E8 failures on the run record.
+5. Alerting on new or elevated risks, then authentication and per-client scoping. Trigger: the second year, then the first external client.
+6. Semantic search and the citations API, which need a vector index and a per-token model provider respectively.

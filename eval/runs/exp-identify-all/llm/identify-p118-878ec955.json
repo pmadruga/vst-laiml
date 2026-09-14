@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p118-878ec955",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "878ec955e8c0c0420ab7d804f485a8996e4b971277b95a9fa314b20512c5623a",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 118:\n\nG1 – Entity-specific \nCyber security\nSBM-3 \nImpacts, risks,  \nand opportunities\n\t Cyber security incidents (entity-specific)\nType of impact: Potential, negative impact\nLocation in the value chain: Downstream\nTime horizon: Short, medium-, and long- term \nNature of activity: Indirect through business relationships \nwith direct impact on society and customers\nDescription: The potential impact of a cyber security incident \nwas added to our reporting scope since the previous reporting \nperiod. The impact is to be understood as the disruption of \nVestas’ ability to control power plants, which directly impacts \ncustomers, and, ultimately, society. The primary risk arises \nfrom politically or financially motivated threat actors seeking \nto trigger power outages. Since customers may face contractual \nobligations to supply power to the grid, this creates indirect \nconsequences for electricity consumers through potential out-\nages or higher electricity prices.  \nGeopolitical tensions amplify the risk of cyber security incidents, \nas Vestas represents a potential target for actors seeking to \nimpact our customers and power producers.\n\t Cyber security risks (entity-specific)\nType of impact: Risk\nLocation in the value chain: Upstream, Own operations, \ndownstream\nTime horizon: Short, medium-, and long- term\nDescription: Our digitally connected and geographically dis-\npersed wind turbines are essential to deliver sustainable energy \nbut also represent potential targets for cyber-attacks. Such in-\ncidents could disrupt energy production and cause outages. \nFor Vestas, a successful cyber-attack could interrupt operations, \nerode partner trust, and cause significant financial losses. \nSince this risk is closely tied to our business model, we conti-\nnuously work to strengthen industry resilience by contributing \nto open-source initiatives that standardise cyber risk quantifi-\ncation, ensuring consistent and customer-specific mitigation \nstrategies. Over the past three years, we have increased in-\nvestment in cyber security across R&D, service, and digital \ninfrastructure to ensure we contribute to energy security and \nempower customers to better manage their own cyber risks.\nIRO-1  \nCyber Risk Management \nStrategy\nIn response to rising digital threats and geopolitical instability, \ncyber resilience is a key pillar of Vestas’ commitment to energy \nsecurity and financial robustness. To remain a trusted partner \nin the energy transition, Vestas engages in shaping cyber leg-\nislation by sharing expertise and knowledge in international \norganisations and integrates cyber risk management into its \nbroader value creation strategy – protecting stakeholders \nwhile enhancing customer, investor, and societal confidence. \nThe Vestas approach is inspired by ISO 31000 and quantifies \nthe impact of potential threats by evaluating vulnerabilities \nacross key stakeholder domains. \nLaunched in 2024, the Cyber Risk Management Strategy ap-\nplies enterprise-wide, ensuring cyber risks are systematically \nidentified, assessed, communicated, and mitigated at the ap-\npropriate organisational levels. It enables stakeholders to prio- \nritise actions effectively, supporting customers in protecting \ntheir assets while avoiding both over- and under-investment in \ncyber security.\nFour pillars of risk management \nThe strategy is structured around four distinct domains of \nresponsibility:\n•\t Strategic cyber risk management – safeguarding Vestas’ \nstrategic objectives.\n•\t Customer cyber risk management – protecting energy \nsolutions delivered to customers.\n•\t Manufacturing cyber risk management – securing each \nmanufacturing facility.\n•\t Operational cyber risk management – managing risks \nacross digital systems and services.\nEach domain defines clear responsibilities and tasks, enabling \ncontinuous oversight and actionable insights into cyber risks \nacross power production sites, manufacturing facilities, digital \ninfrastructure, and strategic initiatives.\nThrough this structured framework, Vestas strengthens cyber \nresilience, ensuring secure renewable energy production and \nreinforcing trust with customers, partners, and society. \nThe strategic approach remains consistent with previous \nyears and is supported by documented methodologies refe- \nrencing relevant scientific bodies. This includes topics such as \nthreat intelligence, economics, and cyberattack path analysis \nmethods. These scientific bodies support the assessment of \nvalid factors that are applicable to the model for cyber risk \nquantification. The risk quantification model is documented, \nand reference the relevant scientific bodies at play, which in-\ncludes threat intelligence, economics, and cyber-attack path \nanalysis methods.\nMDR-P  \nPolicies\nCyber risks are addressed throughout the Vestas organisation \nin line with best practice frameworks and insights gained from \nkey stakeholders such as customers and investors. The Chief \nInformation Security Officer (CISO) defines strategic direction, \nsupports various parts of the organisation, and issues guidance \nin adherence to frameworks and relevant standards. The CISO \noperates under the strategic oversight of Vestas’ executive \nleadership and established governance bodies. In this way,  \nthe most senior level accountable for the realisation of the  \nCyber Risk Management Strategy is a member of the Executive \nManagement Team.\nMDR-A \nActions and resources\nTo manage the potential risks of cyber security incidents and \nthe financial risk connected with our business model, our key \nactions and resources are mainly dedicated to developing our \nrisk management capabilities and promoting cyber security to \nbuild trust and long-term value for our stakeholders. \nCyber Security Services Framework \nIn 2025, Vestas continued to strengthen its cyber risk manage- \nment programme to help customers protect their energy pro-\nduction assets from cyber threats. Our Cyber Security Services \nFramework provides a long- term quantitative foundation for \nunderstanding and managing cyber risks. This allows customers \nto make informed decisions by assessing the potential impact \nof cyber incidents in terms of economic losses, and the impacts \non the societies in which they operate.\nIn 2025, we onboarded several new customers to this initiative, \naiming to provide all Vestas customers with a clear overview of \ntheir cyber risk exposure. This empowers them to make informed \nand transparent decisions to address potential cyber threats.\nPromotion of cyber security\nAt Vestas, cyber security is at the core of delivering secure and \nreliable energy solutions. We continuously invest in advanced ca-\npabilities to protect our operations, our customers, and society:\n•\t Built-in security standards – All Vestas technologies are \ndeveloped to meet the criteria of ISA/IEC 62443 Series of \nCyber security Requirements1, ensuring robust security \nacross our entire energy solutions portfolio.\n•\t Internal Security Operations Centre – Provides a real-time \noverview of Vestas’ global digital infrastructure, enabling \nrapid detection and response to cyber threats across \nVestas’ operations.\n•\t Customer-focused Security Operations Centre – Dedicated \nto monitoring of serviced customer power plants, ensuring \nswift identification and response to cyber incidents in \noperational environments.\n•\t Cyber Academy – Equips every Vestas employee with \ntailored training to reduce attack surfaces, detect threats, \nand respond effectively – building a resilient, security-\naware culture across the organisation. \n1\t \u0007The World’s Only Consensus-Based Automation and Control Systems \nCyber security Standards, International Society Automation (ISA).\n118\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[{\"title\":\"Cyber security incidents (entity-specific)\",\"span\":\"Cyber security incidents (entity-specific)\"},{\"title\":\"Cyber security risks (entity-specific)\",\"span\":\"Cyber security risks (entity-specific)\"}]}",
+  "usage": {
+    "completion_tokens": 140,
+    "prompt_tokens": 1681,
+    "total_tokens": 1821,
+    "prompt_tokens_details": {
+      "cached_tokens": 195
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 1.82,
+  "created_at": "2026-09-14T09:19:43.306305+00:00"
+}

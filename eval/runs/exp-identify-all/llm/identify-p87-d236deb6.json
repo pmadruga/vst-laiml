@@ -1,0 +1,70 @@
+{
+  "call_id": "identify-p87-d236deb6",
+  "model": "gpt-oss",
+  "prompt_version": "v1",
+  "sample": 0,
+  "temperature": 0.0,
+  "request_hash": "d236deb622000c1067c5d4ceca9587b17a2302387f71225cd0ef01606a134cc8",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You read a section of a company's annual report and list the principal risks it discloses.\n\nA principal risk is a threat to the company's objectives that the report itself presents as a risk: something that can delay, cost, damage or prevent. Opportunities, positive impacts, general context and descriptions of governance are not risks. Impacts on people and the environment are not risks to the company unless the text says they carry a financial consequence for the company.\n\nFor each risk return a short title and one verbatim span: a sentence copied exactly from the text that names the risk. Do not paraphrase the span. List each distinct risk once.\n"
+    },
+    {
+      "role": "user",
+      "content": "Report page 87:\n\nWork with suppliers to reduce \nsupply chain Scope 3 emissions \nfrom raw materials, component \nmanufacturing, and global transport\nWe are committed to decarbonising our supply chain, which \naccounts for more than 98 percent of our carbon footprint. \nSince 2020, we have worked to reduce emissions with our \nstrategic suppliers. Today, we collaborate with strategic sup-\npliers of steel, iron, blades, and transport, as these areas  \naccount for a large share of Vestas’ Scope 3 emissions.\nTo reduce Scope 3 emissions, we prioritise gathering sustain-\nability data from suppliers, focusing on high-emitting sources \nlike steel and blade production. This provides the basis for evi-\ndence-based target setting with suppliers and supports our \noverall Scope 3 reduction target. We are committed to conti- \nnuous improvement and driving the development of  \nsupplier-specific sustainability data.\nCommercialise low-emission steel \nDecarbonising steel production is crucial to meet our reduc-\ntion targets. Furthermore, upcoming carbon taxes and tariffs \nwill increase costs for imported conventional steel and thus  \nincrease the need for emissions-reduced steel.\nIn 2023, Vestas partnered with ArcelorMittal to manufacture \nlow-emission steel by melting scrap steel in an electric arc  \nfurnace powered entirely by wind energy, reducing GHG emis-\nsions by up to 66 percent compared to the conventional steel \nmaking route1.\nIn 2025, Vestas received orders for more than 22,000 tonnes \nof low-emission steel on the projects Nordlicht phase 1 and 2 \nand Clashindarroch. This amount of low-emission steel avoids \napproximately 37 kt CO2e compared with conventional steel. \nAlthough low-emission steel is currently included in only a \nsmall share of our constructed projects, we are working closely \nwith partners across our value chain to increase its adoption.\nAchieved and expected GHG \n­emission reductions\nOur combined Scope 1 and (market-based) Scope 2 GHG \nemissions have increased by 9 percent from our 2022 base-\nline. For Scope 3, we have achieved a 10 percent decrease in \nemissions intensity (kg CO2e / MWh) since our 2022 baseline. \nThe emission reduction expected by 2030, compared to our \n2022 baseline, is a 50 percent reduction for Scope 1 and 2, \nand a 45 percent reduction in intensity for Scope 3. We intend \nto complete our actions by 2030, which is the target year of \nour near-term GHG reduction targets.\nOperating expenses (OPEX) and \ncapital expenditures (CAPEX) \nrelated to emission reduction  \nactions\nOur ability to implement GHG reduction actions depends on \nthe allocation of resources. In 2025, we allocated EUR 0.3m  \nin CAPEX (2024: EUR 0.5m) and EUR 32.4m in OPEX (2024: \nEUR 23.2m) to support the implementation of the actions.  \nIn 2026, we expect to allocate EUR 1.2m in CAPEX and EUR \n32.2m in OPEX to support implementation of the transition \nplan. The type of financial resources allocated to achieve our \nactions are primarily employee costs, leasing costs of vehicles \nand capital expenditure related to software and property, \nplant, and equipment. \nThe operating expenditure related to emission reduction ac-\ntions is included in notes 1.4 and 1.5 in the financial state-\nments, while the capital expenditure is included in notes 3.1 \nand 3.2. Our OPEX and CAPEX related to the reduction of our \nGHG emissions are aligned in accordance with the Commission \nDelegated Regulation (EU) 2026/73. For more information on \nreporting on the key performance indicators in relation to the \nEU Taxonomy, see pages 129-132. \nMDR-T, E1-4 \nMetrics and targets\nTargets related to climate change \nmitigation\nWe have set targets to mitigate our environmental impact in \nline with our commitment to manage our impact on climate \nchange. The targets make up the first pillar in our sustainabil-\nity strategy, which was developed by Group Sustainability in \ncollaboration with experts across the organisation, reviewed \nby the Sustainability Committee at the time, and approved by \nthe Executive Management and Board of Directors.  \n1    \u0007According to the Environmental Product Declaration from \nArcelorMittal Europe.\nThrough climate targets, we aim to meet the objectives of our \nSQHE Policy and HSE Framework (see page 80 for information \nabout our policies).\nApproach to target setting and \nreviews\nOur GHG emission reduction targets were originally validated \nby the Science Based Targets Initiative (SBTi) in 2020. In line \nwith the SBTi five-year review cycle, in 2025, we reviewed our \ntargets and submitted revised targets to SBTi for validation.\nIn updating the targets, we have followed SBTi’s latest  \nstandards for ambition level to ensure the targets are based \non conclusive scientific evidence and consistent with our GHG \ninventory boundaries. We followed SBTi’s methodology and \nthe Greenhouse Gas Protocol when defining the targets,  \nincluding adhering to SBTi’s cross-sector absolute reduction \nrequirement for Scope 1 and 2, to reduce emissions at a mini-\nmum of 4.2 percent annually, regardless of business growth; \nthis ensures the target is aligned with the emission reductions \nneeded to adhere to the Paris Agreement 1.5°C scenario. \nThere have been significant changes to our baseline, the \nScope 3 metrics, and target calculation methodology during \n2025, which are described in the “Basis for Preparation” on \npage 82 and under “Progress on Scope 1, 2, and 3 GHG emis-\nsions” on page 88. The performance on our original baseline \nand targets is described on page 89. \nWe evaluate our performance on our Scope 1 and 2 target \nquarterly through reviews by members of Executive Manage-\nment, the Audit Committee, and the Board of Directors.  \nProgress is communicated externally in our interim reports \nand internally in quarterly performance reviews and townhall \nmeetings. We evaluate our performance on the Scope 3 target \nannually. \nThe metric used is tonnes of CO2e for the combined Scope 1 \nand 2 absolute target, and kilogrammes of CO2e/MWh for the \nScope 3 intensity target. The performance on these metrics  \nis also broken down by segment and region to understand \ntrends and set specific CO2e reduction action plans. We ensure \nthat our baseline value is representative by reviewing that the \nscope of activities remains the same year-on-year. \nWhere activities have changed, the baseline has been adjusted \nso the scope is consistent from baseline year to target report-\ning years. By doing so, we consider external factors and their \ninfluence on our baseline. As described in section E1-3,  \nwe have implemented a series of actions to reduce our GHG \nemissions across Scope 1, 2, and 3.\nTarget for Scope 1 and 2 GHG \nemissions \nOur Scope 1 and 2 decarbonisation lever is aligned with our \ntarget boundary, which covers 100 percent of our Scope 1  \nand 2 emissions across all geographies in our own operations.  \nTo reach our 2030 target, we need to reduce our Scope 1 and \nmarketbased Scope 2 emissions by 50 percent from a 2022 \nbaseline. \nWe have set an absolute, combined Scope 1 and 2 target, \nmeaning that we measure progress on the total combined \nScope 1 and market-based Scope 2 emissions. The share of \nemission reductions needed from Scope 1 and 2 respectively \nto reach the target is not set, though we expect the remaining \nemission reductions will come primarily from Scope 1 (approx-\nimately 50 percent). When validating our targets, SBTi con-\nfirmed that our Scope 1 and 2 combined target is in line with \nlimiting global warming to 1.5°C above pre-industrial tempe- \nrature levels.\nE1-4 \nGHG emission reduction targets\n2022 baseline\n2030 mid-term target\nNumber\nPercent\nNumber\nScope 1 + market-based Scope 2 (tonnes CO2e)\n100,000\n50\n50,000\nScope 3 emissions intensity (kg CO2e / MWh generated) \n7.09\n45\n3.9\n87\nVestas Annual Report 2025\nSustainability statement\nFinancial statements\nAuditor and management statements\nOur business\nE1 Climate change"
+    }
+  ],
+  "schema": {
+    "$defs": {
+      "LLMCandidate": {
+        "additionalProperties": false,
+        "description": "What the identify prompt returns per proposed risk (T1, second strategy).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "span": {
+            "description": "a verbatim sentence from the text that names the risk",
+            "title": "Span",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "span"
+        ],
+        "title": "LLMCandidate",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidates": {
+        "items": {
+          "$ref": "#/$defs/LLMCandidate"
+        },
+        "title": "Candidates",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidates"
+    ],
+    "title": "LLMCandidateList",
+    "type": "object"
+  },
+  "response_content": "{\"candidates\":[{\"title\":\"Carbon taxes and tariffs on conventional steel\",\"span\":\"upcoming carbon taxes and tariffs will increase costs for imported conventional steel\"}]}",
+  "usage": {
+    "completion_tokens": 141,
+    "prompt_tokens": 2067,
+    "total_tokens": 2208,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "served_model": "/home/pedro/models/gpt-oss-20b-MXFP4.gguf",
+  "elapsed_s": 2.03,
+  "created_at": "2026-09-14T09:19:37.023840+00:00"
+}

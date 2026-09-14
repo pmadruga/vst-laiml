@@ -1,0 +1,340 @@
+{
+  "pages": {
+    "50": {
+      "calls": "replayed",
+      "proposed": 2,
+      "kept": 2,
+      "dropped_quote_not_on_page": 0
+    },
+    "51": {
+      "calls": "replayed",
+      "proposed": 3,
+      "kept": 3,
+      "dropped_quote_not_on_page": 0
+    },
+    "71": {
+      "calls": "replayed",
+      "proposed": 1,
+      "kept": 1,
+      "dropped_quote_not_on_page": 0
+    },
+    "72": {
+      "calls": "replayed",
+      "proposed": 0,
+      "kept": 0,
+      "dropped_quote_not_on_page": 0
+    },
+    "73": {
+      "calls": "replayed",
+      "proposed": 4,
+      "kept": 4,
+      "dropped_quote_not_on_page": 0
+    },
+    "74": {
+      "calls": "replayed",
+      "proposed": 6,
+      "kept": 6,
+      "dropped_quote_not_on_page": 0
+    },
+    "85": {
+      "calls": "replayed",
+      "proposed": 1,
+      "kept": 0,
+      "dropped_quote_not_on_page": 1
+    },
+    "86": {
+      "calls": "replayed",
+      "proposed": 4,
+      "kept": 4,
+      "dropped_quote_not_on_page": 0
+    },
+    "87": {
+      "calls": "replayed",
+      "proposed": 1,
+      "kept": 1,
+      "dropped_quote_not_on_page": 0
+    },
+    "88": {
+      "calls": "replayed",
+      "proposed": 0,
+      "kept": 0,
+      "dropped_quote_not_on_page": 0
+    },
+    "89": {
+      "calls": "replayed",
+      "proposed": 0,
+      "kept": 0,
+      "dropped_quote_not_on_page": 0
+    },
+    "90": {
+      "calls": "replayed",
+      "proposed": 0,
+      "kept": 0,
+      "dropped_quote_not_on_page": 0
+    },
+    "91": {
+      "calls": "replayed",
+      "proposed": 0,
+      "kept": 0,
+      "dropped_quote_not_on_page": 0
+    },
+    "92": {
+      "calls": "replayed",
+      "proposed": 0,
+      "kept": 0,
+      "dropped_quote_not_on_page": 0
+    },
+    "118": {
+      "calls": "replayed",
+      "proposed": 2,
+      "kept": 2,
+      "dropped_quote_not_on_page": 0
+    }
+  },
+  "table_risks": 10,
+  "table_risks_found": [
+    "Carbon taxes and tariffs",
+    "Cost implication of injuries in own workforce",
+    "Cost implications of injuries to contractors and sub-contractors",
+    "Cyber attacks",
+    "Cyber security risks",
+    "Fines related to forced or child labour",
+    "Geopolitics and regulatory framework",
+    "Insufficient market conditions",
+    "Project execution",
+    "Risk of corruption and bribery"
+  ],
+  "table_risks_missed": [],
+  "candidates": [
+    {
+      "page": 50,
+      "title": "Operational, commercial, macroeconomic and regulatory challenges",
+      "span": "operational, commercial, macroeconomic, and regulatory challenges.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 50,
+      "title": "Climate change mitigation and responsible business conduct",
+      "span": "material sustainability topics such as climate change mitigation and responsible business conduct",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 51,
+      "title": "Geopolitics and regulatory framework",
+      "span": "Geopolitics and regulatory framework",
+      "calls": "replayed",
+      "matches_table_risk": "Geopolitics and regulatory framework",
+      "matched_by": "quote",
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 51,
+      "title": "Project execution",
+      "span": "Project execution",
+      "calls": "replayed",
+      "matches_table_risk": "Project execution",
+      "matched_by": "quote",
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 51,
+      "title": "Cyber attacks",
+      "span": "Cyber attacks",
+      "calls": "replayed",
+      "matches_table_risk": "Cyber attacks",
+      "matched_by": "quote",
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 71,
+      "title": "High carbon taxes and tariffs increasing production costs",
+      "span": "High carbon taxes and tariffs increase the price of GHG intense materials such as steel, increasing the overall cost to produce wind turbines.",
+      "calls": "replayed",
+      "matches_table_risk": "Carbon taxes and tariffs",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 73,
+      "title": "Cost implications of injuries in own workforce",
+      "span": "Potential injuries leading to delays, lost work hours and compensation costs pose a financial risk.",
+      "calls": "replayed",
+      "matches_table_risk": "Cost implication of injuries in own workforce",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 73,
+      "title": "Cost implications of injuries to contractors and sub‑contractors",
+      "span": "Potential injuries to value chain workers leading to delays, lost work hours and compensation costs pose a risk.",
+      "calls": "replayed",
+      "matches_table_risk": "Cost implications of injuries to contractors and sub-contractors",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 73,
+      "title": "Risk of forced and child labour in the supply chain",
+      "span": "Risk of forced and child labour in our supply chain.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": "impact",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 73,
+      "title": "Fines related to forced or child labour",
+      "span": "Vestas’ global network of suppliers combined with the risk of fines related to child and forced labour constitute a potential risk.",
+      "calls": "replayed",
+      "matches_table_risk": "Fines related to forced or child labour",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 74,
+      "title": "Land‑use restrictions during wind‑farm construction",
+      "span": "Land‑use restrictions during wind farm construction leading to a temporary negative impact in the form of physical and economic displacement (e.g income losses) of local communities.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": "impact",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 74,
+      "title": "Failure to respect indigenous peoples’ rights",
+      "span": "Failure to respect indigenous peoples right to own, control and use their lands in development, construction and operation of wind farms is a negative impact.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": "impact",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 74,
+      "title": "Insufficient market conditions",
+      "span": "Inadequate grid expansion, ineffective auction design and permit delays could increase costs, hinder investments, and reduce the viability of wind deployment.",
+      "calls": "replayed",
+      "matches_table_risk": "Insufficient market conditions",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 74,
+      "title": "Cyber security incidents",
+      "span": "Cyber attacks on wind farm infrastructure might cause power outages and increase in electricity prices, negatively impacting society and people.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": "impact",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 74,
+      "title": "Cyber security risks",
+      "span": "Cyber attacks might disrupt business operations, expose intellectual property, or cause legal liability.",
+      "calls": "replayed",
+      "matches_table_risk": "Cyber security risks",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 74,
+      "title": "Risk of corruption and bribery",
+      "span": "Vestas’ global presence presents an increased risk of exposure to corruption and bribery.",
+      "calls": "replayed",
+      "matches_table_risk": "Risk of corruption and bribery",
+      "matched_by": "quote",
+      "table_row": "risk",
+      "type_of_impact_above": null
+    },
+    {
+      "page": 86,
+      "title": "Significant investments required to align with climate targets and mitigate financial impacts from carbon taxes and tariffs",
+      "span": "aligning our own operations with ambitious climate targets and mitigating financial impacts from carbon taxes and tariffs requires significant investments, and some necessary solutions are still immature from a technical or commercial perspective.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 86,
+      "title": "Immaturity of necessary solutions",
+      "span": "aligning our own operations with ambitious climate targets and mitigating financial impacts from carbon taxes and tariffs requires significant investments, and some necessary solutions are still immature from a technical or commercial perspective.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 86,
+      "title": "Dependence on political action",
+      "span": "Our business outlook also depends on political action; without supportive policies, our industry may struggle to meet global climate targets.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 86,
+      "title": "Uncertainties and assumptions in future analysis",
+      "span": "analysis of the future is based on significant uncertainties and assumptions due to e.g., market developments and evolving climate patterns.",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 87,
+      "title": "Carbon taxes and tariffs on conventional steel",
+      "span": "upcoming carbon taxes and tariffs will increase costs for imported conventional steel",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 118,
+      "title": "Cyber security incidents (entity-specific)",
+      "span": "Cyber security incidents (entity-specific)",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": null
+    },
+    {
+      "page": 118,
+      "title": "Cyber security risks (entity-specific)",
+      "span": "Cyber security risks (entity-specific)",
+      "calls": "replayed",
+      "matches_table_risk": null,
+      "matched_by": null,
+      "table_row": null,
+      "type_of_impact_above": "Potential, negative impact"
+    }
+  ]
+}
