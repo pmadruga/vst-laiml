@@ -6,4 +6,4 @@ __pycache__/
 data/*.db
 data/runs/
 runs/
-documentation/baseline/
+documentation/baseline/Case_GenAIandNLPEngineer.pdf

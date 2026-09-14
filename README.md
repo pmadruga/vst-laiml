@@ -18,8 +18,6 @@ Turns one annual report (Vestas Annual Report 2025) into structured principal-ri
 
 ## Setup
 
-The report PDF is not in the repository: place the Vestas Annual Report 2025 at `documentation/baseline/VestasAnnualReport2025.pdf` first (the folder is gitignored and mounted read-only into the containers).
-
 Builds the two images and the database from the recorded baseline run. No model server needed.
 
 ```sh
