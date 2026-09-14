@@ -70,7 +70,7 @@ What does not scale with reports: the API. Structured endpoints answer in 1–2.
 
 ## What actually limits a batch
 
-- **Parser coverage, not compute.** Every new layout costs engineering time, which no column above measures. PLAN.md's first deferred item records that the 2024 report reads only as far as the section titles.
+- **Parser coverage, not compute.** Every new layout costs engineering time, which no column above measures. STRETCH.md's second-report item records that the 2024 report reads only as far as the section titles.
 - **Review load.** One of nine records is pending review on the baseline, about one per report; the weaker model leaves three. At the baseline rate 50 reports produce about 50 records for analysts and a quarter about 200, which is analyst time, not machine time.
 - **Model serialisation.** One local server handles one request at a time; the "4 workers" column is where a hosted provider or a second GPU changes the picture.
 - **Cost is not the constraint.** A quarter's token volume is $0.16 on hosted gpt-oss-20b and about $12 at frontier list prices, before batch discounts.

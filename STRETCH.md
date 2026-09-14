@@ -1,23 +1,17 @@
 # STRETCH.md: what comes next with another week
 
-*What this is:* everything that I'd implement right after, assuming there would be a longer timeline, a larger budget and higher number of resources.
+*What this is:* everything that I'd implement right after, assuming there would be a longer timeline, a larger budget and higher number of resources. It answers the brief's question "What are you explicitly not solving here but would tackle next?"; PLAN.md points here.
 
-## Human in the loop
+## Next
 
-Ranked by what each returns for the effort; each has the trigger that makes it worth building.
+I'd basically handle the trade-offs that couldn't be done, which is coverage and throughput.
 
-- **Review of flagged records.** Trigger: the share of `pending_review` records on a run, one of nine on the baseline. An analyst confirms or corrects the record; the correction lands in the `correction` table and flips `review_state`. Until then flagged records are served with their flag.
-- **Corrections feeding the golden set.** Trigger: the first ten corrections. A corrected record on a reference report becomes the expected output for that risk, so the golden set grows from real disagreement rather than from labelling sessions.
-- **Second labeller.** Trigger: a category dispute an analyst cannot settle from the prompt's cause test. Two people label the reference report blind; the agreement number becomes the floor for the category evaluator.
-
-## Deferred product features
-
-- **Alerting.** Trigger: the second fiscal year loaded, when `risk_status` first returns rows. "New or elevated risk in your portfolio" is a query over the status view joined to a client portfolio, sent by email or webhook after each batch.
-- **Authentication and per-client scoping.** Trigger: the first external client. Keys per client; portfolios visible only to their owner; the read-only service otherwise unchanged.
-- **Writes through the API.** Trigger: analysts reviewing in a tool rather than in SQL. A single endpoint that records a correction; the pipeline stays the only writer of records.
-- **Named entities on records.** Trigger: the second or third report loaded, or the first client question about geographic or regulatory exposure ("which companies cite China or CBAM as a risk"). T5 tags the report's own text on each merged record (register span, potential impact, quoted mitigation), never the model's description, so every entity carries a page citation; a `risk_entity` table and an `entity` filter on the API serve it. spaCy's small model alone is not enough: on this report it finds useful entities for one risk in nine and mislabels codes and units ("NA", "GHG", "Scope 3") on the topical pages, so it needs a gazetteer of countries, regions and regulations and a filter for the reporting company and reporting codes ([probe](documentation/stages/entities-probe.md)).
-
-- **Vector database.** Embedding every block and record would let a question find risks by meaning rather than by shared words, so "supplier concentration" retrieves the geopolitics and project-execution risks even though neither uses those words. It would also give the pipeline a second way to locate sections and rows in a report whose titles and layouts the parser does not know, by similarity to the ones it does.
+1. **Identifying risks beyond the report's tables**, for generalisation to reports that disclose principal risks in prose. Trigger: the first report whose risk sections have no risk table (E3 and E8 find none), or whose prose names a principal risk its tables do not. On Vestas the tables miss at most one prose risk, and the identify prompt run over every in-scope page adds 12 impacts, duplicates and context passages alongside it ([comparison](documentation/stages/identify-all-pages.md)). So the model proposes quoted candidates on every page, each is typed as risk, impact, opportunity or context (from the report's own "Type of impact" label where the page has one), candidates are deduplicated against the tables and across pages, and prose-only records start as `pending_review`.
+2. **A second report and year**, so that year-over-year status and the brief's second example question ("newly elevated") have data. Trigger: the 2024 report, which the extract phase already reads up to the section titles.
+3. **Analyst review of flagged records, with corrections feeding the golden set.** Trigger: the share of `pending_review` records on a run. Detail under Human in the loop.
+4. **Layouts the coordinate parser does not know**, first through more title synonyms and table anchors, then Docling.
+5. **Alerting on new or elevated risks, then authentication and per-client scoping.** Trigger: the second year loaded, then the first external client. Detail under Deferred product features.
+6. **Semantic search and the citations API**, which need a vector index and a per-token model provider respectively. Detail under Deferred product features and Deferred engineering.
 
 ## Deferred engineering
 

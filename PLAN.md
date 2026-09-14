@@ -38,11 +38,4 @@ Two things are settled without the model: which risks exist and where they came 
 
 ## What are you explicitly not solving here but would tackle next?
 
-In order of what I would build next, each detailed with its trigger in [STRETCH.md](/STRETCH.md):
-
-1. Having identification of risks beyond the tables of the report, for generalization.
-2. A second report and year, so that year-over-year status and the second example question have data. Trigger: the 2024 report, which the extract phase already reads up to the section titles.
-3. Analyst review of flagged records, with corrections feeding the golden set.
-4. Layouts the coordinate parser does not know, first through more title synonyms and table anchors, then Docling. Trigger: E3 and E8 failures on the run record.
-5. Alerting on new or elevated risks, then authentication and per-client scoping. Trigger: the second year, then the first external client.
-6. Semantic search and the citations API, which need a vector index and a per-token model provider respectively.
+The ranked list of what I would tackle next, each item with the trigger that makes it worth building, is in [STRETCH.md](/STRETCH.md).
