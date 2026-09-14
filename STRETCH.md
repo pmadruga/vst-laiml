@@ -8,10 +8,10 @@ I'd basically handle the trade-offs that couldn't be done, which is coverage and
 
 1. **Identifying risks beyond the report's tables**, for generalisation to reports that disclose principal risks in prose. Trigger: the first report whose risk sections have no risk table (E3 and E8 find none), or whose prose names a principal risk its tables do not. On Vestas the tables miss at most one prose risk, and the identify prompt run over every in-scope page adds 12 impacts, duplicates and context passages alongside it ([comparison](documentation/stages/identify-all-pages.md)). So the model proposes quoted candidates on every page, each is typed as risk, impact, opportunity or context (from the report's own "Type of impact" label where the page has one), candidates are deduplicated against the tables and across pages, and prose-only records start as `pending_review`.
 2. **A second report and year**, so that year-over-year status and the brief's second example question ("newly elevated") have data. Trigger: the 2024 report, which the extract phase already reads up to the section titles.
-3. **Analyst review of flagged records, with corrections feeding the golden set.** Trigger: the share of `pending_review` records on a run. Detail under Human in the loop.
-4. **Layouts the coordinate parser does not know**, first through more title synonyms and table anchors, then Docling.
-5. **Alerting on new or elevated risks, then authentication and per-client scoping.** Trigger: the second year loaded, then the first external client. Detail under Deferred product features.
-6. **Semantic search and the citations API**, which need a vector index and a per-token model provider respectively. Detail under Deferred product features and Deferred engineering.
+3. **Analyst review of flagged records, with corrections feeding the golden set.** Trigger: the share of `pending_review` records on a run.
+4. **Layouts the coordinate parser does not know**, first through more title synonyms and table anchors, then Docling (detail under Deferred engineering).
+5. **Alerting on new or elevated risks, then authentication and per-client scoping.** Trigger: the second year loaded, then the first external client.
+6. **Semantic search and the citations API**, which need a vector index and a per-token model provider respectively (the citations API in detail under Deferred engineering).
 
 ## Deferred engineering
 

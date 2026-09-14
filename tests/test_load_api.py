@@ -118,3 +118,25 @@ def test_fts_query_with_quotes_does_not_500(db_path, monkeypatch):
         assert client.get("/risks", params={"q": 'tariff"x'}).status_code == 200
         assert client.get("/risks", params={"status": "bogus"}).status_code == 422
         assert client.get("/risks", params={"limit": 0}).status_code == 422
+
+
+def test_sector_resolves_to_a_stored_sector(db_path, monkeypatch):
+    """A sector as a question writes it maps to the sector stored for companies; an unknown one filters to nothing and says so."""
+    import importlib
+    from api import app as app_module
+    conn = connect(db_path, readonly=True)
+    assert app_module.resolve_sector(conn, "renewable-energy") == ["renewable energy"]
+    assert app_module.resolve_sector(conn, "Renewables") == ["renewable energy"]
+    assert app_module.resolve_sector(conn, "renewable") == ["renewable energy"]
+    assert app_module.resolve_sector(conn, "renewabel energy") == ["renewable energy"]
+    assert app_module.resolve_sector(conn, "utilities") == []
+    monkeypatch.setenv("DB_PATH", str(db_path))
+    importlib.reload(app_module)
+    with TestClient(app_module.app) as client:
+        r = client.get("/risks", params={"sector": "renewable-energy", "category": "cyber"}).json()
+        assert r["count"] == 1 and r["sector_matched"] == ["renewable energy"]
+        r = client.get("/risks", params={"sector": "utilities"}).json()
+        assert r["count"] == 0 and r["sector_matched"] == []
+        q = client.get("/questions/companies_with_category", params={"category": "cyber", "sector": "renewable-energy"}).json()
+        assert q["count"] == 1 and q["sector_matched"] == ["renewable energy"]
+        assert client.get("/questions/companies_with_category", params={"category": "cyber", "sector": "utilities"}).json()["count"] == 0

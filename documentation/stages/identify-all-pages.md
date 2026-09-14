@@ -62,7 +62,7 @@ The dropped p.85 proposal was carbon taxes again: its quote joined "mate-rials",
 
 ## What this means for the limitation
 
-For Vestas 2025, table-only identification loses at most one prose risk, and that one overlaps table risks. The limitation matters for filers whose principal risks are written as headed prose rather than tables; there, the fix in the walkthrough applies: the model finds and quotes candidates on every page, the report's own "Type of impact" labels or the model types them, candidates are deduplicated against any tables, and prose-only records start as `pending_review`. This report is not the test of that path; a prose-style report is.
+For Vestas 2025, table-only identification loses at most one prose risk, and that one overlaps table risks. The limitation matters for filers whose principal risks are written as headed prose rather than tables; there, the fix in STRETCH.md's first item applies: the model finds and quotes candidates on every page, the report's own "Type of impact" labels or the model types them, candidates are deduplicated against any tables, and prose-only records start as `pending_review`. This report is not the test of that path; a prose-style report is.
 
 ## Limits
 

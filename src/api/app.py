@@ -10,8 +10,10 @@ writes SQL. The parsed intent is returned with the results.
 
 from __future__ import annotations
 
+import difflib
 import json
 import os
+import re
 import sqlite3
 from typing import Literal
 from contextlib import asynccontextmanager
@@ -77,6 +79,34 @@ def row_to_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict:
     return d
 
 
+def _words(s: str) -> list[str]:
+    return re.sub(r"[^a-z0-9]+", " ", s.lower()).split()
+
+
+def resolve_sector(conn: sqlite3.Connection, sector: str) -> list[str]:
+    """Map a sector as a question writes it to the sectors stored for companies, so the filter is always a stored value.
+
+    In order: the same words after normalising ("renewable-energy" -> "renewable energy"); every word of the request found
+    in the stored sector, allowing a shared stem of five letters or more ("renewables" -> "renewable energy"); a close
+    spelling. No match returns [], and the caller filters to nothing rather than guessing.
+    """
+    known = [r[0] for r in conn.execute("SELECT DISTINCT sector FROM company WHERE sector IS NOT NULL ORDER BY sector")]
+    want = _words(sector)
+    if not want:
+        return []
+    exact = [k for k in known if _words(k) == want]
+    if exact:
+        return exact
+
+    def same_word(w: str, t: str) -> bool:
+        return w == t or (min(len(w), len(t)) >= 5 and (w.startswith(t) or t.startswith(w)))
+
+    covered = [k for k in known if all(any(same_word(w, t) for t in _words(k)) for w in want)]
+    if covered:
+        return covered
+    return [k for k in known if difflib.SequenceMatcher(None, " ".join(want), " ".join(_words(k))).ratio() >= 0.8]
+
+
 def query_records(conn: sqlite3.Connection, intent: QueryIntent, limit: int = 100) -> list[dict]:
     sql = ["SELECT DISTINCT ri.*, c.name AS company_name, c.sector, r.fiscal_year, r.review_frequency, r.review_bodies",
            "FROM risk_instance ri JOIN report r ON r.id = ri.report_id JOIN company c ON c.id = r.company_id"]
@@ -93,8 +123,9 @@ def query_records(conn: sqlite3.Connection, intent: QueryIntent, limit: int = 10
         where.append("ri.source_register = ?")
         params.append(intent.source_register.value)
     if intent.sector:
-        where.append("lower(c.sector) LIKE ?")
-        params.append(f"%{intent.sector.lower()}%")
+        sectors = resolve_sector(conn, intent.sector)
+        where.append(f"c.sector IN ({','.join('?' * len(sectors))})" if sectors else "0")
+        params += sectors
     if intent.status == "removed":
         # a removed risk has no instance in the year it is removed: return its last instance, the year before
         sql.append("JOIN risk_status s ON s.canonical_risk_id = ri.canonical_risk_id AND s.fiscal_year = r.fiscal_year + 1")
@@ -133,7 +164,8 @@ def risks(company: str | None = None, year: int | None = None, category: Categor
                          years=[year] if year else [], source_register=register, status=status, sector=sector, free_text=q or "")
     with conn() as c:
         records = query_records(c, intent, limit)
-    return {"intent": intent.model_dump(mode="json"), "count": len(records), "records": records}
+        matched = resolve_sector(c, sector) if sector else None
+    return {"intent": intent.model_dump(mode="json"), "sector_matched": matched, "count": len(records), "records": records}
 
 
 @app.get("/risks/{risk_id}", response_model=RiskOut)
@@ -154,8 +186,13 @@ def brief_question(name: str, company: str | None = None, year: int | None = Non
     if not sql:
         raise HTTPException(404, f"unknown question; choose one of {sorted(app.state.queries)}")
     with conn() as c:
-        rows = c.execute(sql, {"company": company, "year": year, "category": category, "sector": sector}).fetchall()
-    return {"question": name, "count": len(rows), "rows": [dict(r) for r in rows]}
+        matched = resolve_sector(c, sector) if sector else None
+        rows: list[dict] = []
+        for s in (matched if sector else [None]):  # one stored sector per run of the query; none matched runs nothing
+            for r in c.execute(sql, {"company": company, "year": year, "category": category, "sector": s}).fetchall():
+                if dict(r) not in rows:
+                    rows.append(dict(r))
+    return {"question": name, "sector_matched": matched, "count": len(rows), "rows": rows}
 
 
 @app.get("/companies", response_model=list[CompanyOut])
@@ -211,5 +248,6 @@ def ask(body: Question):
         raise HTTPException(503, "question parsing unavailable; the structured endpoints still work")
     with conn() as c:
         records = query_records(c, intent, min(max(body.limit, 1), 1000))
-    return {"question": body.question, "intent": intent.model_dump(mode="json"), "call_id": call_id,
+        matched = resolve_sector(c, intent.sector) if intent.sector else None
+    return {"question": body.question, "intent": intent.model_dump(mode="json"), "sector_matched": matched, "call_id": call_id,
             "count": len(records), "records": records}

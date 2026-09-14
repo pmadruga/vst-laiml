@@ -47,7 +47,7 @@ The reporting company's own name is most of what is found, and it is useless as 
 
 ## Decision
 
-Not built now; recorded in STRETCH.md with its trigger. Where it would go: T5 on the merged records, tagging only the report's own text (register span, potential impact, quoted mitigation), never the model's description, before T4; each entity stored with its page in a `risk_entity` table and served through an `entity` filter on the API.
+Not built now. The trigger to build it would be the second or third report loaded, or the first client question about geographic or regulatory exposure ("which companies cite China or CBAM as a risk"). Where it would go: T5 on the merged records, tagging only the report's own text (register span, potential impact, quoted mitigation), never the model's description, before T4; each entity stored with its page in a `risk_entity` table and served through an `entity` filter on the API.
 
 ## Limits
 

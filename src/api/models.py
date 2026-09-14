@@ -80,6 +80,7 @@ class RiskOut(BaseModel):
 
 class RiskListResponse(BaseModel):
     intent: QueryIntent
+    sector_matched: list[str] | None = None  # stored sectors a requested sector resolved to; [] when none matched
     count: int
     records: list[RiskOut]
 
@@ -93,6 +94,7 @@ class QuestionResponse(BaseModel):
     """A named brief question: rows are whatever queries.sql selects, so they stay a list of objects."""
 
     question: str
+    sector_matched: list[str] | None = None
     count: int
     rows: list[dict]
 
