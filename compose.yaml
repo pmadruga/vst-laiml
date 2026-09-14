@@ -1,5 +1,6 @@
-# DESIGN.md > 3. Deployment. The model server (llama-swap on the host, port 9292) is reached through the host network,
-# because it listens on 127.0.0.1 only; run `docker compose run pipeline ...` for a batch, `docker compose up api` to serve.
+# DESIGN.md > 3. Deployment. The model server (a local llama-server behind llama-swap, port 9292) is reached through the
+# host network, because it listens on 127.0.0.1 only. Point LLM_BASE_URL, LLM_MODEL and LLM_API_KEY at any
+# OpenAI-compatible server or hosted provider instead (README.md > Model server); run `docker compose run pipeline ...` for a batch, `docker compose up api` to serve.
 services:
   pipeline:
     build: {context: ., target: pipeline}
@@ -8,6 +9,8 @@ services:
     environment:
       LLM_BASE_URL: ${LLM_BASE_URL:-http://127.0.0.1:9292/v1}
       LLM_MODEL: ${LLM_MODEL:-gpt-oss}
+      LLM_API_KEY: ${LLM_API_KEY:-none}
+      LLM_REASONING_EFFORT: ${LLM_REASONING_EFFORT-low}   # no colon: an empty value stays empty
       PROMPT_VERSION: ${PROMPT_VERSION:-v1}
       PDF_PATH: /reports/VestasAnnualReport2025.pdf   # the report is mounted, not baked into the image
     volumes:
@@ -22,6 +25,8 @@ services:
     environment:
       LLM_BASE_URL: ${LLM_BASE_URL:-http://127.0.0.1:9292/v1}
       LLM_MODEL: ${LLM_MODEL:-gpt-oss}
+      LLM_API_KEY: ${LLM_API_KEY:-none}
+      LLM_REASONING_EFFORT: ${LLM_REASONING_EFFORT-low}   # no colon: an empty value stays empty
       DB_PATH: /data/risk.db
       API_REPLAY_RUN: ${API_REPLAY_RUN:-}
     volumes:

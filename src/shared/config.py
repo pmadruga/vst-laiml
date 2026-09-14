@@ -17,12 +17,12 @@ PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"  # versioned prompt te
 EVAL_DIR = REPO_ROOT / "eval"
 
 # --- model (T1 llm strategy, T2, A3) --------------------------------------------------------
-LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "http://127.0.0.1:9292/v1")  # llama-swap, OpenAI-compatible
+LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "http://127.0.0.1:9292/v1")  # local llama-server behind llama-swap; any OpenAI-compatible endpoint
 LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-oss")
 LLM_WEAK_MODEL = os.environ.get("LLM_WEAK_MODEL", "ministral-3:14b")  # the "weaker model" regression in the eval
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "none")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "none")  # bearer key, for hosted providers
 LLM_TIMEOUT_S = float(os.environ.get("LLM_TIMEOUT_S", "600"))
-LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "low")  # gpt-oss chat-template kwarg
+LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "low")  # gpt-oss chat-template kwarg for llama.cpp; empty leaves it out
 PROMPT_VERSION = os.environ.get("PROMPT_VERSION", "v1")
 
 # --- T4 grounding checks: "regex" (hand-rolled) or "spacy" (sentences, lemmas, entities; needs the nlp dependency group) ---

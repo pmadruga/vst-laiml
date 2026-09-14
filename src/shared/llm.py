@@ -1,7 +1,8 @@
 """Model client with record and replay (T1, T2, A3).
 
-OpenAI-compatible chat completions with JSON-schema structured output, served here by llama-swap
-(gpt-oss). Every call is written to <run_dir>/llm/<call_id>.json: request, raw response, usage.
+OpenAI-compatible chat completions with JSON-schema structured output, served here by a local llama-server
+(llama.cpp, behind llama-swap) running gpt-oss. Any OpenAI-compatible server or hosted provider can replace it
+through the LLM_* settings in shared.config. Every call is written to <run_dir>/llm/<call_id>.json: request, raw response, usage.
 In replay mode the same request hash is looked up in a recorded run and no network call is made,
 so tests and the eval are deterministic and need no server.
 """
@@ -60,8 +61,9 @@ class LLMClient:
         body = {
             "model": self.model, "temperature": temp, "max_tokens": max_tokens, "messages": messages,
             "response_format": {"type": "json_schema", "json_schema": {"name": schema.__name__, "strict": True, "schema": _strictify(json_schema)}},
-            "chat_template_kwargs": {"reasoning_effort": LLM_REASONING_EFFORT},
         }
+        if LLM_REASONING_EFFORT:  # llama.cpp's chat-template argument for gpt-oss; other servers may reject the field
+            body["chat_template_kwargs"] = {"reasoning_effort": LLM_REASONING_EFFORT}
         if sample:
             body["seed"] = 1000 + sample
         req_hash = hashlib.sha256(json.dumps({"model": self.model, "prompt_version": self.prompt_version, "sample": sample,

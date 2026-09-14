@@ -1,5 +1,7 @@
 # Experiments kept
 
+Each experiment was cheap to run because of how the pipeline is built ([DESIGN.md › 1. Pipeline](/DESIGN.md), Built for experiments): one flag changes one thing, the model calls replay offline, and the new run is scored against the same golden set.
+
 One row per hypothesis test. Sources: `documentation/stages/*.md`, `documentation/results.md`, `STRETCH.md`, `eval/attempts/2026-09-13/`, `eval/runs/exp-*`.
 
 | Phase | Experiment | What was tried | Result | Decision | Where |

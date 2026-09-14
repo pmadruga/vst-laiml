@@ -8,7 +8,7 @@
 docker compose --profile batch build
 ```
 
-Two images from one Dockerfile: `pipeline` runs `etl.py` as a batch job, `api` serves the database. Both use the host network so they can reach the model server, llama-swap on `127.0.0.1:9292` serving `gpt-oss`; set `LLM_BASE_URL`, `LLM_MODEL` and `PROMPT_VERSION` in the environment to change that. Runs and the database live in `./data` on the host (`/data` in the containers), written as the host user. The report is mounted read-only at `/reports`.
+Two images from one Dockerfile: `pipeline` runs `etl.py` as a batch job, `api` serves the database. Both use the host network so they can reach the model server: a local llama-server (llama.cpp) behind llama-swap on `127.0.0.1:9292`, serving `gpt-oss`. Commands whose comment says live need it, and so do the regression runs and `/ask`. To use another OpenAI-compatible server or a hosted provider, set `LLM_BASE_URL`, `LLM_MODEL`, `LLM_API_KEY` and `LLM_REASONING_EFFORT` (see the README's Model server section); `PROMPT_VERSION` picks the prompt. Runs and the database live in `./data` on the host (`/data` in the containers), written as the host user. The report is mounted read-only at `/reports`.
 
 ## Pipeline
 

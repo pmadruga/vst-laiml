@@ -4,7 +4,7 @@ How the pipeline and the API are built. Step-by-step detail is in [SPECS.md](SPE
 
 ## Stack
 
-Python 3.12 with uv; PyMuPDF for the PDF (words, fonts, drawings, links); Pydantic for the record schema; gpt-oss 20B served locally by llama-swap through an OpenAI-compatible API, with every call recorded for replay; SQLite with full-text search; FastAPI; pytest; Docker Compose.
+Python 3.12 with uv; PyMuPDF for the PDF (words, fonts, drawings, links); Pydantic for the record schema; gpt-oss 20B on a local llama-server (llama.cpp) through its OpenAI-compatible API, replaceable by another server or a hosted provider through environment variables, with every call recorded for replay; SQLite with full-text search; FastAPI; pytest; Docker Compose.
 
 ## 1. Pipeline
 
@@ -13,6 +13,8 @@ Three phases. Each step reads the previous step's file and writes its own under 
 - **Extract, no model.** Sections are found through the table of contents links. The two risk tables (p.51 main risks, pp.71–74 sustainability-report risks) are rebuilt from word positions and font sizes, because plain text order mixes their columns; an arrow icon in each sustainability row marks it as a risk or an opportunity. Every piece of text keeps its section and page.
 - **Transform, the model writes and code checks.** The table rows marked as risks become 10 candidates. One model call per risk writes the description, the category and the mitigation, and a risk found in both tables merges into one record. Each record is checked against its source text, retried once, then flagged. Automatic evaluators then compare the records with expected answers written from the report (the golden set), and a failure stops the records from being loaded.
 - **Load.** SQLite, one report at a time: records with citations, full-text search, a view of how each risk changes from year to year, and a log of every check's outcome (the run record).
+
+**Built for experiments.** Each step writes its output to a file, and every model call is recorded and can be replayed without the model server. So one change (`--model`, `--prompt-version`, `--grounding`, `--break-parser`) becomes a new run, scored against the same golden set and compared in the run record. That is how the regression runs and the experiments in [experiments.md](documentation/experiments.md) were made.
 
 ## Where the model is used, and where it is not
 

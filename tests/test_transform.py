@@ -92,3 +92,17 @@ def test_final_object_has_register_fields_and_enriched_mitigation(baseline_run):
     assert carbon.mitigation and any(f.startswith("mitigation_from_topical_section") for f in carbon.quality_flags)
     assert carbon.mitigation.startswith("Our transition plan")  # the MDR-A actions paragraph, not the quoted cross-reference
     assert any(c.page in (85, 86, 87) for c in carbon.citations)
+
+
+def test_reasoning_effort_is_only_sent_when_set(tmp_path, monkeypatch):
+    """Servers other than llama.cpp may reject chat_template_kwargs, so an empty LLM_REASONING_EFFORT leaves it out."""
+    from shared import llm as llm_mod
+    from shared.schema import DescribeOutput
+    sent = []
+    reply = DescribeOutput(title="t", description="One. Two.", category="cyber", confidence=1.0).model_dump_json()
+    monkeypatch.setattr(llm_mod.LLMClient, "_post", lambda self, body: (sent.append(body), (reply, {"usage": {}}, 0.0))[1])
+    for i, effort in enumerate(("low", "")):
+        monkeypatch.setattr(llm_mod, "LLM_REASONING_EFFORT", effort)
+        llm_mod.LLMClient(tmp_path / f"run{i}").complete("x", "system", "user", DescribeOutput)
+    assert sent[0]["chat_template_kwargs"] == {"reasoning_effort": "low"}
+    assert "chat_template_kwargs" not in sent[1]

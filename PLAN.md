@@ -16,10 +16,11 @@ Correctness. The two risk analysts I spoke with both said they prefer factuality
 
 ## What assumptions are you making?
 
-- Risks come from the report's risk tables, which is a limitation in itself.
+- A report's principal risks are the ones it lists in its risk tables; risks written only in paragraphs are missed.
+- A wrong record costs more trust than a missing one, which is why the two analysts' preference for factuality comes first.
 - The brief's seven categories are the ones clients use, and each risk has one main cause.
-- Reports are digital PDFs, not scans, with a table of contents; a report laid out differently is flagged, not read silently.
-- One report, with expected answers written from its tables, is enough to catch a drop in quality when the parser, the prompt or the model changes.
+- Reports are digital PDFs, not scans, with a table of contents.
+- One report with expected answers is enough to catch a drop in quality when the parser, prompt or model changes.
 - Analysts and clients accept records that carry a quality flag.
 
 ## What are you explicitly not solving here but would tackle next?
