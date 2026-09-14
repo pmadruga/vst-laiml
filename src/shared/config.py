@@ -9,7 +9,7 @@ from pathlib import Path
 from .schema import Register
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_PDF = REPO_ROOT / "documentation" / "baseline" / "VestasAnnualReport2025.pdf"
+DEFAULT_PDF = Path(os.environ.get("PDF_PATH", REPO_ROOT / "documentation" / "baseline" / "VestasAnnualReport2025.pdf"))  # in Docker: /reports/...
 RUNS_DIR = Path(os.environ.get("RUNS_DIR", REPO_ROOT / "runs"))
 DATA_DIR = Path(os.environ.get("DATA_DIR", REPO_ROOT / "data"))
 DB_PATH = Path(os.environ.get("DB_PATH", DATA_DIR / "risk.db"))

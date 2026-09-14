@@ -1,0 +1,46 @@
+# Review panel, round two, 2026-09-13
+
+Six reviews of the state after the round-one fixes: brief compliance with a check of every round-one item, a full-file code review, document coherence, evaluation rigour against the recorded runs, a second mock panel with fifteen new questions, and a reproducibility check from a fresh clone that followed the README literally. Round one's fifteen items: eight resolved, five partly, two untouched (lenient evaluators, documents outrunning code). Nothing below has been changed yet.
+
+## Breaks the submission as a repository
+
+1. **The evidence runs are not in git.** `.gitignore` has `runs/` without a leading slash, which also ignores `eval/runs/`. From a fresh clone: 8 of 23 tests skip, both replay commands in the README fail, the eval finds no run, no database can be built, the API refuses to start. Every number in the results section rests on files a reviewer cannot get. Fix: `/runs/` in `.gitignore`, add `eval/runs`, commit prompts, `enrich.py`, `golden.json`, tests and `SCALABILITY.md` together, then re-run the tests from a clean clone.
+2. **Nothing since the build commit is committed**: 21 modified and 3 untracked files, including `enrich.py`, which the committed `etl.py` and tests would import and not find.
+3. **The evidence runs are self-replays with lost provenance.** Every `run.json` was overwritten by the last invocation, so the regression runs say `replay: <own id>` and the baseline says `phases: ["load"]`, while the README calls them "a full extract and transform". Fix: merge into `run.json` instead of overwriting, re-record the four runs live once as the last step, and never replay them afterwards.
+
+## Wrong results a panel will find
+
+4. **`status=removed` can never return a record.** The API joins the status view on the instance's own year, and a removed risk has no instance in that year, so golden question 8 ("which risks dropped out") always returns zero. The removed branch also uses `MAX(fiscal_year)` across all companies, so one company's 2025 report marks every other company's 2024 risks as removed. Fix: scope the max per company; serve removed from `canonical_risk` or join on the prior year.
+5. **The carbon-taxes mitigation is a regex accident.** The enrich step matches the first "Actions and resources" on p.86, which is a quoted cross-reference, not the MDR-A heading, so the record's mitigation starts with a stray quotation mark and a period and holds the Scope 1 to 3 targets list. The report's only sentence about carbon taxes on that page is a caveat, not an action. The golden phrases were then chosen to fit the grab. Fix: anchor on the MDR-A heading inside the matched IRO block, or set `mitigation_stated: false` for carbon taxes and cite the caveat. Also the terminator regex never fires, so the paragraph is simply the first 700 characters, and hyphen re-joining eats words.
+6. **Numbers in the documents do not come from the shipped recordings.** The baseline recordings hold 16 pipeline calls (4 identify, 10 describe, 2 repair), 35 s, 12.5k tokens in and 3.2k out; SCALABILITY.md and DESIGN.md say 20 calls, 51 s, 14k and 4k. Page 72 has no register rows, so identify runs on four pages. Fix: compute the table with a committed script over `eval/runs/baseline/llm`.
+7. **Counts disagree across documents.** Flagged records: one (README) against "two of nine" (PLAN, DESIGN, STRETCH, SCALABILITY); weak model 3 flags against "4". Golden questions: five (README evaluation section, build report) against nine. Tests: 19 against 23. Review-load arithmetic in DESIGN is wrong under any rate. Fix: one number each, recomputed from the artefacts.
+
+## Evaluation claims that do not hold
+
+8. **The grounding evaluator cannot fail on hallucination.** It searches the golden phrases in the description, span and citation spans together; the spans are copied page text, so a fabricated description with a correct span scores 1.0. The baseline's own T4 check flags an invented second sentence on r09 while eval grounding reports 1.0. Fix: search description and mitigation only; add a negative check of invented content words against page text.
+9. **Matching is order-dependent and title-rescued.** The two injuries rows tie at 0.85 and the first wins; in the broken-parser run project execution matches on title alone. Fix: match on the register's `verbatim_title`, which the record now carries; make ties an error.
+10. **The prompts still encode this report's hard cases, and the README says they do not.** The describe rules of thumb map one-to-one onto four golden items; the intent prompt has a clause per question. Two intent sweeps three minutes apart show the prompt was edited against the fixed nine questions and flipped exactly the two failures. Fix: say plainly that category and intent are in-distribution compliance checks with the taxonomy policy stated in the prompt, and that the next report is the held-out test. Remove the false "never mentions" sentence.
+11. **The intent evaluator ignores `years` and `free_text`** and compares sector by truthiness; Q5 expected "tariffs" as free text, got nothing, and passed. Fix: compare all fields.
+12. **The broken-parser regression cannot reach identification or provenance.** It injects the correct headings and page, so only grounding, category and fields can move; the docstring and SPECS claim more. Fix: also scramble the heading-to-column mapping, and state which evaluators the regression reaches.
+13. **Thresholds are "one miss allowed" on nine items** and the broken-parser scores sit at 0.778, one item from passing. State the thresholds as miss counts with a reason, and present the scores as a smoke test, not accuracy.
+
+## Code defects
+
+14. **Malformed model reply aborts the transform**: an empty content or an over-long title raises a validation error caught nowhere; the run dies without a run-record row. Fix: catch in `complete`, record `model_reply_invalid`, retry once.
+15. **Number grounding misses unit-suffixed numbers** (`40m`, `5GW`, `EUR 1.2bn` reduces to `1`). The test that covers it passes only through a year.
+16. **Replay paths**: `etl.py --replay` and the API's `API_REPLAY_RUN` resolve under `runs/`, not `eval/runs`; in Docker `API_REPLAY_RUN=baseline` finds nothing. Fix: accept a path and fall back to `eval/runs`.
+17. **`canonical_risk.canonical_title` is inserted from the model's title and never updated**, and it is what the newly-elevated query returns. Use the register title.
+18. **Minor**: the T6 count check is still tautological by construction; one model proposal can match every register candidate in the agreement score; `with conn() as c` in the API is a transaction, not a close; unused imports; `config.PHASES["load"]` is a string; the 2024 and 2023 trial runs cited in SCALABILITY.md are not in the repo.
+
+## Documents
+
+19. **Stale paths and sections**: README cites `src/pipeline/schema.py`; CLAUDE.md says current stage 0 and cites four DESIGN.md sections that no longer exist; the build report still describes an append-only run record and an unsigned golden set.
+20. **PLAN.md**: "no human evaluation in my approach" contradicts the review loop; "an LLM is used as a fallback only when strictly necessary" contradicts one call per risk; "four in-scope sections, which the brief requires" (the brief requires two); deferred items 1 and 5 have no STRETCH.md entry; PLAN is two pages against the brief's half. Number the assumptions, since DESIGN.md cites them by number.
+21. **DESIGN.md** is three pages against the brief's one; abbreviations E1 to E8, T1 to T6 and FTS5 need a one-line legend; the section order mixes numbered and unnumbered headings.
+22. **SPECS.md** promises evaluators inside T6, a query log, two run-record fields and T5's third marker source; none exist. Mark each "not built, deferred".
+23. **README**: the replay example fails as written (needs `--extract` on the new run id); the database section has no path to a database; Docker's batch command fails on a fresh checkout because `./data` is created by the daemon as root (commit `data/.gitkeep`); tests skip rather than fail without the baseline, which hides finding 1.
+24. **The carbon-taxes provenance is served as a quality flag** while the README calls it a note; use a separate field or rename.
+
+## For the walkthrough
+
+The coherence review's minute-by-minute outline is sound: product in one breath; why the model never touches the PDF; the register-first decision and what it cost; the three regression runs; record and replay; scaling and what actually limits it; concessions and next week. The second mock panel's fifteen questions to prepare for, in order of risk: the replayed evidence runs, what the broken parser can and cannot fail, the carbon-taxes mitigation, the ESRS-id-on-merge decision when a risk leaves the ESRS register, the four model-only candidates never surfaced, the run record with n=1, the run record history the build report cites but the code no longer keeps, what `confidence` means, an unauthenticated model call per request, no frontier-model comparison, what "principal risk" means across filers, the 4 to 8 hour budget, `_strictify` and the arrow indices, the hard-coded merge hints, and the prompt demanding a second sentence that the grounding check then flags.

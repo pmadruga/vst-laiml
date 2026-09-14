@@ -9,9 +9,10 @@ import pytest
 from shared.runrecord import RunRecord
 from shared.schema import ParseResult, RiskExtraction
 from pipeline.transform.describe import describe
+from pipeline.transform.enrich import enrich_mitigations
 from pipeline.transform.identify import identify, register_candidates
 from shared.llm import LLMClient, ReplayMiss
-from pipeline.transform.merge import merge
+from pipeline.transform.merge import canonical_id, merge
 from pipeline.transform.validate import grounding_problems, validate_and_repair, validate_transform
 
 
@@ -33,12 +34,13 @@ def test_replay_reproduces_the_baseline_records(baseline_run):
     client = LLMClient(d, model=run_json["model"], prompt_version=run_json["prompt_version"], replay_dir=baseline_run)
     ident = identify(parsed, rec, client)
     desc = describe(ident, rec, client)
-    recs = merge(ident.candidates, desc, rec, final.run.run_id, run_json["model"], run_json["prompt_version"])
+    recs, merges = merge(ident.candidates, desc, rec, final.run.run_id, run_json["model"], run_json["prompt_version"])
+    recs = enrich_mitigations(recs, parsed, rec)
     recs = validate_and_repair(recs, parsed, rec, client)
     assert [r.title for r in recs] == [r.title for r in final.risks]
     assert [r.category for r in recs] == [r.category for r in final.risks]
     assert [len(r.citations) for r in recs] == [len(r.citations) for r in final.risks]
-    assert validate_transform(recs, len(ident.candidates), len(ident.candidates) - len(recs), parsed, rec) != "error"
+    assert len(merges) == 1 and validate_transform(recs, len(ident.candidates), merges, parsed, rec) != "error"
 
 
 def test_replay_miss_is_loud(baseline_run):
@@ -70,3 +72,18 @@ def test_final_object_shape(baseline_run):
     for r in final.risks:
         assert r.title and r.description and r.section and r.page and r.citations
         assert r.model and r.prompt_version and r.run_id
+
+
+def test_canonical_id_comes_from_the_register_not_the_model(parsed):
+    cands = {c.verbatim_title: c for c in register_candidates(parsed)}
+    assert canonical_id(cands["Cyber attacks"]) == "vestas-erm-cyber-attacks"
+    assert canonical_id(cands["Cyber security risks"]) == "vestas-g1-cyber-security-risks"
+
+
+def test_final_object_has_register_fields_and_enriched_mitigation(baseline_run):
+    final = RiskExtraction.model_validate_json((baseline_run / "final.json").read_text())
+    by = {r.verbatim_title: r for r in final.risks}
+    assert by["Cyber attacks"].stated_mitigation and by["Cyber attacks"].canonical_risk_id == "vestas-g1-cyber-security-risks"  # merged: ESRS id kept
+    carbon = by["Carbon taxes and tariffs"]
+    assert carbon.mitigation and any(f.startswith("mitigation_from_topical_section") for f in carbon.quality_flags)
+    assert any(c.page in (85, 86, 87) for c in carbon.citations)

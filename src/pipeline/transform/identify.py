@@ -40,9 +40,11 @@ def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]+", " ", s.lower())).strip()
 
 
-def llm_candidates(parsed: ParseResult, client: LLMClient, pages: tuple[int, ...] = (51, 71, 72, 73, 74)) -> list[CandidateRisk]:
+def llm_candidates(parsed: ParseResult, client: LLMClient, pages: tuple[int, ...] | None = None) -> list[CandidateRisk]:
     """Ask the model for principal risks per page; keep proposals whose span exists on the page."""
     system = load_prompt("identify", client.prompt_version)
+    if pages is None:  # the pages that carry a register: the same pages the deterministic strategy reads
+        pages = tuple(sorted({b.page for b in parsed.blocks if b.source_register is not None}))
     out: list[CandidateRisk] = []
     blocks_by_page: dict[int, list] = {}
     for b in parsed.blocks:

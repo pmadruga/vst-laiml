@@ -21,7 +21,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from shared.config import (COMPANY, DB_PATH, DEFAULT_PDF, LLM_MODEL, PHASES, PROMPT_VERSION, REPORT, REVIEW_BODIES, RUNS_DIR)
+from shared.config import (COMPANY, DB_PATH, DEFAULT_PDF, EVAL_DIR, LLM_MODEL, PHASES, PROMPT_VERSION, REPORT, REVIEW_BODIES, RUNS_DIR)
 from pipeline.extract.locate import locate
 from pipeline.extract.parse import parse
 from pipeline.extract.validate import validate_extraction
@@ -29,6 +29,7 @@ from pipeline.load.sqlite import load, review_frequency
 from shared.runrecord import RunRecord
 from shared.schema import (Company, IdentifyResult, LocateResult, ParseResult, Report, RiskExtraction, RiskRecord, RunInfo, DescribedRisk)
 from pipeline.transform.describe import describe
+from pipeline.transform.enrich import enrich_mitigations
 from pipeline.transform.identify import identify
 from shared.llm import LLMClient
 from pipeline.transform.merge import merge
@@ -47,6 +48,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--db", type=Path, default=DB_PATH)
     p.add_argument("--list", action="store_true")
     return p
+
+
+def resolve_run(ref: str) -> Path:
+    """A run to replay from: a path, a run id under runs/, or a run id under eval/runs/."""
+    for cand in (Path(ref), RUNS_DIR / ref, EVAL_DIR / "runs" / ref):
+        if (cand / "llm").is_dir():
+            return cand
+    raise SystemExit(f"no recorded run at {ref!r} (looked in ./, runs/, eval/runs/)")
 
 
 def write(d: Path, name: str, model) -> None:
@@ -100,7 +109,7 @@ def _naive_main_risks(page, page_no, pdf_index, section):
 def phase_transform(args, d: Path, rec: RunRecord) -> int:
     located = LocateResult.model_validate_json((d / "locate.json").read_text())
     parsed = ParseResult.model_validate_json((d / "parse.json").read_text())
-    replay = (RUNS_DIR / args.replay) if args.replay else None
+    replay = resolve_run(args.replay) if args.replay else None
     client = LLMClient(d, model=args.model, prompt_version=args.prompt_version, replay_dir=replay)
     mode = f"replay of {args.replay}" if replay else f"live {args.model}"
     print(f"[transform] model calls: {mode}; prompt {args.prompt_version}")
@@ -113,9 +122,10 @@ def phase_transform(args, d: Path, rec: RunRecord) -> int:
     (d / "describe.json").write_text(json.dumps([x.model_dump(mode="json") for x in described], indent=2) + "\n")
     print(f"[transform] T2 describe: {len(described)} records; poor fit {sum(x.output.poor_fit for x in described)}; voted {sum(len(x.call_ids) > 1 for x in described)}")
 
-    records = merge(identified.candidates, described, rec, rec.run_id, args.model, args.prompt_version)
-    merges = len(identified.candidates) - len(records)
-    print(f"[transform] T3 merge: {len(records)} records ({merges} merged)")
+    records, merges = merge(identified.candidates, described, rec, rec.run_id, args.model, args.prompt_version)
+    print(f"[transform] T3 merge: {len(records)} records ({len(merges)} merged)")
+    records = enrich_mitigations(records, parsed, rec)
+    print(f"[transform] T5 enrich: {sum(any(f.startswith('mitigation_from_topical') for f in r.quality_flags) for r in records)} mitigations from the topical sections")
 
     records = validate_and_repair(records, parsed, rec, client)
     flagged = [r.id for r in records if r.quality_flags]
@@ -138,10 +148,11 @@ def phase_transform(args, d: Path, rec: RunRecord) -> int:
         try:
             ident2 = identify(parsed, rrec, None if args.no_llm_identify else rc)
             desc2 = describe(ident2, rrec, rc)
-            rec2 = merge(ident2.candidates, desc2, rrec, rec.run_id, args.model, args.prompt_version)
+            rec2, _ = merge(ident2.candidates, desc2, rrec, rec.run_id, args.model, args.prompt_version)
+            rec2 = enrich_mitigations(rec2, parsed, rrec)
             replay_records = validate_and_repair(rec2, parsed, rrec, rc)
         except Exception as e:  # a replay miss is itself the finding
-            rec.add("transform", "replay_identical", "error", count=1, error=str(e)[:200])
+            rec.add("transform", "pipeline_reproducibility", "error", count=1, error=str(e)[:200])
     status = validate_transform(records, len(identified.candidates), merges, parsed, rec, replay_records)
     print(f"[transform] T6: {status}")
     print(rec.summary("transform"))

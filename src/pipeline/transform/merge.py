@@ -7,7 +7,7 @@ import re
 
 from shared.config import COMPANY, REPORT
 from shared.runrecord import RunRecord
-from shared.schema import CandidateRisk, Citation, DescribedRisk, RiskRecord
+from shared.schema import CandidateRisk, Citation, DescribedRisk, Register, RiskRecord
 
 MERGE_TITLE_SIM = 0.55
 KEYWORD_HINTS = {"cyber": {"cyber"}, "corruption": {"corruption", "bribery"}}
@@ -25,6 +25,13 @@ def _same_risk(a: CandidateRisk, da: DescribedRisk, b: CandidateRisk, db: Descri
         return True
     va, vb = _norm(a.verbatim_title), _norm(b.verbatim_title)
     return any(k <= set(va.split()) and k <= set(vb.split()) for k in KEYWORD_HINTS.values())
+
+
+def canonical_id(c: CandidateRisk) -> str:
+    """Stable across runs and years: the register's own title (and ESRS code), never the model's wording.
+    A risk found in both registers takes the ESRS id, so a risk that moves into the main-risks table keeps its id and shows as elevated."""
+    key = re.sub(r"[^a-z0-9]+", "-", c.verbatim_title.lower().replace("’", "")).strip("-")
+    return f"{COMPANY['id']}-{(c.source_taxonomy or 'erm').lower()}-{key}"
 
 
 def merge(candidates: list[CandidateRisk], described: list[DescribedRisk], record: RunRecord, run_id: str,
@@ -51,14 +58,16 @@ def merge(candidates: list[CandidateRisk], described: list[DescribedRisk], recor
                 citations.append(Citation(section=o.section, page=o.page, source_register=o.source_register, span=o.verbatim_span))
         n += 1
         title = d.output.title
+        esrs_twin = next((o for o in ordered if o.candidate_id in {m[1] for m in merges if m[0] == c.candidate_id} and o.source_register == Register.ESRS_FINANCIAL_RISK), None)
         records.append(RiskRecord(
-            id=f"{REPORT['id']}-r{n:02d}", report_id=REPORT["id"], canonical_risk_id=f"{COMPANY['id']}-{re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')}",
+            id=f"{REPORT['id']}-r{n:02d}", report_id=REPORT["id"], canonical_risk_id=canonical_id(esrs_twin or c),
             title=title, description=d.output.description, category=d.output.category,
             secondary_categories=d.output.secondary_categories, source_register=c.source_register, source_taxonomy=c.source_taxonomy,
             section=c.section, page=c.page, citations=citations, potential_impact=c.potential_impact,
             mitigation=d.output.mitigation, prominence=c.prominence, verbatim_span=c.verbatim_span,
+            verbatim_title=c.verbatim_title, stated_mitigation=c.stated_mitigation,
             confidence=d.output.confidence, poor_fit=d.output.poor_fit,
             quality_flags=[f"poor_fit:{d.output.poor_fit_reason}"] if d.output.poor_fit else [],
             model=model, prompt_version=prompt_version, run_id=run_id))
     record.add("transform", "merge", "ok", count=len(merges), merged=merges, records=len(records), candidates=len(candidates))
-    return records
+    return records, merges

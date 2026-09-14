@@ -9,6 +9,7 @@ services:
       LLM_BASE_URL: ${LLM_BASE_URL:-http://127.0.0.1:9292/v1}
       LLM_MODEL: ${LLM_MODEL:-gpt-oss}
       PROMPT_VERSION: ${PROMPT_VERSION:-v1}
+      PDF_PATH: /reports/VestasAnnualReport2025.pdf   # the report is mounted, not baked into the image
     volumes:
       - ./data:/data
       - ./documentation/baseline:/reports:ro

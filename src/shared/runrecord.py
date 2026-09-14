@@ -23,6 +23,8 @@ class RunRecord:
     def add(self, phase: str, check_id: str, outcome: Outcome, count: int = 0, strategy: str | None = None, **detail) -> RunCheck:
         row = RunCheck(run_id=self.run_id, report_id=self.report_id, phase=phase, check_id=check_id,
                        outcome=outcome, count=count, strategy=strategy, detail=detail)
+        key = (phase, check_id, detail.get("section"))
+        self.rows = [r for r in self.rows if (r.phase, r.check_id, r.detail.get("section")) != key]
         self.rows.append(row)
         self.save()
         return row

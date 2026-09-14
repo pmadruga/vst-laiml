@@ -59,7 +59,8 @@ SELECT canonical_risk_id, fiscal_year,
   CASE WHEN prev_prominence IS NULL THEN 'new'
        WHEN prominence < prev_prominence THEN 'elevated' ELSE 'continuing' END AS status
 FROM pairs
-WHERE EXISTS (SELECT 1 FROM years y2 WHERE y2.canonical_risk_id = pairs.canonical_risk_id AND y2.fiscal_year = pairs.fiscal_year - 1)
+WHERE EXISTS (SELECT 1 FROM report r2 JOIN canonical_risk cr2 ON cr2.company_id = r2.company_id
+              WHERE cr2.id = pairs.canonical_risk_id AND r2.fiscal_year = pairs.fiscal_year - 1)
 UNION ALL
 SELECT y.canonical_risk_id, y.fiscal_year + 1, 'removed'
 FROM years y

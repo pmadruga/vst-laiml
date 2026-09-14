@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import os
 import sqlite3
+from typing import Literal
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -36,7 +37,7 @@ REPLAY_RUN = os.environ.get("API_REPLAY_RUN")  # serve intents from a recorded r
 def open_db() -> sqlite3.Connection:
     if not DB.exists():
         raise RuntimeError(f"database not found at {DB}; run the pipeline's load phase first")
-    conn = sqlite3.connect(f"file:{DB}?mode=ro", uri=True, check_same_thread=False)  # read-only; endpoints run in a threadpool
+    conn = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     row = conn.execute("SELECT value FROM meta WHERE key = 'schema_version'").fetchone()
     version = row[0] if row else None
@@ -48,11 +49,16 @@ def open_db() -> sqlite3.Connection:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.conn = open_db()  # refuses to start on a mismatch (A1)
+    open_db().close()  # A1: refuses to start on a schema mismatch; endpoints open their own read-only connection
     app.state.queries = named_queries()
     app.state.llm = None
     yield
-    app.state.conn.close()
+
+
+def conn() -> sqlite3.Connection:
+    c = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+    c.row_factory = sqlite3.Row
+    return c
 
 
 app = FastAPI(title="Structured Risk Intelligence API", version=SCHEMA_VERSION, lifespan=lifespan)
@@ -99,7 +105,7 @@ def query_records(conn: sqlite3.Connection, intent: QueryIntent, limit: int = 10
     if intent.free_text.strip():
         sql.append("JOIN risk_fts f ON f.id = ri.id")
         where.append("risk_fts MATCH ?")
-        params.append(" OR ".join(f'"{w}"' for w in intent.free_text.split()))
+        params.append(" OR ".join('"' + w.replace('"', '""') + '"' for w in intent.free_text.split()))
     if where:
         sql.append("WHERE " + " AND ".join(where))
     sql.append("ORDER BY r.fiscal_year DESC, ri.prominence, ri.page, ri.id LIMIT ?")
@@ -115,22 +121,25 @@ def health():
 
 @app.get("/risks", response_model=RiskListResponse)
 def risks(company: str | None = None, year: int | None = None, category: Category | None = None,
-          register: Register | None = None, status: str | None = None, sector: str | None = None,
-          q: str | None = Query(default=None, description="full-text search over title and description"), limit: int = 100):
+          register: Register | None = None, status: Literal["new", "continuing", "removed", "elevated"] | None = None,
+          sector: str | None = None, q: str | None = Query(default=None, description="full-text search over title and description"),
+          limit: int = Query(default=100, ge=1, le=1000)):
     intent = QueryIntent(categories=[category] if category else [], companies=[company] if company else [],
                          years=[year] if year else [], source_register=register, status=status, sector=sector, free_text=q or "")
-    records = query_records(app.state.conn, intent, limit)
+    with conn() as c:
+        records = query_records(c, intent, limit)
     return {"intent": intent.model_dump(mode="json"), "count": len(records), "records": records}
 
 
 @app.get("/risks/{risk_id}", response_model=RiskOut)
 def risk(risk_id: str):
-    row = app.state.conn.execute("SELECT ri.*, c.name AS company_name, c.sector, r.fiscal_year, r.review_frequency, r.review_bodies "
-                                 "FROM risk_instance ri JOIN report r ON r.id = ri.report_id JOIN company c ON c.id = r.company_id WHERE ri.id = ?",
-                                 (risk_id,)).fetchone()
-    if not row:
-        raise HTTPException(404, "no such risk")
-    return row_to_record(app.state.conn, row)
+    with conn() as c:
+        row = c.execute("SELECT ri.*, c.name AS company_name, c.sector, r.fiscal_year, r.review_frequency, r.review_bodies "
+                        "FROM risk_instance ri JOIN report r ON r.id = ri.report_id JOIN company c ON c.id = r.company_id WHERE ri.id = ?",
+                        (risk_id,)).fetchone()
+        if not row:
+            raise HTTPException(404, "no such risk")
+        return row_to_record(c, row)
 
 
 @app.get("/questions/{name}", response_model=QuestionResponse)
@@ -139,23 +148,27 @@ def brief_question(name: str, company: str | None = None, year: int | None = Non
     sql = app.state.queries.get(name)
     if not sql:
         raise HTTPException(404, f"unknown question; choose one of {sorted(app.state.queries)}")
-    rows = app.state.conn.execute(sql, {"company": company, "year": year, "category": category, "sector": sector}).fetchall()
+    with conn() as c:
+        rows = c.execute(sql, {"company": company, "year": year, "category": category, "sector": sector}).fetchall()
     return {"question": name, "count": len(rows), "rows": [dict(r) for r in rows]}
 
 
 @app.get("/companies", response_model=list[CompanyOut])
 def companies():
-    return [dict(r) for r in app.state.conn.execute("SELECT * FROM company ORDER BY name")]
+    with conn() as c:
+        return [dict(r) for r in c.execute("SELECT * FROM company ORDER BY name")]
 
 
 @app.get("/runs", response_model=list[RunOut])
 def runs():
-    return [dict(r) for r in app.state.conn.execute("SELECT * FROM run ORDER BY started_at DESC")]
+    with conn() as c:
+        return [dict(r) for r in c.execute("SELECT * FROM run ORDER BY started_at DESC")]
 
 
 @app.get("/runs/{run_id}/record", response_model=list[RunCheckOut])
 def run_record(run_id: str):
-    rows = app.state.conn.execute("SELECT phase, check_id, outcome, count, strategy, detail FROM run_record WHERE run_id = ? ORDER BY id", (run_id,)).fetchall()
+    with conn() as c:
+        rows = c.execute("SELECT phase, check_id, outcome, count, strategy, detail FROM run_record WHERE run_id = ? ORDER BY id", (run_id,)).fetchall()
     return [{**dict(r), "detail": json.loads(r["detail"] or "{}")} for r in rows]
 
 
@@ -167,11 +180,14 @@ class Question(BaseModel):
     limit: int = 100
 
 
-def parse_intent(question: str) -> tuple[QueryIntent, str]:
+def query_understanding_step(question: str) -> tuple[QueryIntent, str]:
+    """A3: one structured-output model call turns the question into a QueryIntent, the same filters the structured endpoints take."""
     if app.state.llm is None:
         run_dir = RUNS_DIR / "api"
         run_dir.mkdir(parents=True, exist_ok=True)
-        replay = (RUNS_DIR / REPLAY_RUN) if REPLAY_RUN else None
+        replay = None
+        if REPLAY_RUN:  # a path, or a run id under runs/
+            replay = Path(REPLAY_RUN) if (Path(REPLAY_RUN) / "llm").is_dir() else RUNS_DIR / REPLAY_RUN
         app.state.llm = LLMClient(run_dir, model=LLM_MODEL, prompt_version=PROMPT_VERSION, replay_dir=replay)
     system = load_prompt("intent", PROMPT_VERSION)
     key = "".join(ch for ch in question.lower() if ch.isalnum())[:40]
@@ -181,11 +197,14 @@ def parse_intent(question: str) -> tuple[QueryIntent, str]:
 @app.post("/ask", response_model=AskResponse)
 def ask(body: Question):
     try:
-        intent, call_id = parse_intent(body.question)
-    except ReplayMiss as e:
-        raise HTTPException(503, f"question parsing unavailable in replay mode: {e}")
-    except Exception as e:  # provider down: structured endpoints keep working
-        raise HTTPException(503, f"question parsing unavailable: {e}")
-    records = query_records(app.state.conn, intent, body.limit)
+        intent, call_id = query_understanding_step(body.question)
+    except ReplayMiss:
+        raise HTTPException(503, "question parsing unavailable: no recorded answer for this question in replay mode")
+    except Exception as e:  # provider down: structured endpoints keep working; detail goes to the log, not the client
+        import logging
+        logging.getLogger("api").warning("intent parsing failed: %s", e)
+        raise HTTPException(503, "question parsing unavailable; the structured endpoints still work")
+    with conn() as c:
+        records = query_records(c, intent, min(max(body.limit, 1), 1000))
     return {"question": body.question, "intent": intent.model_dump(mode="json"), "call_id": call_id,
             "count": len(records), "records": records}

@@ -1,149 +1,378 @@
 {
   "report_id": "vestas-2025",
-  "labelled_by": "Pedro (to confirm); drafted from the registers on p.51 and pp.71-74 before any model output",
+  "labelled_by": "Pedro Madruga",
   "labelled_on": "2026-09-13",
-  "notes": "Identification is settled by the report's registers (PLAN.md > Assumptions). Category follows the written mapping rule in prompts/v1/describe.md. key_phrases are copied from the risk's own text and must appear in the record's description, span or mitigation. Cyber appears in both registers and merges to one record, so 9 records are expected from 10 register rows.",
+  "notes": "Identification is settled by the report's own registers (PLAN.md > Assumptions): the nine risks are the three p.51 main risks and the seven ESRS rows marked as financial risks, with cyber present in both registers and merged. Titles are the register's own headings; aliases are plain synonyms, not model output. Categories follow the cause test in the describe prompt. key_phrases are copied from the risk's own text and must appear in the record's description or mitigation. mitigation_stated is true where the report states actions for the risk on the in-scope or offered pages (p.51 for the main risks, p.118 and pp.85-92 for the topical sections).",
   "expected_record_count": 9,
   "risks": [
     {
       "golden_id": "geopolitics",
       "title": "Geopolitics and regulatory framework",
-      "aliases": ["Geopolitical and regulatory shifts", "Geopolitics and regulation", "Geopolitical tensions and regulatory framework"],
+      "aliases": [
+        "Geopolitical and regulatory risk"
+      ],
       "source_register": "erm_main_risk",
       "section": "risk_management",
       "page": 51,
       "category": "regulatory",
-      "acceptable_categories": ["regulatory", "market"],
-      "secondary_should_include": ["market", "supply_chain"],
-      "key_phrases": ["geopolitical tensions", "tariffs", "regulatory"],
+      "acceptable_categories": [
+        "regulatory",
+        "market"
+      ],
+      "secondary_should_include": [
+        "market",
+        "supply_chain"
+      ],
+      "key_phrases": [
+        "geopolitical tensions",
+        "tariffs",
+        "regulatory"
+      ],
       "mitigation_stated": true,
-      "mitigation_phrases": ["monitoring global developments", "regionalised manufacturing footprint", "hedging"]
+      "mitigation_phrases": [
+        "monitoring global developments",
+        "regionalised manufacturing footprint",
+        "hedging"
+      ]
     },
     {
       "golden_id": "project_execution",
       "title": "Project execution",
-      "aliases": ["Project execution risk", "Execution of complex projects"],
+      "aliases": [
+        "Project execution risk"
+      ],
       "source_register": "erm_main_risk",
       "section": "risk_management",
       "page": 51,
       "category": "operational",
-      "acceptable_categories": ["operational"],
-      "secondary_should_include": ["supply_chain"],
-      "key_phrases": ["onshore and offshore projects", "delays", "quality"],
+      "acceptable_categories": [
+        "operational"
+      ],
+      "secondary_should_include": [
+        "supply_chain"
+      ],
+      "key_phrases": [
+        "onshore and offshore projects",
+        "delays",
+        "quality"
+      ],
       "mitigation_stated": true,
-      "mitigation_phrases": ["project governance", "planning", "coordination with suppliers"]
+      "mitigation_phrases": [
+        "project governance",
+        "planning",
+        "coordination with suppliers"
+      ]
     },
     {
       "golden_id": "cyber",
       "title": "Cyber attacks",
-      "aliases": ["Cyber security risks", "Cyber attacks on critical assets", "Cyber security"],
+      "aliases": [
+        "Cyber security risks",
+        "Cyber security"
+      ],
       "source_register": "erm_main_risk",
       "also_in_register": "esrs_financial_risk",
       "section": "risk_management",
       "page": 51,
       "also_on_page": 74,
       "category": "cyber",
-      "acceptable_categories": ["cyber"],
+      "acceptable_categories": [
+        "cyber"
+      ],
       "secondary_should_include": [],
-      "key_phrases": ["cyber attack", "critical infrastructure", "energy production"],
+      "key_phrases": [
+        "cyber attack",
+        "critical infrastructure",
+        "energy production"
+      ],
       "mitigation_stated": true,
-      "mitigation_phrases": ["cyber security", "customers"]
+      "mitigation_phrases": [
+        "cyber security",
+        "customers"
+      ]
     },
     {
       "golden_id": "carbon_taxes",
       "title": "Carbon taxes and tariffs",
-      "aliases": ["Carbon taxes and tariffs on materials", "Carbon pricing and tariffs"],
+      "aliases": [
+        "Carbon taxes"
+      ],
       "source_register": "esrs_financial_risk",
       "source_taxonomy": "E1",
       "section": "material_iros",
       "page": 71,
       "category": "regulatory",
-      "acceptable_categories": ["regulatory", "climate"],
-      "secondary_should_include": ["climate"],
-      "key_phrases": ["carbon taxes", "steel", "cost"],
-      "mitigation_stated": false
+      "acceptable_categories": [
+        "regulatory",
+        "climate"
+      ],
+      "secondary_should_include": [
+        "climate"
+      ],
+      "key_phrases": [
+        "carbon taxes",
+        "steel",
+        "cost"
+      ],
+      "mitigation_stated": true,
+      "mitigation_phrases": [
+        "transition plan",
+        "decarbonisation",
+        "emission"
+      ],
+      "mitigation_page": 86
     },
     {
       "golden_id": "injuries_own_workforce",
       "title": "Cost implication of injuries in own workforce",
-      "aliases": ["Workforce injury costs", "Injuries in own workforce", "Health and safety incidents in own workforce"],
+      "aliases": [
+        "Injuries in own workforce",
+        "Workforce injuries"
+      ],
       "source_register": "esrs_financial_risk",
       "source_taxonomy": "S1",
       "section": "material_iros",
       "page": 73,
       "category": "operational",
-      "acceptable_categories": ["operational"],
+      "acceptable_categories": [
+        "operational"
+      ],
       "secondary_should_include": [],
-      "key_phrases": ["injuries", "delays", "compensation costs"],
+      "key_phrases": [
+        "injuries",
+        "delays",
+        "compensation costs"
+      ],
       "mitigation_stated": false
     },
     {
       "golden_id": "injuries_contractors",
       "title": "Cost implications of injuries to contractors and sub-contractors",
-      "aliases": ["Contractor injury costs", "Injuries to contractors and sub-contractors", "Value chain worker injuries"],
+      "aliases": [
+        "Injuries to contractors and sub-contractors",
+        "Contractor injuries"
+      ],
       "source_register": "esrs_financial_risk",
       "source_taxonomy": "S2",
       "section": "material_iros",
       "page": 73,
       "category": "operational",
-      "acceptable_categories": ["operational", "supply_chain"],
+      "acceptable_categories": [
+        "operational",
+        "supply_chain"
+      ],
       "secondary_should_include": [],
-      "key_phrases": ["injuries", "value chain workers", "compensation costs"],
+      "key_phrases": [
+        "injuries",
+        "value chain workers",
+        "compensation costs"
+      ],
       "mitigation_stated": false
     },
     {
       "golden_id": "forced_child_labour",
       "title": "Fines related to forced or child labour",
-      "aliases": ["Forced and child labour fines", "Forced or child labour in the supply chain"],
+      "aliases": [
+        "Forced or child labour fines"
+      ],
       "source_register": "esrs_financial_risk",
       "source_taxonomy": "S2",
       "section": "material_iros",
       "page": 73,
       "category": "regulatory",
-      "acceptable_categories": ["regulatory", "supply_chain"],
-      "secondary_should_include": ["supply_chain"],
-      "key_phrases": ["fines", "child", "forced labour", "suppliers"],
+      "acceptable_categories": [
+        "regulatory",
+        "supply_chain"
+      ],
+      "secondary_should_include": [
+        "supply_chain"
+      ],
+      "key_phrases": [
+        "fines",
+        "child",
+        "forced labour",
+        "suppliers"
+      ],
       "mitigation_stated": false
     },
     {
       "golden_id": "market_conditions",
       "title": "Insufficient market conditions",
-      "aliases": ["Grid, auction and permit conditions", "Inadequate market conditions", "Insufficient market conditions for wind deployment"],
+      "aliases": [
+        "Insufficient market conditions for wind deployment"
+      ],
       "source_register": "esrs_financial_risk",
       "source_taxonomy": "G1",
       "section": "material_iros",
       "page": 74,
       "category": "market",
-      "acceptable_categories": ["market", "regulatory"],
-      "secondary_should_include": ["regulatory"],
-      "key_phrases": ["grid expansion", "auction design", "permit delays"],
+      "acceptable_categories": [
+        "market",
+        "regulatory"
+      ],
+      "secondary_should_include": [
+        "regulatory"
+      ],
+      "key_phrases": [
+        "grid expansion",
+        "auction design",
+        "permit delays"
+      ],
       "mitigation_stated": false
     },
     {
       "golden_id": "corruption",
       "title": "Risk of corruption and bribery",
-      "aliases": ["Corruption and bribery", "Corruption and bribery exposure"],
+      "aliases": [
+        "Corruption and bribery"
+      ],
       "source_register": "esrs_financial_risk",
       "source_taxonomy": "G1",
       "section": "material_iros",
       "page": 74,
       "category": "regulatory",
-      "acceptable_categories": ["regulatory"],
+      "acceptable_categories": [
+        "regulatory"
+      ],
       "secondary_should_include": [],
-      "key_phrases": ["corruption", "bribery", "global presence"],
+      "key_phrases": [
+        "corruption",
+        "bribery",
+        "global presence"
+      ],
       "mitigation_stated": false
     }
   ],
   "questions": [
-    {"question": "What are the top enterprise risks facing Vestas, and how frequently are they reviewed at Board/Executive level?",
-     "intent": {"categories": [], "companies": ["Vestas"], "years": [], "source_register": "erm_main_risk", "status": null, "sector": null, "free_text": ""}},
-    {"question": "What emerging risks have been newly elevated?",
-     "intent": {"categories": [], "companies": [], "years": [], "source_register": null, "status": "elevated", "sector": null, "free_text": ""}},
-    {"question": "Show me every renewable-energy company that lists cyber security as a principal risk",
-     "intent": {"categories": ["cyber"], "companies": [], "years": [], "source_register": null, "status": null, "sector": "renewable energy", "free_text": ""}},
-    {"question": "Which companies are exposed to supplier concentration?",
-     "intent": {"categories": ["supply_chain"], "companies": [], "years": [], "source_register": null, "status": null, "sector": null, "free_text": ""}},
-    {"question": "Does Vestas mention tariffs in its 2025 risks?",
-     "intent": {"categories": ["regulatory"], "companies": ["Vestas"], "years": [2025], "source_register": null, "status": null, "sector": null, "free_text": "tariffs"}}
+    {
+      "question": "What are the top enterprise risks facing Vestas, and how frequently are they reviewed at Board/Executive level?",
+      "intent": {
+        "categories": [],
+        "companies": [
+          "Vestas"
+        ],
+        "years": [],
+        "source_register": "erm_main_risk",
+        "status": null,
+        "sector": null,
+        "free_text": ""
+      }
+    },
+    {
+      "question": "What emerging risks have been newly elevated?",
+      "intent": {
+        "categories": [],
+        "companies": [],
+        "years": [],
+        "source_register": null,
+        "status": "elevated",
+        "sector": null,
+        "free_text": ""
+      }
+    },
+    {
+      "question": "Show me every renewable-energy company that lists cyber security as a principal risk",
+      "intent": {
+        "categories": [
+          "cyber"
+        ],
+        "companies": [],
+        "years": [],
+        "source_register": null,
+        "status": null,
+        "sector": "renewable energy",
+        "free_text": ""
+      }
+    },
+    {
+      "question": "Which companies are exposed to supplier concentration?",
+      "intent": {
+        "categories": [
+          "supply_chain"
+        ],
+        "companies": [],
+        "years": [],
+        "source_register": null,
+        "status": null,
+        "sector": null,
+        "free_text": ""
+      }
+    },
+    {
+      "question": "Does Vestas mention tariffs in its 2025 risks?",
+      "intent": {
+        "categories": [
+          "regulatory"
+        ],
+        "companies": [
+          "Vestas"
+        ],
+        "years": [
+          2025
+        ],
+        "source_register": null,
+        "status": null,
+        "sector": null,
+        "free_text": "tariffs"
+      }
+    },
+    {
+      "question": "Which risks did Vestas report in 2025 about the safety of its workers?",
+      "intent": {
+        "categories": [
+          "operational"
+        ],
+        "companies": [
+          "Vestas"
+        ],
+        "years": [
+          2025
+        ],
+        "source_register": null,
+        "status": null,
+        "sector": null,
+        "free_text": ""
+      }
+    },
+    {
+      "question": "List the main risks for Vestas.",
+      "intent": {
+        "categories": [],
+        "companies": [
+          "Vestas"
+        ],
+        "years": [],
+        "source_register": "erm_main_risk",
+        "status": null,
+        "sector": null,
+        "free_text": ""
+      }
+    },
+    {
+      "question": "Which risks dropped out of the register this year?",
+      "intent": {
+        "categories": [],
+        "companies": [],
+        "years": [],
+        "source_register": null,
+        "status": "removed",
+        "sector": null,
+        "free_text": ""
+      }
+    },
+    {
+      "question": "Are there companies exposed to corruption or bribery?",
+      "intent": {
+        "categories": [
+          "regulatory"
+        ],
+        "companies": [],
+        "years": [],
+        "source_register": null,
+        "status": null,
+        "sector": null,
+        "free_text": ""
+      }
+    }
   ]
 }

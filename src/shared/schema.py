@@ -204,6 +204,8 @@ class RiskRecord(Strict):
     mitigation: str | None = None
     prominence: int = Field(ge=1)
     verbatim_span: str
+    verbatim_title: str | None = Field(default=None, description="the register's own heading, the basis of canonical_risk_id")
+    stated_mitigation: str | None = Field(default=None, description="the register's 'how we manage it' text, as printed")
     confidence: float = Field(ge=0.0, le=1.0)
     poor_fit: bool = False
     quality_flags: list[str] = Field(default_factory=list)
